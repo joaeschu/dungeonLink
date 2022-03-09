@@ -1,0 +1,1090 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://www.semanticweb.org/javert/ontologies/2017/10/dungeons-and-dragons"
+         xmlns="http://www.semanticweb.org/javert/ontologies/2017/10/dungeons-and-dragons#">
+
+<owl:Ontology rdf:about="http://www.semanticweb.org/javert/ontologies/2017/10/dungeons-and-dragons"/>
+
+<owl:ObjectProperty rdf:about="#hasItem">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+  <rdfs:domain rdf:resource="#Character"/>
+  <rdfs:range rdf:resource="#Item"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasOwner">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Location"/>
+  <rdfs:range rdf:resource="#Faction"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#isAtLocation">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Character"/>
+  <rdfs:range rdf:resource="#Location"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#knowsSpell">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+  <rdfs:domain rdf:resource="#Sorcerer"/>
+  <rdfs:range rdf:resource="#Spell"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#speaksLanguage">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+  <rdfs:domain rdf:resource="#Character"/>
+  <rdfs:range rdf:resource="#Language"/>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="#damage">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Spell"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#durability">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Item"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#experience">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Character"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#isSafe">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Location"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#level">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Character"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#range">
+  <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Spell"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:Class rdf:about="#Character"/>
+
+<owl:Class rdf:about="#Item">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#durability"/>
+      <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Location"/>
+
+<owl:Class rdf:about="#Faction"/>
+
+<owl:Class rdf:about="#Sorcerer">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <owl:Restriction>
+              <owl:onProperty rdf:resource="#hasItem"/>
+              <owl:someValuesFrom rdf:resource="#Staff"/>
+            </owl:Restriction>
+            <owl:Restriction>
+              <owl:onProperty rdf:resource="#hasItem"/>
+              <owl:someValuesFrom rdf:resource="#Wand"/>
+            </owl:Restriction>
+          </owl:unionOf>
+        </owl:Class>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#knowsSpell"/>
+          <owl:someValuesFrom rdf:resource="#Spell"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#CClass"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Spell">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#damage"/>
+      <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Language"/>
+
+<owl:Class rdf:about="#Aarakocra">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Race"/>
+
+<owl:Class rdf:about="#Aasimar">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Abyssal">
+  <rdfs:subClassOf rdf:resource="#ExoticLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ExoticLanguage">
+  <rdfs:subClassOf rdf:resource="#Language"/>
+  <owl:disjointWith rdf:resource="#StandardLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Armor">
+  <rdfs:subClassOf rdf:resource="#Item"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Arrow">
+  <rdfs:subClassOf rdf:resource="#Weapon"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Weapon">
+  <rdfs:subClassOf rdf:resource="#Item"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Axe">
+  <rdfs:subClassOf rdf:resource="#Weapon"/>
+</owl:Class>
+
+<owl:Class rdf:about="#BandedMail">
+  <rdfs:subClassOf rdf:resource="#Heavy"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Heavy">
+  <rdfs:subClassOf rdf:resource="#Armor"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Barbarian">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:unionOf rdf:parseType="Collection">
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasItem"/>
+          <owl:someValuesFrom rdf:resource="#Axe"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasItem"/>
+          <owl:someValuesFrom rdf:resource="#Battleaxe"/>
+        </owl:Restriction>
+      </owl:unionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#CClass"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Battleaxe">
+  <rdfs:subClassOf rdf:resource="#Weapon"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CClass"/>
+
+<owl:Class rdf:about="#Bard">
+  <rdfs:subClassOf rdf:resource="#CClass"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Bow">
+  <rdfs:subClassOf rdf:resource="#Weapon"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Buckler">
+  <rdfs:subClassOf rdf:resource="#Shield"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Shield">
+  <rdfs:subClassOf rdf:resource="#Armor"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Bugbear">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Celestial">
+  <rdfs:subClassOf rdf:resource="#ExoticLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Chain">
+  <rdfs:subClassOf rdf:resource="#Light"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Light">
+  <rdfs:subClassOf rdf:resource="#Armor"/>
+</owl:Class>
+
+<owl:Class rdf:about="#City">
+  <rdfs:subClassOf rdf:resource="#Populated"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Populated">
+  <rdfs:subClassOf rdf:resource="#Location"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Cleric">
+  <rdfs:subClassOf rdf:resource="#CClass"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CommonLanguage">
+  <rdfs:subClassOf rdf:resource="#StandardLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#StandardLanguage">
+  <rdfs:subClassOf rdf:resource="#Language"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Conjuration">
+  <rdfs:subClassOf rdf:resource="#Spell"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DeepSpeech">
+  <rdfs:subClassOf rdf:resource="#ExoticLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Divination">
+  <rdfs:subClassOf rdf:resource="#Spell"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Draconic">
+  <rdfs:subClassOf rdf:resource="#ExoticLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Dragonborn">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Druid">
+  <rdfs:subClassOf rdf:resource="#CClass"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Dungeon">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Location"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#isSafe"/>
+          <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</owl:hasValue>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Location"/>
+  <owl:disjointWith rdf:resource="#Populated"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Dwarf">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Character"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#speaksLanguage"/>
+          <owl:someValuesFrom rdf:resource="#DwarvishLanguage"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DwarvishLanguage">
+  <rdfs:subClassOf rdf:resource="#StandardLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Elf">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Character"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#speaksLanguage"/>
+          <owl:someValuesFrom rdf:resource="#ElvishLanguage"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ElvishLanguage">
+  <rdfs:subClassOf rdf:resource="#StandardLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Enchantment">
+  <rdfs:subClassOf rdf:resource="#Spell"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Evocation">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Spell"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#damage"/>
+          <owl:someValuesFrom>
+            <rdfs:Datatype>
+              <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+              <owl:withRestrictions>
+                <rdf:Description>
+                  <rdf:first>
+                    <rdf:Description>
+                      <xsd:minExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</xsd:minExclusive>
+                    </rdf:Description>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </owl:withRestrictions>
+            </rdfs:Datatype>
+          </owl:someValuesFrom>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#range"/>
+          <owl:someValuesFrom>
+            <rdfs:Datatype>
+              <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+              <owl:withRestrictions>
+                <rdf:Description>
+                  <rdf:first>
+                    <rdf:Description>
+                      <xsd:minExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</xsd:minExclusive>
+                    </rdf:Description>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </owl:withRestrictions>
+            </rdfs:Datatype>
+          </owl:someValuesFrom>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Spell"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Extra">
+  <rdfs:subClassOf rdf:resource="#Armor"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FactionLocation">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Location"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasOwner"/>
+          <owl:someValuesFrom rdf:resource="#Faction"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Location"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FeralTiefling">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Fighter">
+  <rdfs:subClassOf rdf:resource="#CClass"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Firblog">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FullPlate">
+  <rdfs:subClassOf rdf:resource="#Heavy"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Genasi">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#GiantLanguage">
+  <rdfs:subClassOf rdf:resource="#StandardLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Gnome">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Character"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#speaksLanguage"/>
+          <owl:someValuesFrom rdf:resource="#GnomishLanguage"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#GnomishLanguage">
+  <rdfs:subClassOf rdf:resource="#StandardLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Goblin">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Character"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#speaksLanguage"/>
+          <owl:someValuesFrom rdf:resource="#GoblinLanguage"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#GoblinLanguage">
+  <rdfs:subClassOf rdf:resource="#StandardLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Goliath">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#HalfElf">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#HalfOrc">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#HalfPlate">
+  <rdfs:subClassOf rdf:resource="#Heavy"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Halfling">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Character"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#speaksLanguage"/>
+          <owl:someValuesFrom rdf:resource="#HalflingLanguage"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#HalflingLanguage">
+  <rdfs:subClassOf rdf:resource="#StandardLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Healing">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Spell"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#range"/>
+          <owl:someValuesFrom>
+            <rdfs:Datatype>
+              <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+              <owl:withRestrictions>
+                <rdf:Description>
+                  <rdf:first>
+                    <rdf:Description>
+                      <xsd:minExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</xsd:minExclusive>
+                    </rdf:Description>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </owl:withRestrictions>
+            </rdfs:Datatype>
+          </owl:someValuesFrom>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#damage"/>
+          <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</owl:hasValue>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Spell"/>
+</owl:Class>
+
+<owl:Class rdf:about="#HeavySteel">
+  <rdfs:subClassOf rdf:resource="#Shield"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Hobgoblin">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Human">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Character"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#speaksLanguage"/>
+          <owl:someValuesFrom rdf:resource="#CommonLanguage"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Illusion">
+  <rdfs:subClassOf rdf:resource="#Spell"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Infernal">
+  <rdfs:subClassOf rdf:resource="#ExoticLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Kenku">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Kobold">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Leather">
+  <rdfs:subClassOf rdf:resource="#Light"/>
+</owl:Class>
+
+<owl:Class rdf:about="#LightSteel">
+  <rdfs:subClassOf rdf:resource="#Shield"/>
+</owl:Class>
+
+<owl:Class rdf:about="#LightWooden">
+  <rdfs:subClassOf rdf:resource="#Shield"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Lizardfolk">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Longsword">
+  <rdfs:subClassOf rdf:resource="#Weapon"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Monk">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasItem"/>
+          <owl:someValuesFrom rdf:resource="#Light"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasItem"/>
+          <owl:someValuesFrom rdf:resource="#Rod"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#CClass"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Rod">
+  <rdfs:subClassOf rdf:resource="#Item"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Necromancy">
+  <rdfs:subClassOf rdf:resource="#Spell"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Orc">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Character"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#speaksLanguage"/>
+          <owl:someValuesFrom rdf:resource="#OrcLanguage"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#OrcLanguage">
+  <rdfs:subClassOf rdf:resource="#StandardLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Padded">
+  <rdfs:subClassOf rdf:resource="#Light"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Paladin">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasItem"/>
+          <owl:someValuesFrom rdf:resource="#Heavy"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#knowsSpell"/>
+          <owl:someValuesFrom rdf:resource="#Healing"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#CClass"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Potion">
+  <rdfs:subClassOf rdf:resource="#Item"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Primordial">
+  <rdfs:subClassOf rdf:resource="#ExoticLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Ranger">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasItem"/>
+          <owl:someValuesFrom rdf:resource="#Light"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasItem"/>
+          <owl:someValuesFrom rdf:resource="#Sword"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#CClass"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Sword">
+  <rdfs:subClassOf rdf:resource="#Weapon"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Ring">
+  <rdfs:subClassOf rdf:resource="#Item"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Rogue">
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasItem"/>
+          <owl:someValuesFrom rdf:resource="#Light"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasItem"/>
+          <owl:someValuesFrom rdf:resource="#Sword"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf rdf:resource="#CClass"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Scroll">
+  <rdfs:subClassOf rdf:resource="#Item"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Staff">
+  <rdfs:subClassOf rdf:resource="#Item"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Wand">
+  <rdfs:subClassOf rdf:resource="#Item"/>
+</owl:Class>
+
+<owl:Class rdf:about="#SplintMail">
+  <rdfs:subClassOf rdf:resource="#Heavy"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Studded">
+  <rdfs:subClassOf rdf:resource="#Light"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Sylvan">
+  <rdfs:subClassOf rdf:resource="#ExoticLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Tabaxi">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Tiefling">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Tortle">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Tower">
+  <rdfs:subClassOf rdf:resource="#Shield"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Town">
+  <rdfs:subClassOf rdf:resource="#Populated"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Transmutation">
+  <rdfs:subClassOf rdf:resource="#Spell"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Triton">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Undercommon">
+  <rdfs:subClassOf rdf:resource="#ExoticLanguage"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Village">
+  <rdfs:subClassOf rdf:resource="#Populated"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Warlock">
+  <rdfs:subClassOf rdf:resource="#CClass"/>
+  <rdfs:subClassOf>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasItem"/>
+          <owl:someValuesFrom rdf:resource="#Staff"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#knowsSpell"/>
+          <owl:someValuesFrom rdf:resource="#Spell"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Wizard">
+  <rdfs:subClassOf rdf:resource="#CClass"/>
+  <rdfs:subClassOf>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasItem"/>
+          <owl:someValuesFrom rdf:resource="#Wand"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#knowsSpell"/>
+          <owl:someValuesFrom rdf:resource="#Spell"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#WondrousItem">
+  <rdfs:subClassOf rdf:resource="#Item"/>
+</owl:Class>
+
+<owl:Class rdf:about="#YuanTiPureblood">
+  <rdfs:subClassOf rdf:resource="#Race"/>
+</owl:Class>
+
+<owl:Class rdf:about="#User">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<Faction rdf:about="#Adventures_League">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Faction>
+
+<GiantLanguage rdf:about="#AncientGiant">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</GiantLanguage>
+
+<Character rdf:about="#Arkala">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <speaksLanguage rdf:resource="#HighElvish"/>
+  <experience rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9623</experience>
+  <level rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9</level>
+</Character>
+
+<ElvishLanguage rdf:about="#HighElvish">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</ElvishLanguage>
+
+<rdf:Description rdf:about="#Blizzard">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <damage rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">25</damage>
+  <range rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</range>
+</rdf:Description>
+
+<rdf:Description rdf:about="#Chiraga">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <speaksLanguage rdf:resource="#SlaveCommon"/>
+  <experience rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4322</experience>
+  <level rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</level>
+</rdf:Description>
+
+<Language rdf:about="#SlaveCommon">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Language>
+
+<rdf:Description rdf:about="#Dasytlish">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <experience rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">15003</experience>
+  <level rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">15</level>
+</rdf:Description>
+
+<Populated rdf:about="#Dumbarton_City">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Populated>
+
+<Evocation rdf:about="#Fireball">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Evocation>
+
+<Healing rdf:about="#Greater_Healing">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Healing>
+
+<CommonLanguage rdf:about="#ImperialLanguage">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</CommonLanguage>
+
+<Heavy rdf:about="#Iron_Armor">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <durability rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</durability>
+</Heavy>
+
+<Sword rdf:about="#Iron_Sword">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <durability rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</durability>
+</Sword>
+
+<Leather rdf:about="#Leather_Armor">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <durability rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</durability>
+</Leather>
+
+<Populated rdf:about="#Lesianlith_City">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Populated>
+
+<rdf:Description rdf:about="#Lesser_Healing">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <damage rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</damage>
+  <range rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">15</range>
+</rdf:Description>
+
+<Dungeon rdf:about="#Mount_of_Doom">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <rdf:type rdf:resource="#Location"/>
+</Dungeon>
+
+<Character rdf:about="#Nac-syt">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <speaksLanguage rdf:resource="#AncientGiant"/>
+  <experience rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">39922</experience>
+  <level rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">39</level>
+</Character>
+
+<Character rdf:about="#Nineshi">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <hasItem rdf:resource="#Iron_Armor"/>
+  <knowsSpell rdf:resource="#Greater_Healing"/>
+</Character>
+
+<Populated rdf:about="#Orkney_City">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Populated>
+
+<Character rdf:about="#Overmotliisal">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Character>
+
+<Location rdf:about="#Rocky_Mountain">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <hasOwner rdf:resource="#The_Zhentarim"/>
+</Location>
+
+<Faction rdf:about="#The_Zhentarim">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Faction>
+
+<Character rdf:about="#Rusathsi">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <hasItem rdf:resource="#Iron_Sword"/>
+  <hasItem rdf:resource="#Leather_Armor"/>
+</Character>
+
+<Location rdf:about="#Shadow_Cave">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <isSafe rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</isSafe>
+</Location>
+
+<Sword rdf:about="#Silver_Sword">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <durability rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">10</durability>
+</Sword>
+
+<Staff rdf:about="#Staff_of_Conjuration">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <durability rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</durability>
+</Staff>
+
+<Faction rdf:about="#The_Emerald_Enclave">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+</Faction>
+
+<owl:AllDisjointProperties>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#damage"/>
+    <rdf:Description rdf:about="#durability"/>
+    <rdf:Description rdf:about="#experience"/>
+    <rdf:Description rdf:about="#isSafe"/>
+    <rdf:Description rdf:about="#level"/>
+    <rdf:Description rdf:about="#range"/>
+  </owl:members>
+</owl:AllDisjointProperties>
+
+<owl:AllDisjointProperties>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#hasItem"/>
+    <rdf:Description rdf:about="#hasOwner"/>
+    <rdf:Description rdf:about="#isAtLocation"/>
+    <rdf:Description rdf:about="#knowsSpell"/>
+    <rdf:Description rdf:about="#speaksLanguage"/>
+  </owl:members>
+</owl:AllDisjointProperties>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Faction"/>
+    <rdf:Description rdf:about="#Item"/>
+    <rdf:Description rdf:about="#Language"/>
+    <rdf:Description rdf:about="#Location"/>
+    <rdf:Description rdf:about="#Race"/>
+    <rdf:Description rdf:about="#Spell"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#CommonLanguage"/>
+    <rdf:Description rdf:about="#DwarvishLanguage"/>
+    <rdf:Description rdf:about="#ElvishLanguage"/>
+    <rdf:Description rdf:about="#GiantLanguage"/>
+    <rdf:Description rdf:about="#GnomishLanguage"/>
+    <rdf:Description rdf:about="#GoblinLanguage"/>
+    <rdf:Description rdf:about="#HalflingLanguage"/>
+    <rdf:Description rdf:about="#OrcLanguage"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#City"/>
+    <rdf:Description rdf:about="#Town"/>
+    <rdf:Description rdf:about="#Village"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Chain"/>
+    <rdf:Description rdf:about="#Leather"/>
+    <rdf:Description rdf:about="#Padded"/>
+    <rdf:Description rdf:about="#Studded"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Buckler"/>
+    <rdf:Description rdf:about="#HeavySteel"/>
+    <rdf:Description rdf:about="#LightSteel"/>
+    <rdf:Description rdf:about="#LightWooden"/>
+    <rdf:Description rdf:about="#Tower"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#BandedMail"/>
+    <rdf:Description rdf:about="#FullPlate"/>
+    <rdf:Description rdf:about="#HalfPlate"/>
+    <rdf:Description rdf:about="#SplintMail"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Arrow"/>
+    <rdf:Description rdf:about="#Axe"/>
+    <rdf:Description rdf:about="#Battleaxe"/>
+    <rdf:Description rdf:about="#Bow"/>
+    <rdf:Description rdf:about="#Longsword"/>
+    <rdf:Description rdf:about="#Sword"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Armor"/>
+    <rdf:Description rdf:about="#Potion"/>
+    <rdf:Description rdf:about="#Ring"/>
+    <rdf:Description rdf:about="#Rod"/>
+    <rdf:Description rdf:about="#Scroll"/>
+    <rdf:Description rdf:about="#Staff"/>
+    <rdf:Description rdf:about="#Wand"/>
+    <rdf:Description rdf:about="#Weapon"/>
+    <rdf:Description rdf:about="#WondrousItem"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Abyssal"/>
+    <rdf:Description rdf:about="#Celestial"/>
+    <rdf:Description rdf:about="#DeepSpeech"/>
+    <rdf:Description rdf:about="#Draconic"/>
+    <rdf:Description rdf:about="#Infernal"/>
+    <rdf:Description rdf:about="#Primordial"/>
+    <rdf:Description rdf:about="#Sylvan"/>
+    <rdf:Description rdf:about="#Undercommon"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointProperties>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#level"/>
+  </owl:members>
+</owl:AllDisjointProperties>
+
+
+</rdf:RDF>
