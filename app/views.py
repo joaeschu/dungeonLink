@@ -2,6 +2,14 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
+import ficheroClases
+import ficheroGeneral
+import ficheroHechizos
+import ficheroObjetos
+import ficheroRazas
+import ficheroTrasfondos
+from tfgrol.settings import BASE_DIR
+
 
 def private_area(request):
     if request.session.get('user_id') is None:
@@ -22,10 +30,15 @@ def sheet(request):
         f.write(json.dumps(sheet))
         f.close()
         return redirect('sheet')
-
+# onto = get_ontology('rpg.owl').load()
+#    barbarian = onto.Barbarian
+#    individuals = list(onto.individuals())
+#    equivalents = barbarian.equivalent_to */
     if (os.path.isfile(BASE_DIR / file)):
         sheet = json.load(open(BASE_DIR / file, "r"))
-    return render(request, 'sheet.html', {'session': request.session, 'sheet': sheet})
+    return render(request, 'sheet.html', {'session': request.session, 'sheet': sheet, 'ficheroClases': ficheroClases,
+                                          'ficheroGeneral': ficheroGeneral, 'ficheroHechizos': ficheroHechizos, 'ficheroObjetos': ficheroObjetos,
+                                          'ficheroRazas': ficheroRazas, 'ficheroTrasfondos': ficheroTrasfondos})
 
 
 def index(request):

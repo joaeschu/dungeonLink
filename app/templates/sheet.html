@@ -1,7 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -19,6 +18,7 @@
         <div class="btn-group" role="group">
             <a class="btn btn-primary" style="margin: 22px;" href="{% url 'private-area' %}">Volver</a>
             <button class="btn btn-primary" type="submit" style="margin: 22px;">Guardar</button>
+            <button class="btn btn-primary" type="button" style="margin: 22px;" data-bs-toggle="modal" data-bs-target="#modal-generador">Generador Personaje</button>
         </div>
         <div class="btn-group" role="group">
 
@@ -214,7 +214,7 @@
         <input name="passiveperception"{% if sheet is not None %} value="{{ sheet.passiveperception }}"{% endif %} placeholder="10" />
       </div>
       <div class="otherprofs box textblock">
-        <label for="otherprofs">Otras competencias y lenguajes</label><textarea name="otherprofs"{% if sheet is not None %} value="{{ sheet.otherprofs }}"{% endif %}></textarea>
+        <label for="otherprofs">Otras competencias y lenguajes</label><textarea name="otherprofs">{% if sheet is not None %}{{ sheet.otherprofs }}{% endif %}</textarea>
       </div>
     </section>
     <section>
@@ -361,35 +361,236 @@
               </li>
             </ul>
           </div>
-          <textarea name="equipmentList"{% if sheet is not None %} value="{{ sheet.equipmentList }}"{% endif %} placeholder="Lista de equipo"></textarea>
+          <textarea name="equipmentList" placeholder="Lista de equipo">{% if sheet is not None %}{{ sheet.equipmentList }}{% endif %}</textarea>
         </div>
       </section>
     </section>
     <section>
       <section class="flavor">
         <div class="personality">
-          <label for="personality">Personalidad</label><textarea name="personality"{% if sheet is not None %} value="{{ sheet.personality }}"{% endif %}></textarea>
+          <label for="personality">Personalidad</label><textarea name="personality">{% if sheet is not None %}{{ sheet.personality }}{% endif %}</textarea>
         </div>
         <div class="ideals">
-          <label for="ideals">Ideales</label><textarea name="ideals"{% if sheet is not None %} value="{{ sheet.ideals }}"{% endif %}></textarea>
+          <label for="ideals">Ideales</label><textarea name="ideals">{% if sheet is not None %}{{ sheet.ideals }}{% endif %}</textarea>
         </div>
         <div class="bonds">
-          <label for="bonds">Vínculos</label><textarea name="bonds"{% if sheet is not None %} value="{{ sheet.bonds }}"{% endif %}></textarea>
+          <label for="bonds">Vínculos</label><textarea name="bonds">{% if sheet is not None %}{{ sheet.bonds }}{% endif %}</textarea>
         </div>
         <div class="flaws">
-          <label for="flaws">Defectos</label><textarea name="flaws"{% if sheet is not None %} value="{{ sheet.flaws }}"{% endif %}></textarea>
+          <label for="flaws">Defectos</label><textarea name="flaws">{% if sheet is not None %}{{ sheet.flaws }}{% endif %}</textarea>
         </div>
       </section>
       <section class="features">
         <div>
-          <label for="features">Rasgos y atributos</label><textarea name="features"{% if sheet is not None %} value="{{ sheet.features }}"{% endif %}></textarea>
+          <label for="features">Rasgos y atributos</label><textarea name="features">{% if sheet is not None %}{{ sheet.features }}{% endif %}</textarea>
         </div>
       </section>
     </section>
   </main>
 </form>
+    <div class="modal fade" role="dialog" tabindex="-1" id="modal-generador">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">General</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="accordion" role="tablist" id="accordion-1">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" role="tab"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1" aria-expanded="true" aria-controls="accordion-1 .item-1">Accordion Item</button></h2>
+                            <div class="accordion-collapse collapse show item-1" role="tabpanel">
+                                <div class="accordion-body">
+                                    <form  autocomplete="off">
+                                        <div class="row">
+                                            <div class="col"><label class="col-form-label">Nombre<input class="form-control" type="text"></label></div>
+                                            <div class="col"><label class="form-label">Alineamiento</label><select class="form-select">
+                                                        {% for alineamiento in ficheroGeneral.alineamientos %}
+                                                            <option value="{{ alineamiento }}">{{ alineamiento }}</option>
+                                                        {% endfor %}
+                                                </select></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col"><label class="form-label">Resumen del concepto</label><input class="form-control" type="text"></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-2" aria-expanded="false" aria-controls="accordion-1 .item-2">Accordion Item</button></h2>
+                            <div class="accordion-collapse collapse item-2" role="tabpanel">
+                                <div class="accordion-body">
+                                    <form  autocomplete="off">
+                                        <div class="row">
+                                            <div class="col"><label class="form-label">Clase</label><select class="form-select" id="clase-selector">
+                                            <option value="" selected disabled>Seleciona uno..</option>
+                                                    {% for clase,value in ficheroClases.clases.items %}
+                                                            <option value="{{ clase }}" data-subclases="{{ value.Subclases }}">{{ clase }}</option>
+                                                        {% endfor %}
+                                                </select></div>
+                                            <div class="col"><label class="form-label">Habilidades</label>
+                                                <select  class="form-select">
+                                                   {% for habilidad in ficheroClases.Habilidades%}
+                                                            <option value="{{ habilidad }}">{{ habilidad }}</option>
+                                                        {% endfor %}
+                                                </select>
+                                                <select  class="form-select">
+                                                   {% for habilidad in ficheroClases.Habilidades%}
+                                                            <option value="{{ habilidad }}">{{ habilidad }}</option>
+                                                        {% endfor %}
+                                                </select>
+                                                <select  class="form-select">
+                                                   {% for habilidad in ficheroClases.Habilidades%}
+                                                            <option value="{{ habilidad }}">{{ habilidad }}</option>
+                                                        {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="col"><label class="form-label">Equipo inicial. Elige entre:</label>
+                                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-3">Una gran hacha</label></div>
+                                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Cualquier arma marcial cuerpo a cuerpo</label></div>
+                                                <label class="form-label">También recibes<br></label>
+                                            </div>
+                                            <div class="col"><label class="form-label">o :</label>
+                                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label class="form-check-label" for="formCheck-4">Dos hachas de mano</label></div>
+                                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5"><label class="form-check-label" for="formCheck-5">Cualquier arma simple</label></div>
+                                                <label class="form-label">Un equipo de explorador y 4 jabalinas<br></label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col"><label class="form-label">Subclase<br></label><select class="form-select" id="subclase-selector">
+
+                                                    </optgroup>
+                                                </select></div>
+                                            <div class="col"><label class="form-label"></label><label class="form-label">Herramientas</label><select class="form-select">
+                                                    </optgroup>
+                                                </select></div>
+                                            <div class="col"><label class="form-label">Trucos inicales</label>
+                                            </div>
+                                            <div class="col"><label class="form-label">Hechizos iniciales</label>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-3" aria-expanded="false" aria-controls="accordion-1 .item-3">Accordion Item</button></h2>
+                            <div class="accordion-collapse collapse item-3" role="tabpanel">
+                                <div class="accordion-body">
+                                    <form  autocomplete="off">
+                                        <div class="row">
+                                            <div class="col"><label class="form-label">Seleccionar Trasfondo</label><select class="form-select">
+                                                    {% for trasfondo in ficheroTrasfondos.trasfondos %}
+                                                            <option value="{{ trasfondo }}">{{ trasfondo }}</option>
+                                                        {% endfor %}
+                                                </select></div>
+                                            <div class="col"><label class="form-label">lenguajes</label><select class="form-select">
+                                                   {% for idioma in ficheroGeneral.idiomas %}
+                                                            <option value="{{ idioma }}">{{ idioma }}</option>
+                                                        {% endfor %}
+                                                </select></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col"><label class="form-label">Competencia de habilidades</label><select class="form-select">
+
+                                                </select></div>
+                                            <div class="col"><label class="form-label">Herramientas</label><select class="form-select">
+
+                                                </select></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-4" aria-expanded="false" aria-controls="accordion-1 .item-4">Accordion Item</button></h2>
+                            <div class="accordion-collapse collapse item-4" role="tabpanel">
+                                <div class="accordion-body">
+                                    <form  autocomplete="off">
+                                        <div class="row">
+                                            <div class="col"><label class="form-label">Raza</label><select class="form-select">
+                                                    {% for raza in ficheroRazas.razas %}
+                                                            <option value="{{ raza }}">{{ raza }}</option>
+                                                        {% endfor %}
+                                                </select></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col"><label class="form-label">Fuerza&nbsp; &nbsp;</label><span class="badge bg-primary" style="margin: 0px;margin-left: 10px;margin-top: 8px;">+2</span><select class="form-select">
+                                                    <option value="15" selected="">15</option>
+                                                    <option value="14" selected="">14</option>
+                                                    <option value="13" selected="">13</option>
+                                                    <option value="12" selected="">12</option>
+                                                    <option value="10" selected="">10</option>
+                                                    <option value="8" selected="">8</option>
+                                                </select></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col"><label class="form-label">Destreza&nbsp; &nbsp;</label><span class="badge bg-primary" style="margin-left: 10px;margin-top: 8px;">+2</span><select class="form-select">
+                                                     <option value="15" selected="">15</option>
+                                                    <option value="14" selected="">14</option>
+                                                    <option value="13" selected="">13</option>
+                                                    <option value="12" selected="">12</option>
+                                                    <option value="10" selected="">10</option>
+                                                    <option value="8" selected="">8</option>
+                                                </select></div>
+                                        </div>
+                                    </form>
+                                    <form>
+                                        <div class="row">
+                                            <div class="col"><label class="form-label">Constitución&nbsp; &nbsp;</label><span class="badge bg-primary" style="margin: 0px;margin-left: 10px;margin-top: 8px;">+2</span><select class="form-select">
+                                                      <option value="15" selected="">15</option>
+                                                    <option value="14" selected="">14</option>
+                                                    <option value="13" selected="">13</option>
+                                                    <option value="12" selected="">12</option>
+                                                    <option value="10" selected="">10</option>
+                                                    <option value="8" selected="">8</option>
+                                                </select></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col"><label class="form-label">Sabiduría&nbsp; &nbsp;</label><span class="badge bg-primary" style="margin-top: 8px;margin-left: 10px;">+2</span><select class="form-select">
+                                                     <option value="15" selected="">15</option>
+                                                    <option value="14" selected="">14</option>
+                                                    <option value="13" selected="">13</option>
+                                                    <option value="12" selected="">12</option>
+                                                    <option value="10" selected="">10</option>
+                                                    <option value="8" selected="">8</option>
+                                                </select></div>
+                                        </div>
+                                    </form>
+                                    <form>
+                                        <div class="row">
+                                            <div class="col"><label class="form-label">Inteligencia&nbsp; &nbsp;</label><span class="badge bg-primary" style="margin-top: 8px;margin-left: 10px;">+2</span><select class="form-select">
+                                                    <option value="15" selected="">15</option>
+                                                    <option value="14" selected="">14</option>
+                                                    <option value="13" selected="">13</option>
+                                                    <option value="12" selected="">12</option>
+                                                    <option value="10" selected="">10</option>
+                                                    <option value="8" selected="">8</option>
+                                                </select></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col"><label class="form-label">Carisma&nbsp; &nbsp;</label><span class="badge bg-primary" style="margin-left: 10px;margin-top: 8px;">+2</span><select class="form-select">
+                                                     <option value="15" selected="">15</option>
+                                                    <option value="14" selected="">14</option>
+                                                    <option value="13" selected="">13</option>
+                                                    <option value="12" selected="">12</option>
+                                                    <option value="10" selected="">10</option>
+                                                    <option value="8" selected="">8</option>
+                                                </select></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Atrás</button><button class="btn btn-primary" type="button">Guardar</button></div>
+            </div>
+        </div>
+    </div>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'js/sheet.js' %}"></script>
+    <script src="{% static 'js/sheet.js' %}" defer></script>
 </body>
 
 </html>

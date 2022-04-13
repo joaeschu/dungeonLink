@@ -61,4 +61,49 @@ function totalhd_clicked()
 {
   $("[name='remaininghd']").val($("[name='totalhd']").val())
 }
+const convertPythonDictToJSON = function (data) {
+  if(data === ''){
+    return null;
+  }
+    let d = data.replace(new RegExp(`(?<=[a-zA-Z])'(?=[a-zA-Z ])`, "g"), '__')
+    d = d.replace(new RegExp("'", 'g'), '"')
+    d = d.replace(new RegExp("__", 'g'), "'")
+    d = d.replace(new RegExp("None", 'g'), 'null')
+    d = d.replace(new RegExp("False", 'g'), 'false')
+    d = d.replace(new RegExp("True", 'g'), 'true')
+    return JSON.parse(d)
+}
+const clearDropown  = function (select){
+      length = select.options.length;
+  while(length--){
+    select.remove(length);
+  }
+}
+
+const addArrayDropdown  = function (select,array){
+          let option = document.createElement("option");
+          option.disabled = true;
+          option.selected = true;
+          option.text = "Seleciona uno...";
+        select.add(option);
+
+        if(Array.isArray(array)){
+     array.forEach(function (value){
+        let option = document.createElement("option");
+        option.text = value;
+        option.value = value;
+        select.add(option);
+     });
+  }
+}
+
+
+
+document.getElementById('clase-selector').addEventListener("change", function(event) {
+  let select = document.getElementById('subclase-selector');
+  clearDropown(select);
+
+  let subclases = convertPythonDictToJSON(this.querySelector(':checked').getAttribute('data-subclases'));
+  addArrayDropdown(select,subclases);
+});
 
