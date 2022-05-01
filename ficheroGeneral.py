@@ -12,6 +12,6 @@ alineamientos = ["Legal Bueno", "Neutral Bueno", "Caótico Bueno", "Legal Neutra
 
 
 
-idiomas = ["Común Enano", "Élfico", "Gigante", "Gnómico", "Goblin", "Mediano", "Orco", "Abisal", "Celestial", "Dracónico", "Habla Profunda",
+idiomas = ["Común", "Enano", "Élfico", "Gigante", "Gnómico", "Goblin", "Mediano", "Orco", "Abisal", "Celestial", "Dracónico", "Habla Profunda",
                 "Infernal", "Primordial", "Silvano", "Infracomún"]
 

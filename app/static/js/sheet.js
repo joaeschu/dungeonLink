@@ -74,36 +74,50 @@ const convertPythonDictToJSON = function (data) {
     return JSON.parse(d)
 }
 const clearDropown  = function (select){
-      length = select.options.length;
-  while(length--){
-    select.remove(length);
-  }
+    select.tomselect.clear()
+    select.tomselect.clearOptions()
 }
 
 const addArrayDropdown  = function (select,array){
-          let option = document.createElement("option");
-          option.disabled = true;
-          option.selected = true;
-          option.text = "Seleciona uno...";
-        select.add(option);
+        if(Array.isArray(array)) {
+            array.forEach(function (value){
+                select.tomselect.addOption({value:value,text:value});
+            });
+        }
 
-        if(Array.isArray(array)){
-     array.forEach(function (value){
-        let option = document.createElement("option");
-        option.text = value;
-        option.value = value;
-        select.add(option);
-     });
-  }
 }
 
 
 
 document.getElementById('clase-selector').addEventListener("change", function(event) {
-  let select = document.getElementById('subclase-selector');
-  clearDropown(select);
+    let select_subclass = document.getElementById('subclase-selector');
+    let select_habilidades = document.getElementById('habilidades-selector');
+    let select_equipoA = document.getElementById('equipoA-selector');
+    let select_equipoB = document.getElementById('equipoB-selector');
+    let select_equipoC = document.getElementById('equipoC-selector');
+    clearDropown(select_subclass);
+    clearDropown(select_habilidades);
+    clearDropown(select_equipoA);
 
-  let subclases = convertPythonDictToJSON(this.querySelector(':checked').getAttribute('data-subclases'));
-  addArrayDropdown(select,subclases);
+    let selection = this.querySelector(':checked');
+    select_habilidades.tomselect.settings.maxItems =selection.getAttribute('data-habilidades-max');
+    addArrayDropdown(select_subclass, convertPythonDictToJSON(selection.getAttribute('data-subclases')));
+    addArrayDropdown(select_habilidades, convertPythonDictToJSON(selection.getAttribute('data-habilidades')));
+    addArrayDropdown(select_equipoA, convertPythonDictToJSON(selection.getAttribute('data-equipoA')));
+    addArrayDropdown(select_equipoB, convertPythonDictToJSON(selection.getAttribute('data-equipoB')));
+    addArrayDropdown(select_equipoC, convertPythonDictToJSON(selection.getAttribute('data-C')));
 });
+
+
+
+new TomSelect("#habilidades-selector",{
+    plugins: ['remove_button'],
+	maxItems: 3
+});
+
+Array.from(document.getElementsByClassName("tomselect-basic")).forEach(
+    function(element) {
+        new TomSelect(element,{});
+    }
+);
 

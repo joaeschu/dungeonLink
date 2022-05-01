@@ -1,17 +1,18 @@
 clases = {
     "Bárbaro": {
-        "Dado de golpe": 12,
+        "Dado_de_golpe": 12,
         "Armaduras": ["Armaduras ligeras", "Armaduras medias", "Escudos"],
         "Armas": ["Armas c/c simples", "Armas c/c marciales", "Armas a distancia simples", "Armas a distancia marciales"],
         "Herramientas": [],
         "Salvaciones": ["Fuerza", "Constitución"],
-        "Habilidades a elegir": 2,
+        "Habilidades_a_elegir": 2,
         "Habilidades": ["Atletismo", "Intimidación","Naturaleza", "Percepción", "Supervivencia", "Trato de animales"],
         "Subclases": ["Senda del Berserker", "Senda del Guerrero Totémico"],
-        "Equipo A": ["Una gran hacha", "Dos hachas de mano"],
-        "Equipo B": ["Cualquier arma marcial cuerpo a cuerpo", "cualquier arma simple"],
-        "Equipo obligatorio": ["Un equipo de explorador", "cuatro jabalinas"],
-        "Nivel 1": {
+        "Equipo_A": ["Una gran hacha", "Cualquier arma marcial cuerpo a cuerpo"],
+        "Equipo_B": ["Dos hachas de mano", "cualquier arma simple"],
+        "Equipo_C": [],
+        "Equipo_obligatorio": ["Un equipo de explorador", "cuatro jabalinas"],
+        "Nivel_1": {
             "Furia": "En combate, luchas con una ferocidad primitiva. En tu turno, puedes entrar en furia como acción adicional." 
                     " Mientras estás en furia ganas los siguientes beneficios si no llevas armadura pesada:"
                      " ● Tienes ventaja en las pruebas y tiradas de salvación de Fuerza."
@@ -37,21 +38,22 @@ clases = {
                     }
                 },
         "Bardo":  {
-            "Dado de golpe": 8,
+            "Dado_de_golpe": 8,
             "Armaduras": ["Armaduras ligeras"],
             "Armas": ["Armas c/c simples", "Armas a distancia simples", "ballesta de mano", "espada larga", "estoque",
                       "espada corta"],
             "Herramientas": ["tres instrumentos musicales de tu elección"],
             "Salvaciones": ["Destreza,", "Carisma."],
-            "Habilidades a elegir": 3,
+            "Habilidades_a_elegir": 3,
             "Habilidades": ["Atletismo", "Acrobacias", "Juego de Manos", "Sigilo", "Arcano", "Historia",
                      "Investigación", "Naturaleza", "Religión", "Trato de animales", "Medicina", "Percepción", "Perspicacia", "Supervivencia",
                      "Engaño", "Intimidación", "Interpretación", "Persuasión"],
             "Subclases": ["Colegio del Conocimiento", "Colegio del Valor"],
-            "Equipo A": ["Estoque", "Equipo de diplomático","lira"],
-            "Equipo B": ["Espada larga", "Equipo de actor", "cualquier otro instrumento musical"],
-            "Equipo obligatorio": ["Armadura de cuero", "Daga"],
-            "Nivel 1": {
+            "Equipo_A": ["Estoque", "Espada larga"],
+            "Equipo_B": ["Equipo de diplomático", "Equipo de actor"],
+            "Equipo_C": ["lira", "cualquier otro instrumento musical"],
+            "Equipo_obligatorio": ["Armadura de cuero", "Daga"],
+            "Nivel_1": {
                 "Lanzamiento de conjuros":
                     "Has aprendido a descifrar y reformular la realidad en armonía con tu música y tus deseos. Tus conjuros son parte de tu vasto repertorio, magia que puedes aplicar a variadas situaciones. Consulta el Capítulo 10 para ver las reglas generales de lanzamiento de conjuros y el Capítulo 11 para ver la lista de conjuros del bardo."
                     "TRUCOS"
@@ -116,15 +118,3 @@ clases = {
         "Paladín": {"Juramento de Devoción", "Juramento de los Ancestros", "Juramento de Venganza"},
         "Pícaro": {"Ladrón", "Asesino", "Bribón Arcano"}
                 }
-
-Dado_de_golpe = 12
-Armaduras = ["Armaduras ligeras", "Armaduras medias", "Escudos"]
-Armas= ["Armas c/c simples", "Armas c/c marciales", "Armas a distancia simples", "Armas a distancia marciales"]
-Herramientas= []
-Salvaciones=["Fuerza", "Constitución"]
-Habilidades_a_elegir= 2
-Habilidades=["Atletismo", "Intimidación","Naturaleza", "Percepción", "Supervivencia", "Trato de animales"]
-Subclases=["Senda del Berserker", "Senda del Guerrero Totémico"]
-Equipo_A= ["Una gran hacha", "Dos hachas de mano"]
-Equipo_B=["Cualquier arma marcial cuerpo a cuerpo", "cualquier arma simple"]
-Equipo_obligatorio= ["Un equipo de explorador", "cuatro jabalinas"]
