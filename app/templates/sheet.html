@@ -27,7 +27,7 @@
     </div>
   <header>
     <section class="charname">
-      <label for="charname">Nombre del personaje</label><input name="charname"{% if sheet is not None %} value="{{ sheet.charname }}"{% endif %} placeholder="Lego Las" />
+      <label for="charname">Nombre del personaje</label><input name="charname" id="sheet-charname"{% if sheet is not None %} value="{{ sheet.charname }}"{% endif %} placeholder="Lego Las" />
     </section>
     <section class="misc">
       <ul>
@@ -403,8 +403,8 @@
                                 <div class="accordion-body">
                                     <form  autocomplete="off">
                                         <div class="row">
-                                            <div class="col"><label class="col-form-label">Nombre<input class="form-control" type="text"></label></div>
-                                            <div class="col"><label class="form-label">Alineamiento</label><select class="tomselect-basic" placeholder="Select a person..." >
+                                            <div class="col"><label class="col-form-label">Nombre<input id="text-nombre" class="form-control" type="text"></label></div>
+                                            <div class="col"><label class="form-label">Alineamiento</label><select class="tomselect-basic" placeholder="Selecciona..." >
                                                                                         <option value="">Select a person...</option>
 
                                                         {% for alineamiento in ficheroGeneral.alineamientos %}
@@ -428,13 +428,14 @@
                                             <div class="col"><label class="form-label">Clase</label><select class="tomselect-basic" id="clase-selector" placeholder="Seleciona uno..">
                                             <option value="">Seleciona uno..</option>
                                                     {% for clase,value in ficheroClases.clases.items %}
-                                                            <option value="{{ clase }}"  data-habilidades-max="{{ value.Habilidades_a_elegir }}" data-subclases="{{ value.Subclases }}" data-habilidades="{{ value.Habilidades }}" data-equipoA="{{ value.Equipo_A }}"data-equipoB="{{ value.Equipo_B }}"data-equipoC="{{ value.Equipo_C }}">{{ clase }}</option>
+                                                            <option value="{{ clase }}"  data-habilidades-max="{{ value.Habilidades_a_elegir }}" data-subclases="{{ value.Subclases }}" data-habilidades="{{ value.Habilidades }}"
+                                                                    data-equipoA="{{ value.Equipo_A }}"data-equipoB="{{ value.Equipo_B }}"data-equipoC="{{ value.Equipo_C }}"data-herramientas-max="{{ value.Herramientas_a_elegir }}"
+                                                                    data-herramientas="{{ value.Herramientas }}">{{ clase }}
+                                                            </option>
                                                         {% endfor %}
                                                 </select></div>
                                             <div class="col"><label class="form-label">Habilidades</label>
-                                                <select  id="habilidades-selector" name="habilidades-select[]" multiple placeholder="Seleciona" autocomplete="off">
-
-                                                </select>
+                                                <select  id="habilidades-selector" name="habilidades-select[]" multiple placeholder="Seleciona" autocomplete="off"></select>
                                             </div>
                                                <div class="col"><label class="form-label">Equipo inicial</label>
                                                 <select class="tomselect-basic" id="equipoA-selector"></select>
@@ -445,7 +446,8 @@
                                         <div class="row">
                                             <div class="col"><label class="form-label">Subclase<br></label><select class="tomselect-basic" id="subclase-selector">
                                                 </select></div>
-                                            <div class="col"><label class="form-label"></label><label class="form-label">Herramientas</label><select class="form-select">
+                                            <div class="col"><label class="form-label">Herramientas</label>
+                                                <select  id="herramientas-selector" name="herramientas-select[]" multiple placeholder="Seleciona" autocomplete="off">
                                                 </select></div>
                                         </div>
                                     </form>
@@ -584,7 +586,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Atrás</button><button class="btn btn-primary" type="button">Guardar</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Cerrar</button><button class="btn btn-primary" id="button-guardar" type="button" data-bs-dismiss="modal">Guardar</button></div>
             </div>
         </div>
     </div>

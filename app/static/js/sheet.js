@@ -87,6 +87,11 @@ const addArrayDropdown  = function (select,array){
 
 }
 
+document.getElementById('button-guardar').addEventListener("click", function(event) {
+    console.log('test')
+    document.getElementById('sheet-charname').value = document.getElementById('text-nombre').value;
+});
+
 
 
 document.getElementById('clase-selector').addEventListener("change", function(event) {
@@ -95,9 +100,13 @@ document.getElementById('clase-selector').addEventListener("change", function(ev
     let select_equipoA = document.getElementById('equipoA-selector');
     let select_equipoB = document.getElementById('equipoB-selector');
     let select_equipoC = document.getElementById('equipoC-selector');
+    let select_herramientas = document.getElementById('herramientas-selector');
     clearDropown(select_subclass);
     clearDropown(select_habilidades);
     clearDropown(select_equipoA);
+    clearDropown(select_equipoB);
+    clearDropown(select_equipoC);
+    clearDropown(select_herramientas);
 
     let selection = this.querySelector(':checked');
     select_habilidades.tomselect.settings.maxItems =selection.getAttribute('data-habilidades-max');
@@ -105,7 +114,9 @@ document.getElementById('clase-selector').addEventListener("change", function(ev
     addArrayDropdown(select_habilidades, convertPythonDictToJSON(selection.getAttribute('data-habilidades')));
     addArrayDropdown(select_equipoA, convertPythonDictToJSON(selection.getAttribute('data-equipoA')));
     addArrayDropdown(select_equipoB, convertPythonDictToJSON(selection.getAttribute('data-equipoB')));
-    addArrayDropdown(select_equipoC, convertPythonDictToJSON(selection.getAttribute('data-C')));
+    addArrayDropdown(select_equipoC, convertPythonDictToJSON(selection.getAttribute('data-equipoC')));
+    select_herramientas.tomselect.settings.maxItems =selection.getAttribute('data-herramientas-max');
+    addArrayDropdown(select_herramientas, convertPythonDictToJSON(selection.getAttribute('data-herramientas')));
 });
 
 
@@ -113,6 +124,11 @@ document.getElementById('clase-selector').addEventListener("change", function(ev
 new TomSelect("#habilidades-selector",{
     plugins: ['remove_button'],
 	maxItems: 3
+});
+
+new TomSelect("#herramientas-selector",{
+    plugins: ['remove_button'],
+	maxItems: 4
 });
 
 Array.from(document.getElementsByClassName("tomselect-basic")).forEach(
