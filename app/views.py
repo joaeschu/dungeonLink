@@ -1,4 +1,7 @@
-from django.shortcuts import render
+import json
+import os
+
+from django.shortcuts import render, redirect
 
 from django.http import HttpResponse
 
@@ -9,6 +12,7 @@ import ficheroObjetos
 import ficheroRazas
 import ficheroTrasfondos
 from tfgrol.settings import BASE_DIR
+
 
 
 def private_area(request):

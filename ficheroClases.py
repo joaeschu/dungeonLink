@@ -55,6 +55,16 @@ clases = {
             "Equipo_B": ["Equipo de diplomático", "Equipo de actor"],
             "Equipo_C": ["lira", "cualquier otro instrumento musical"],
             "Equipo_obligatorio": ["Armadura de cuero", "Daga"],
+            "Trucos_a_elegir": 2,
+            "Trucos_por_nivel": [2,2,2,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4],
+            "Trucos": ["Burla cruel", "Cuchichear mensaje", "Ilusión menor", "Impacto verdadero", "Luces danzantes", "Luz", "Mano del mago",
+                             "Prestidigitación"],
+            "Conjuros_a_elegir": 4,
+            "Conjuros_por_nivel": [4,5,6,7,8,9,10,11,12,14,15,15,16,18,19,19,20,22,22,22],
+            "Conjuros_1": ["Encantar Animal", "Caer como una pluma", "Comprensión idiomática", "Curar heridas", "Detectar magia",
+                             "Disfrazarse", "Dormir", "Escritura ilusoria", "Fuego feérico", "Hablar con los animales", "Hechizar persona", "Heroísmo",
+                             "Identificar", "Imagen silenciosa", "Onda atronadora", "Palabra curativa", "Perdición", "Sirviente invisible", "Terribles carcajadas",
+                             "Zancada prodigiosa"],
             "Nivel_1": {
                 "Lanzamiento de conjuros":
                     "Has aprendido a descifrar y reformular la realidad en armonía con tu música y tus deseos. Tus conjuros son parte de tu vasto repertorio, magia que puedes aplicar a variadas situaciones. Consulta el Capítulo 10 para ver las reglas generales de lanzamiento de conjuros y el Capítulo 11 para ver la lista de conjuros del bardo."

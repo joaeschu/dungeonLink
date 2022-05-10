@@ -367,7 +367,7 @@
       </section>
     </section>
     <section>
-      <section class="flavor">
+      <section class="flavor">s
         <div class="personality">
           <label for="personality">Personalidad</label><textarea name="personality">{% if sheet is not None %}{{ sheet.personality }}{% endif %}</textarea>
         </div>
@@ -430,7 +430,8 @@
                                                     {% for clase,value in ficheroClases.clases.items %}
                                                             <option value="{{ clase }}"  data-habilidades-max="{{ value.Habilidades_a_elegir }}" data-subclases="{{ value.Subclases }}" data-habilidades="{{ value.Habilidades }}"
                                                                     data-equipoA="{{ value.Equipo_A }}"data-equipoB="{{ value.Equipo_B }}"data-equipoC="{{ value.Equipo_C }}"data-herramientas-max="{{ value.Herramientas_a_elegir }}"
-                                                                    data-herramientas="{{ value.Herramientas }}">{{ clase }}
+                                                                    data-herramientas="{{ value.Herramientas }}"data-Trucos-a-elegir="{{ value.Trucos_a_elegir }}"data-Trucos="{{ value.Trucos }}"data-Conjuros-a-elegir="{{ value.Conjuros_a_elegir }}"
+                                                                    data-Conjuros-1="{{ value.Conjuros_1 }}">{{ clase }}
                                                             </option>
                                                         {% endfor %}
                                                 </select></div>
@@ -450,8 +451,16 @@
                                                 <select  id="herramientas-selector" name="herramientas-select[]" multiple placeholder="Seleciona" autocomplete="off">
                                                 </select></div>
                                         </div>
+                                        <div class="row">
+                                             <div class="col"><label class="form-label">Trucos</label>
+                                                <select  id="trucos-selector" name="trucos-select[]" multiple placeholder=" " autocomplete="off"></select>
+                                            </div>
+                                             <div class="col"><label class="form-label">Hechizos</label>
+                                                <select  id="conjuros-selector" name="conjuros-select[]" multiple placeholder=" " autocomplete="off"></select>
+                                            </div>
+                                        </div>
                                     </form>
-                                </div>
+                                </div><
                             </div>
                         </div>
                         <div class="accordion-item">
@@ -460,16 +469,15 @@
                                 <div class="accordion-body">
                                     <form  autocomplete="off">
                                         <div class="row">
-                                            <div class="col"><label class="form-label">Seleccionar Trasfondo</label><select class="form-select">
-                                                    {% for trasfondo in ficheroTrasfondos.trasfondos %}
-                                                            <option value="{{ trasfondo }}">{{ trasfondo }}</option>
+                                            <div class="col"><label class="form-label">Seleccionar Trasfondo</label><select class="tomselect-basic" id="trasfondo-selector" placeholder="Seleciona uno..">
+                                                    {% for clase,value in ficheroTrasfondos.trasfondos.items %}
+                                                             <option value="{{ clase }}"  data-trasfondos="{{ value.Habilidades }}" data-idiomas="{{ value.idiomas }}">{{ clase }}
+                                                            </option>
                                                         {% endfor %}
                                                 </select></div>
-                                            <div class="col"><label class="form-label">lenguajes</label><select class="form-select">
-                                                   {% for idioma in ficheroGeneral.idiomas %}
-                                                            <option value="{{ idioma }}">{{ idioma }}</option>
-                                                        {% endfor %}
-                                                </select></div>
+                                             <div class="col"><label class="form-label">Lenguajes</label>
+                                                <select  id="lenguajes-selector" name="lenguajes-select[]" multiple placeholder="Seleciona" autocomplete="off"></select>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col"><label class="form-label">Competencia de habilidades</label><select class="form-select">
@@ -484,29 +492,8 @@
                             </div>
                         </div>
                         <div class="accordion-item">
-                                <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-4" aria-expanded="false" aria-controls="accordion-1 .item-4">Hechizos</button></h2>
-                                <div class="accordion-collapse collapse item-4" role="tabpanel">
-                                    <div class="accordion-body">
-                                        <form  autocomplete="off">
-                                            <div class="row">
-                                                <div class="col"><label class="form-label">Equipo inicial. Elige entre:</label></div>
-                                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-3">Una gran hacha</label></div>
-                                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Cualquier arma marcial cuerpo a cuerpo</label></div>
-                                                <label class="form-label">También recibes<br></label>
-                                            </div>
-                                            <div class="col"><label class="form-label">o :</label>
-                                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label class="form-check-label" for="formCheck-4">Dos hachas de mano</label></div>
-                                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-5"><label class="form-check-label" for="formCheck-5">Cualquier arma simple</label></div>
-                                                <label class="form-label">Un equipo de explorador y 4 jabalinas<br></label>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-5" aria-expanded="false" aria-controls="accordion-1 .item-5">Raza y características</button></h2>
-                            <div class="accordion-collapse collapse item-5" role="tabpanel">
+                            <h2 class="accordion-header" role="tab"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-4" aria-expanded="false" aria-controls="accordion-1 .item-4">Raza y características</button></h2>
+                            <div class="accordion-collapse collapse item-4" role="tabpanel">
                                 <div class="accordion-body">
                                     <form  autocomplete="off">
                                         <div class="row">
