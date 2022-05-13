@@ -32,22 +32,22 @@
     <section class="misc">
       <ul>
         <li>
-          <label for="classlevel">Clase y nivel</label><input name="classlevel"{% if sheet is not None %} value="{{ sheet.classlevel }}"{% endif %} placeholder="Explorador 6" />
+          <label for="classlevel">Clase y nivel</label><input name="classlevel" id="sheet-classlevel"{% if sheet is not None %} value="{{ sheet.classlevel }}"{% endif %} placeholder="Explorador 6" />
         </li>
         <li>
-          <label for="background">Trasfondo</label><input name="background"{% if sheet is not None %} value="{{ sheet.background }}"{% endif %} placeholder="Príncipe de los Bosques" />
+          <label for="background">Trasfondo</label><input name="background" id="sheet-background"{% if sheet is not None %} value="{{ sheet.background }}"{% endif %} placeholder="Príncipe de los Bosques" />
         </li>
         <li>
-          <label for="playername">Usuario</label><input name="playername"{% if sheet is not None %} value="{{ sheet.playername }}"{% endif %} placeholder="Player McPlayerface">
+          <label for="playername">Usuario</label><input name="playername" id="sheet-playername"{% if sheet is not None %} value="{{ sheet.playername }}"{% endif %} placeholder="Player McPlayerface">
         </li>
         <li>
-          <label for="race">Raza</label><input name="race"{% if sheet is not None %} value="{{ sheet.race }}"{% endif %} placeholder="Alto Elfo" />
+          <label for="race">Raza</label><input name="race" id="sheet-race"{% if sheet is not None %} value="{{ sheet.race }}"{% endif %} placeholder="Alto Elfo" />
         </li>
         <li>
-          <label for="alignment">Alineamineto</label><input name="alignment"{% if sheet is not None %} value="{{ sheet.alignment }}"{% endif %} placeholder="Caótico Estúpido" />
+          <label for="alignment">Alineamineto</label><input name="alignment" id="sheet-alignment"{% if sheet is not None %} value="{{ sheet.alignment }}"{% endif %} placeholder="Caótico Estúpido" />
         </li>
         <li>
-          <label for="experiencepoints">Puntos de experiencia</label><input name="experiencepoints"{% if sheet is not None %} value="{{ sheet.experiencepoints }}"{% endif %} placeholder="3240" />
+          <label for="experiencepoints">Puntos de experiencia</label><input name="experiencepoints"  id="sheet-experiencepoints"{% if sheet is not None %} value="{{ sheet.experiencepoints }}"{% endif %} placeholder="3240" />
         </li>
       </ul>
     </section>
@@ -59,7 +59,7 @@
           <ul>
             <li>
               <div class="score">
-                <label for="Strengthscore">Fuerza</label><input name="Strengthscore"{% if sheet is not None %} value="{{ sheet.Strengthscore }}"{% endif %} placeholder="10" class="stat"/>
+                <label for="Strengthscore">Fuerza</label><input name="Strengthscore"   id="sheet-Strengthscore"{% if sheet is not None %} value="{{ sheet.Strengthscore }}"{% endif %} placeholder="10" class="stat"/>
               </div>
               <div class="modifier">
                 <input name="Strengthmod"{% if sheet is not None %} value="{{ sheet.Strengthmod }}"{% endif %} placeholder="+0" class="statmod"/>
@@ -67,7 +67,7 @@
             </li>
             <li>
               <div class="score">
-                <label for="Dexterityscore">Destreza</label><input name="Dexterityscore"{% if sheet is not None %} value="{{ sheet.Dexterityscore }}"{% endif %} placeholder="10" class="stat"/>
+                <label for="Dexterityscore">Destreza</label><input name="Dexterityscore"  id="sheet-Dexterityscore"{% if sheet is not None %} value="{{ sheet.Dexterityscore }}"{% endif %} placeholder="10" class="stat"/>
               </div>
               <div class="modifier">
                 <input name="Dexteritymod"{% if sheet is not None %} value="{{ sheet.Dexteritymod }}"{% endif %} placeholder="+0" class=statmod/>
@@ -75,7 +75,7 @@
             </li>
             <li>
               <div class="score">
-                <label for="Constitutionscore">Constitución</label><input name="Constitutionscore"{% if sheet is not None %} value="{{ sheet.Constitutionscore }}"{% endif %} placeholder="10" class="stat"/>
+                <label for="Constitutionscore">Constitución</label><input name="Constitutionscore"  id="sheet-Constitutionscore"{% if sheet is not None %} value="{{ sheet.Constitutionscore }}"{% endif %} placeholder="10" class="stat"/>
               </div>
               <div class="modifier">
                 <input name="Constitutionmod"{% if sheet is not None %} value="{{ sheet.Constitutionmod }}"{% endif %} placeholder="+0" class="statmod"/>
@@ -83,7 +83,7 @@
             </li>
             <li>
               <div class="score">
-                <label for="Wisdomscore">Sabiduría</label><input name="Wisdomscore"{% if sheet is not None %} value="{{ sheet.Wisdomscore }}"{% endif %} placeholder="10" class="stat"/>
+                <label for="Wisdomscore">Sabiduría</label><input name="Wisdomscore"  id="sheet-Wisdomscore"{% if sheet is not None %} value="{{ sheet.Wisdomscore }}"{% endif %} placeholder="10" class="stat"/>
               </div>
               <div class="modifier">
                 <input name="Wisdommod"{% if sheet is not None %} value="{{ sheet.Wisdommod }}"{% endif %} placeholder="+0" />
@@ -91,7 +91,7 @@
             </li>
             <li>
               <div class="score">
-                <label for="Intelligencescore">Inteligencia</label><input name="Intelligencescore"{% if sheet is not None %} value="{{ sheet.Intelligencescore }}"{% endif %} placeholder="10" class="stat"/>
+                <label for="Intelligencescore">Inteligencia</label><input name="Intelligencescore"  id="sheet-Intelligencescore"{% if sheet is not None %} value="{{ sheet.Intelligencescore }}"{% endif %} placeholder="10" class="stat"/>
               </div>
               <div class="modifier">
                 <input name="Intelligencemod"{% if sheet is not None %} value="{{ sheet.Intelligencemod }}"{% endif %} placeholder="+0" class="statmod"/>
@@ -99,7 +99,7 @@
             </li>
             <li>
               <div class="score">
-                <label for="Charismascore">Carisma</label><input name="Charismascore"{% if sheet is not None %} value="{{ sheet.Charismascore }}"{% endif %} placeholder="10" class="stat"/>
+                <label for="Charismascore">Carisma</label><input name="Charismascore"  id="sheet-Charismascore"{% if sheet is not None %} value="{{ sheet.Charismascore }}"{% endif %} placeholder="10" class="stat"/>
               </div>
               <div class="modifier">
                 <input name="Charismamod"{% if sheet is not None %} value="{{ sheet.Charismamod }}"{% endif %} placeholder="+0" class="statmod"/>
@@ -112,33 +112,33 @@
             <div class="label-container">
               <label for="inspiration">Inspiración</label>
             </div>
-            <input name="inspiration"{% if sheet is not None and sheet.inspiration == 'on' %} checked{% endif %} type="checkbox" />
+            <input name="inspiration" id="sheet-inspiration"{% if sheet is not None and sheet.inspiration == 'on' %} checked{% endif %} type="checkbox" />
           </div>
           <div class="proficiencybonus box">
             <div class="label-container">
               <label for="proficiencybonus">Bonificador de competencia</label>
             </div>
-            <input name="proficiencybonus"{% if sheet is not None %} value="{{ sheet.proficiencybonus }}"{% endif %} placeholder="+2" />
+            <input name="proficiencybonus" id="sheet-proficiencybonus"{% if sheet is not None %} value="{{ sheet.proficiencybonus }}"{% endif %} placeholder="+2" />
           </div>
           <div class="saves list-section box">
             <ul>
               <li>
-                <label for="Strengthsave">Fuerza</label><input name="Strengthsave"{% if sheet is not None %} value="{{ sheet.Strengthsave }}"{% endif %} placeholder="+0" type="text" /><input name="Strengthsaveprof"{% if sheet is not None and sheet.Strengthsaveprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Strengthsave">Fuerza</label><input name="Strengthsave" id="sheet-Strengthsave"{% if sheet is not None %} value="{{ sheet.Strengthsave }}"{% endif %} placeholder="+0" type="text" /><input name="Strengthsaveprof"{% if sheet is not None and sheet.Strengthsaveprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Dexteritysave">Destreza</label><input name="Dexteritysave"{% if sheet is not None %} value="{{ sheet.Dexteritysave }}"{% endif %} placeholder="+0" type="text" /><input name="Dexteritysaveprof"{% if sheet is not None and sheet.Dexteritysaveprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Dexteritysave">Destreza</label><input name="Dexteritysave" id="sheet-Dexteritysave"{% if sheet is not None %} value="{{ sheet.Dexteritysave }}"{% endif %} placeholder="+0" type="text" /><input name="Dexteritysaveprof"{% if sheet is not None and sheet.Dexteritysaveprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Constitutionsave">Constitución</label><input name="Constitutionsave"{% if sheet is not None %} value="{{ sheet.Constitutionsave }}"{% endif %} placeholder="+0" type="text" /><input name="Constitutionsaveprof"{% if sheet is not None and sheet.Constitutionsaveprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Constitutionsave">Constitución</label><input name="Constitutionsave" id="sheet-Constitutionsave"{% if sheet is not None %} value="{{ sheet.Constitutionsave }}"{% endif %} placeholder="+0" type="text" /><input name="Constitutionsaveprof"{% if sheet is not None and sheet.Constitutionsaveprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Wisdomsave">Sabiduría</label><input name="Wisdomsave"{% if sheet is not None %} value="{{ sheet.Wisdomsave }}"{% endif %} placeholder="+0" type="text" /><input name="Wisdomsaveprof"{% if sheet is not None and sheet.Wisdomsaveprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Wisdomsave">Sabiduría</label><input name="Wisdomsave" id="sheet-Wisdomsave"{% if sheet is not None %} value="{{ sheet.Wisdomsave }}"{% endif %} placeholder="+0" type="text" /><input name="Wisdomsaveprof"{% if sheet is not None and sheet.Wisdomsaveprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Intelligencesave">Inteligencia</label><input name="Intelligencesave"{% if sheet is not None %} value="{{ sheet.Intelligencesave }}"{% endif %} placeholder="+0" type="text" /><input name="Intelligencesaveprof"{% if sheet is not None and sheet.Intelligencesaveprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Intelligencesave">Inteligencia</label><input name="Intelligencesave" id="sheet-Intelligencesave"{% if sheet is not None %} value="{{ sheet.Intelligencesave }}"{% endif %} placeholder="+0" type="text" /><input name="Intelligencesaveprof"{% if sheet is not None and sheet.Intelligencesaveprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Charismasave">Carisma</label><input name="Charismasave"{% if sheet is not None %} value="{{ sheet.Charismasave }}"{% endif %} placeholder="+0" type="text" /><input name="Charismasaveprof"{% if sheet is not None and sheet.Charismasaveprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Charismasave">Carisma</label><input name="Charismasave" id="sheet-Charismasave"{% if sheet is not None %} value="{{ sheet.Charismasave }}"{% endif %} placeholder="+0" type="text" /><input name="Charismasaveprof"{% if sheet is not None and sheet.Charismasaveprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
             </ul>
             <div class="label">
@@ -148,58 +148,58 @@
           <div class="skills list-section box">
             <ul>
               <li>
-                <label for="Acrobatics">Acrobacias <span class="skill">(Des)</span></label><input name="Acrobatics"{% if sheet is not None %} value="{{ sheet.Acrobatics }}"{% endif %} placeholder="+0" type="text" /><input name="Acrobaticsprof"{% if sheet is not None and sheet.Acrobaticsprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Acrobatics">Acrobacias <span class="skill">(Des)</span></label><input name="Acrobatics" id="sheet-Acrobatics"{% if sheet is not None %} value="{{ sheet.Acrobatics }}"{% endif %} placeholder="+0" type="text" /><input name="Acrobaticsprof"{% if sheet is not None and sheet.Acrobaticsprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Animal Handling">Trato con animales<span class="skill">(Sab)</span></label><input name="AnimalHandling"{% if sheet is not None %} value="{{ sheet.AnimalHandling }}"{% endif %} placeholder="+0" type="text" /><input name="AnimalHandlingprof"{% if sheet is not None and sheet.AnimalHandlingprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Animal Handling">Trato con animales<span class="skill">(Sab)</span></label><input name="AnimalHandling" id="sheet-AnimalHandling"{% if sheet is not None %} value="{{ sheet.AnimalHandling }}"{% endif %} placeholder="+0" type="text" /><input name="AnimalHandlingprof"{% if sheet is not None and sheet.AnimalHandlingprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Arcana">Arcano <span class="skill">(Int)</span></label><input name="Arcana"{% if sheet is not None %} value="{{ sheet.Arcana }}"{% endif %} placeholder="+0" type="text" /><input name="Arcanaprof"{% if sheet is not None and sheet.Arcanaprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Arcana">Arcano <span class="skill">(Int)</span></label><input name="Arcana" id="sheet-Arcana"{% if sheet is not None %} value="{{ sheet.Arcana }}"{% endif %} placeholder="+0" type="text" /><input name="Arcanaprof"{% if sheet is not None and sheet.Arcanaprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Athletics">Atletismo <span class="skill">(Fue)</span></label><input name="Athletics"{% if sheet is not None %} value="{{ sheet.Athletics }}"{% endif %} placeholder="+0" type="text" /><input name="Athleticsprof"{% if sheet is not None and sheet.Athleticsprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Athletics">Atletismo <span class="skill">(Fue)</span></label><input name="Athletics" id="sheet-Athletics"{% if sheet is not None %} value="{{ sheet.Athletics }}"{% endif %} placeholder="+0" type="text" /><input name="Athleticsprof"{% if sheet is not None and sheet.Athleticsprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Deception">Engañar <span class="skill">(Car)</span></label><input name="Deception"{% if sheet is not None %} value="{{ sheet.Deception }}"{% endif %} placeholder="+0" type="text" /><input name="Deceptionprof"{% if sheet is not None and sheet.Deceptionprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Deception">Engañar <span class="skill">(Car)</span></label><input name="Deception" id="sheet-Deception"{% if sheet is not None %} value="{{ sheet.Deception }}"{% endif %} placeholder="+0" type="text" /><input name="Deceptionprof"{% if sheet is not None and sheet.Deceptionprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="History">Historia <span class="skill">(Int)</span></label><input name="History"{% if sheet is not None %} value="{{ sheet.History }}"{% endif %} placeholder="+0" type="text" /><input name="Historyprof"{% if sheet is not None and sheet.Historyprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="History">Historia <span class="skill">(Int)</span></label><input name="History" id="sheet-History"{% if sheet is not None %} value="{{ sheet.History }}"{% endif %} placeholder="+0" type="text" /><input name="Historyprof"{% if sheet is not None and sheet.Historyprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Insight">Averiguar intenciones <span class="skill">(Sab)</span></label><input name="Insight"{% if sheet is not None %} value="{{ sheet.Insight }}"{% endif %} placeholder="+0" type="text" /><input name="Insightprof"{% if sheet is not None and sheet.Insightprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Insight">Averiguar intenciones <span class="skill">(Sab)</span></label><input name="Insight" id="sheet-Insight"{% if sheet is not None %} value="{{ sheet.Insight }}"{% endif %} placeholder="+0" type="text" /><input name="Insightprof"{% if sheet is not None and sheet.Insightprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Intimidation">Intimidación <span class="skill">(Car)</span></label><input name="Intimidation"{% if sheet is not None %} value="{{ sheet.Intimidation }}"{% endif %} placeholder="+0" type="text" /><input name="Intimidationprof"{% if sheet is not None and sheet.Intimidationprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Intimidation">Intimidación <span class="skill">(Car)</span></label><input name="Intimidation" id="sheet-Intimidation"{% if sheet is not None %} value="{{ sheet.Intimidation }}"{% endif %} placeholder="+0" type="text" /><input name="Intimidationprof"{% if sheet is not None and sheet.Intimidationprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Investigation">Investigación <span class="skill">(Int)</span></label><input name="Investigation"{% if sheet is not None %} value="{{ sheet.Investigation }}"{% endif %} placeholder="+0" type="text" /><input name="Investigationprof"{% if sheet is not None and sheet.Investigationprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Investigation">Investigación <span class="skill">(Int)</span></label><input name="Investigation" id="sheet-Investigation"{% if sheet is not None %} value="{{ sheet.Investigation }}"{% endif %} placeholder="+0" type="text" /><input name="Investigationprof"{% if sheet is not None and sheet.Investigationprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Medicine">Medicina <span class="skill">(Sab)</span></label><input name="Medicine"{% if sheet is not None %} value="{{ sheet.Medicine }}"{% endif %} placeholder="+0" type="text" /><input name="Medicineprof"{% if sheet is not None and sheet.Medicineprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Medicine">Medicina <span class="skill">(Sab)</span></label><input name="Medicine" id="sheet-Medicine"{% if sheet is not None %} value="{{ sheet.Medicine }}"{% endif %} placeholder="+0" type="text" /><input name="Medicineprof"{% if sheet is not None and sheet.Medicineprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Nature">Naturaleza<span class="skill">(Int)</span></label><input name="Nature"{% if sheet is not None %} value="{{ sheet.Nature }}"{% endif %} placeholder="+0" type="text" /><input name="Natureprof"{% if sheet is not None and sheet.Natureprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Nature">Naturaleza<span class="skill">(Int)</span></label><input name="Nature" id="sheet-Nature"{% if sheet is not None %} value="{{ sheet.Nature }}"{% endif %} placeholder="+0" type="text" /><input name="Natureprof"{% if sheet is not None and sheet.Natureprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Perception">Percepción <span class="skill">(Sab)</span></label><input name="Perception"{% if sheet is not None %} value="{{ sheet.Perception }}"{% endif %} placeholder="+0" type="text" /><input name="Perceptionprof"{% if sheet is not None and sheet.Perceptionprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Perception">Percepción <span class="skill">(Sab)</span></label><input name="Perception" id="sheet-Perception"{% if sheet is not None %} value="{{ sheet.Perception }}"{% endif %} placeholder="+0" type="text" /><input name="Perceptionprof"{% if sheet is not None and sheet.Perceptionprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Performance">Actuación <span class="skill">(Car)</span></label><input name="Performance"{% if sheet is not None %} value="{{ sheet.Performance }}"{% endif %} placeholder="+0" type="text" /><input name="Performanceprof"{% if sheet is not None and sheet.Performanceprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Performance">Actuación <span class="skill">(Car)</span></label><input name="Performance" id="sheet-Performance"{% if sheet is not None %} value="{{ sheet.Performance }}"{% endif %} placeholder="+0" type="text" /><input name="Performanceprof"{% if sheet is not None and sheet.Performanceprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Persuasion">Persuasión <span class="skill">(Car)</span></label><input name="Persuasion"{% if sheet is not None %} value="{{ sheet.Persuasion }}"{% endif %} placeholder="+0" type="text" /><input name="Persuasionprof"{% if sheet is not None and sheet.Persuasionprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Persuasion">Persuasión <span class="skill">(Car)</span></label><input name="Persuasion" id="sheet-Persuasion"{% if sheet is not None %} value="{{ sheet.Persuasion }}"{% endif %} placeholder="+0" type="text" /><input name="Persuasionprof"{% if sheet is not None and sheet.Persuasionprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Religion">Religión <span class="skill">(Int)</span></label><input name="Religion"{% if sheet is not None %} value="{{ sheet.Religion }}"{% endif %} placeholder="+0" type="text" /><input name="Religionprof"{% if sheet is not None and sheet.Religionprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Religion">Religión <span class="skill">(Int)</span></label><input name="Religion" id="sheet-Religion"{% if sheet is not None %} value="{{ sheet.Religion }}"{% endif %} placeholder="+0" type="text" /><input name="Religionprof"{% if sheet is not None and sheet.Religionprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Sleight of Hand">Juego de manos <span class="skill">(Des)</span></label><input name="SleightofHand"{% if sheet is not None %} value="{{ sheet.SleightofHand }}"{% endif %} placeholder="+0" type="text" /><input name="SleightofHandprof"{% if sheet is not None and sheet.SleightofHandprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Sleight of Hand">Juego de manos <span class="skill">(Des)</span></label><input name="SleightofHand" id="sheet-SleightofHand"{% if sheet is not None %} value="{{ sheet.SleightofHand }}"{% endif %} placeholder="+0" type="text" /><input name="SleightofHandprof"{% if sheet is not None and sheet.SleightofHandprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Stealth">Sigilo <span class="skill">(Des)</span></label><input name="Stealth"{% if sheet is not None %} value="{{ sheet.Stealth }}"{% endif %} placeholder="+0" type="text" /><input name="Stealthprof"{% if sheet is not None and sheet.Stealthprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Stealth">Sigilo <span class="skill">(Des)</span></label><input name="Stealth" id="sheet-Stealth"{% if sheet is not None %} value="{{ sheet.Stealth }}"{% endif %} placeholder="+0" type="text" /><input name="Stealthprof"{% if sheet is not None and sheet.Stealthprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
               <li>
-                <label for="Survival">Supervivencia <span class="skill">(Sab)</span></label><input name="Survival"{% if sheet is not None %} value="{{ sheet.Survival }}"{% endif %} placeholder="+0" type="text" /><input name="Survivalprof"{% if sheet is not None and sheet.Survivalprof == 'on' %} checked{% endif %} type="checkbox" />
+                <label for="Survival">Supervivencia <span class="skill">(Sab)</span></label><input name="Survival" id="sheet-Survival"{% if sheet is not None %} value="{{ sheet.Survival }}"{% endif %} placeholder="+0" type="text" /><input name="Survivalprof"{% if sheet is not None and sheet.Survivalprof == 'on' %} checked{% endif %} type="checkbox" />
               </li>
             </ul>
             <div class="label">
@@ -212,49 +212,49 @@
         <div class="label-container">
           <label for="passiveperception">Sabiduría pasiva (Percepción)</label>
         </div>
-        <input name="passiveperception"{% if sheet is not None %} value="{{ sheet.passiveperception }}"{% endif %} placeholder="10" />
+        <input name="passiveperception"id="sheet-passiveperception"{% if sheet is not None %} value="{{ sheet.passiveperception }}"{% endif %} placeholder="10" />
       </div>
       <div class="otherprofs box textblock">
-        <label for="otherprofs">Otras competencias y lenguajes</label><textarea name="otherprofs">{% if sheet is not None %}{{ sheet.otherprofs }}{% endif %}</textarea>
+        <label for="otherprofs">Otras competencias y lenguajes</label><textarea name="otherprofs"id="sheet-otherprofs">{% if sheet is not None %}{{ sheet.otherprofs }}{% endif %}</textarea>
       </div>
     </section>
     <section>
       <section class="combat">
         <div class="armorclass">
           <div>
-            <label for="ac">Clase de armadura</label><input name="ac"{% if sheet is not None %} value="{{ sheet.ac }}"{% endif %} placeholder="10" type="text" />
+            <label for="ac">Clase de armadura</label><input name="ac"id="sheet-ac"{% if sheet is not None %} value="{{ sheet.ac }}"{% endif %} placeholder="10" type="text" />
           </div>
         </div>
         <div class="initiative">
           <div>
-            <label for="initiative">Iniciativa</label><input name="initiative"{% if sheet is not None %} value="{{ sheet.initiative }}"{% endif %} placeholder="+0" type="text" />
+            <label for="initiative">Iniciativa</label><input name="initiative"id="sheet-initiative"{% if sheet is not None %} value="{{ sheet.initiative }}"{% endif %} placeholder="+0" type="text" />
           </div>
         </div>
         <div class="speed">
           <div>
-            <label for="speed">Velocidad</label><input name="speed"{% if sheet is not None %} value="{{ sheet.speed }}"{% endif %} placeholder="30" type="text" />
+            <label for="speed">Velocidad</label><input name="speed"id="sheet-speed"{% if sheet is not None %} value="{{ sheet.speed }}"{% endif %} placeholder="30" type="text" />
           </div>
         </div>
         <div class="hp">
           <div class="regular">
             <div class="max">
-              <label for="maxhp">Puntos de golpe máximos</label><input name="maxhp"{% if sheet is not None %} value="{{ sheet.maxhp }}"{% endif %} placeholder="10" type="text" />
+              <label for="maxhp">Puntos de golpe máximos</label><input name="maxhp"id="sheet-maxhp"{% if sheet is not None %} value="{{ sheet.maxhp }}"{% endif %} placeholder="10" type="text" />
             </div>
             <div class="current">
-              <label for="currenthp">Puntos de golpe actuales</label><input name="currenthp"{% if sheet is not None %} value="{{ sheet.currenthp }}"{% endif %} type="text" />
+              <label for="currenthp">Puntos de golpe actuales</label><input name="currenthp"id="sheet-currenthp"{% if sheet is not None %} value="{{ sheet.currenthp }}"{% endif %} type="text" />
             </div>
           </div>
           <div class="temporary">
-            <label for="temphp">Puntos de golpe temporales</label><input name="temphp"{% if sheet is not None %} value="{{ sheet.temphp }}"{% endif %} type="text" />
+            <label for="temphp">Puntos de golpe temporales</label><input name="temphp"id="sheet-temphp"{% if sheet is not None %} value="{{ sheet.temphp }}"{% endif %} type="text" />
           </div>
         </div>
         <div class="hitdice">
           <div>
             <div class="total">
-              <label onclick="totalhd_clicked()" for="totalhd">Total</label><input name="totalhd"{% if sheet is not None %} value="{{ sheet.totalhd }}"{% endif %} placeholder="2d10" type="text" />
+              <label onclick="totalhd_clicked()" for="totalhd">Total</label><input name="totalhd"id="sheet-totalhd"{% if sheet is not None %} value="{{ sheet.totalhd }}"{% endif %} placeholder="2d10" type="text" />
             </div>
             <div class="remaining">
-              <label for="remaininghd">Dados de golpe</label><input name="remaininghd"{% if sheet is not None %} value="{{ sheet.remaininghd }}"{% endif %} type="text" />
+              <label for="remaininghd">Dados de golpe</label><input name="remaininghd"id="sheet-remaininghd"{% if sheet is not None %} value="{{ sheet.remaininghd }}"{% endif %} type="text" />
             </div>
           </div>
         </div>
@@ -267,17 +267,17 @@
               <div class="deathsuccesses">
                 <label>Éxitos</label>
                 <div class="bubbles">
-                  <input name="deathsuccess1"{% if sheet is not None and sheet.deathsuccess1 == 'on' %} checked{% endif %} type="checkbox" />
-                  <input name="deathsuccess2"{% if sheet is not None and sheet.deathsuccess2 == 'on' %} checked{% endif %} type="checkbox" />
-                  <input name="deathsuccess3"{% if sheet is not None and sheet.deathsuccess3 == 'on' %} checked{% endif %} type="checkbox" />
+                  <input name="deathsuccess1"id="sheet-deathsuccess1"{% if sheet is not None and sheet.deathsuccess1 == 'on' %} checked{% endif %} type="checkbox" />
+                  <input name="deathsuccess2"id="sheet-deathsuccess2"{% if sheet is not None and sheet.deathsuccess2 == 'on' %} checked{% endif %} type="checkbox" />
+                  <input name="deathsuccess3"id="sheet-deathsuccess3"{% if sheet is not None and sheet.deathsuccess3 == 'on' %} checked{% endif %} type="checkbox" />
                 </div>
               </div>
               <div class="deathfails">
                 <label>Fallos</label>
                 <div class="bubbles">
-                  <input name="deathfail1"{% if sheet is not None and sheet.deathfail1 == 'on' %} checked{% endif %} type="checkbox" />
-                  <input name="deathfail2"{% if sheet is not None and sheet.deathfail2 == 'on' %} checked{% endif %} type="checkbox" />
-                  <input name="deathfail3"{% if sheet is not None and sheet.deathfail3 == 'on' %} checked{% endif %} type="checkbox" />
+                  <input name="deathfail1"id="sheet-deathfail1"{% if sheet is not None and sheet.deathfail1 == 'on' %} checked{% endif %} type="checkbox" />
+                  <input name="deathfail2"id="sheet-deathfail2"{% if sheet is not None and sheet.deathfail2 == 'on' %} checked{% endif %} type="checkbox" />
+                  <input name="deathfail3"id="sheet-deathfail3"{% if sheet is not None and sheet.deathfail3 == 'on' %} checked{% endif %} type="checkbox" />
                 </div>
               </div>
             </div>
@@ -304,35 +304,35 @@
             <tbody>
               <tr>
                 <td>
-                  <input name="atkname1"{% if sheet is not None %} value="{{ sheet.atkname1 }}"{% endif %} type="text" />
+                  <input name="atkname1"id="sheet-atkname1"{% if sheet is not None %} value="{{ sheet.atkname1 }}"{% endif %} type="text" />
                 </td>
                 <td>
-                  <input name="atkbonus1"{% if sheet is not None %} value="{{ sheet.atkbonus1 }}"{% endif %} type="text" />
+                  <input name="atkbonus1"id="sheet-atkbonus1"{% if sheet is not None %} value="{{ sheet.atkbonus1 }}"{% endif %} type="text" />
                 </td>
                 <td>
-                  <input name="atkdamage1"{% if sheet is not None %} value="{{ sheet.atkdamage1 }}"{% endif %} type="text" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input name="atkname2"{% if sheet is not None %} value="{{ sheet.atkname2 }}"{% endif %} type="text" />
-                </td>
-                <td>
-                  <input name="atkbonus2"{% if sheet is not None %} value="{{ sheet.atkbonus2 }}"{% endif %} type="text" />
-                </td>
-                <td>
-                  <input name="atkdamage2"{% if sheet is not None %} value="{{ sheet.atkdamage2 }}"{% endif %} type="text" />
+                  <input name="atkdamage1"id="sheet-atkdamage1"{% if sheet is not None %} value="{{ sheet.atkdamage1 }}"{% endif %} type="text" />
                 </td>
               </tr>
               <tr>
                 <td>
-                  <input name="atkname3"{% if sheet is not None %} value="{{ sheet.atkname3 }}"{% endif %} type="text" />
+                  <input name="atkname2"id="sheet-atkname2"{% if sheet is not None %} value="{{ sheet.atkname2 }}"{% endif %} type="text" />
                 </td>
                 <td>
-                  <input name="atkbonus3"{% if sheet is not None %} value="{{ sheet.atkbonus3 }}"{% endif %} type="text" />
+                  <input name="atkbonus2"id="sheet-atkbonus2"{% if sheet is not None %} value="{{ sheet.atkbonus2 }}"{% endif %} type="text" />
                 </td>
                 <td>
-                  <input name="atkdamage3"{% if sheet is not None %} value="{{ sheet.atkdamage3 }}"{% endif %} type="text" />
+                  <input name="atkdamage2"id="sheet-atkdamage2"{% if sheet is not None %} value="{{ sheet.atkdamage2 }}"{% endif %} type="text" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input name="atkname3"id="sheet-atkname3"{% if sheet is not None %} value="{{ sheet.atkname3 }}"{% endif %} type="text" />
+                </td>
+                <td>
+                  <input name="atkbonus3"id="sheet-atkbonus3"{% if sheet is not None %} value="{{ sheet.atkbonus3 }}"{% endif %} type="text" />
+                </td>
+                <td>
+                  <input name="atkdamage3"id="sheet-atkdamage3"{% if sheet is not None %} value="{{ sheet.atkdamage3 }}"{% endif %} type="text" />
                 </td>
               </tr>
             </tbody>
@@ -346,44 +346,44 @@
           <div class="money">
             <ul>
               <li>
-                <label for="cp">PC</label><input name="cp"{% if sheet is not None %} value="{{ sheet.cp }}"{% endif %} />
+                <label for="cp">PC</label><input name="cp"id="sheet-cp"{% if sheet is not None %} value="{{ sheet.cp }}"{% endif %} />
               </li>
               <li>
-                <label for="sp">PP</label><input name="sp"{% if sheet is not None %} value="{{ sheet.sp }}"{% endif %} />
+                <label for="sp">PP</label><input name="sp"id="sheet-sp"{% if sheet is not None %} value="{{ sheet.sp }}"{% endif %} />
               </li>
               <li>
-                <label for="ep">PE</label><input name="ep"{% if sheet is not None %} value="{{ sheet.ep }}"{% endif %} />
+                <label for="ep">PE</label><input name="ep"id="sheet-ep"{% if sheet is not None %} value="{{ sheet.ep }}"{% endif %} />
               </li>
               <li>
-                <label for="gp">PO</label><input name="gp"{% if sheet is not None %} value="{{ sheet.gp }}"{% endif %} />
+                <label for="gp">PO</label><input name="gp"id="sheet-gp"{% if sheet is not None %} value="{{ sheet.gp }}"{% endif %} />
               </li>
               <li>
-                <label for="pp">PP</label><input name="pp"{% if sheet is not None %} value="{{ sheet.pp }}"{% endif %} />
+                <label for="pp">PP</label><input name="pp"id="sheet-pp"{% if sheet is not None %} value="{{ sheet.pp }}"{% endif %} />
               </li>
             </ul>
           </div>
-          <textarea name="equipmentList" placeholder="Lista de equipo">{% if sheet is not None %}{{ sheet.equipmentList }}{% endif %}</textarea>
+          <textarea name="equipmentList" placeholder="Lista de equipo"id="sheet-Lista-de-equipo">{% if sheet is not None %}{{ sheet.equipmentList }}{% endif %}</textarea>
         </div>
       </section>
     </section>
     <section>
       <section class="flavor">s
         <div class="personality">
-          <label for="personality">Personalidad</label><textarea name="personality">{% if sheet is not None %}{{ sheet.personality }}{% endif %}</textarea>
+          <label for="personality">Personalidad</label><textarea name="personality"id="sheet-personality">{% if sheet is not None %}{{ sheet.personality }}{% endif %}</textarea>
         </div>
         <div class="ideals">
-          <label for="ideals">Ideales</label><textarea name="ideals">{% if sheet is not None %}{{ sheet.ideals }}{% endif %}</textarea>
+          <label for="ideals">Ideales</label><textarea name="ideals"id="sheet-ideals">{% if sheet is not None %}{{ sheet.ideals }}{% endif %}</textarea>
         </div>
         <div class="bonds">
-          <label for="bonds">Vínculos</label><textarea name="bonds">{% if sheet is not None %}{{ sheet.bonds }}{% endif %}</textarea>
+          <label for="bonds">Vínculos</label><textarea name="bonds"id="sheet-bonds">{% if sheet is not None %}{{ sheet.bonds }}{% endif %}</textarea>
         </div>
         <div class="flaws">
-          <label for="flaws">Defectos</label><textarea name="flaws">{% if sheet is not None %}{{ sheet.flaws }}{% endif %}</textarea>
+          <label for="flaws">Defectos</label><textarea name="flaws"id="sheet-flaws">{% if sheet is not None %}{{ sheet.flaws }}{% endif %}</textarea>
         </div>
       </section>
       <section class="features">
         <div>
-          <label for="features">Rasgos y atributos</label><textarea name="features">{% if sheet is not None %}{{ sheet.features }}{% endif %}</textarea>
+          <label for="features">Rasgos y atributos</label><textarea name="features"id="sheet-features">{% if sheet is not None %}{{ sheet.features }}{% endif %}</textarea>
         </div>
       </section>
     </section>
@@ -470,22 +470,24 @@
                                     <form  autocomplete="off">
                                         <div class="row">
                                             <div class="col"><label class="form-label">Seleccionar Trasfondo</label><select class="tomselect-basic" id="trasfondo-selector" placeholder="Seleciona uno..">
+                                                    <option value="">Selecciona...</option>
                                                     {% for clase,value in ficheroTrasfondos.trasfondos.items %}
-                                                             <option value="{{ clase }}"  data-trasfondos="{{ value.Habilidades }}" data-idiomas="{{ value.idiomas }}">{{ clase }}
+                                                             <option value="{{ clase }}"  data-trasfondo-habilidades="{{ value.Habilidades }}" data-trasfondo-herramientas-max="{{ value.Herramientas_a_elegir }}" data-trasfondo-herramientas="{{ value.Herramientas }}"
+                                                             data-trasfondo-idiomas-max="{{ value.Idiomas_a_elegir }}" data-trasfondo-idiomas="{{ value.Idiomas }}">{{ clase }}
                                                             </option>
                                                         {% endfor %}
                                                 </select></div>
                                              <div class="col"><label class="form-label">Lenguajes</label>
-                                                <select  id="lenguajes-selector" name="lenguajes-select[]" multiple placeholder="Seleciona" autocomplete="off"></select>
+                                                <select  id="trasfondo-idiomas-selector" name="trasfondo-idiomas-select[]" multiple placeholder="Seleciona" autocomplete="off"></select>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col"><label class="form-label">Competencia de habilidades</label><select class="form-select">
-
-                                                </select></div>
-                                            <div class="col"><label class="form-label">Herramientas</label><select class="form-select">
-
-                                                </select></div>
+                                            <div class="col"><label class="form-label">Competencia de habilidades</label>
+                                                <select  id="trasfondo-habilidades-selector" name="trasfondo-habilidades-select[]" multiple placeholder="Seleciona" autocomplete="off"></select>
+                                            </div>
+                                            <div class="col"><label class="form-label">Herramientas</label>
+                                            <select  id="trasfondo-herramientas-selector" name="trasfondo-herramientas-select[]" multiple placeholder="Seleciona" autocomplete="off"></select>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -497,75 +499,44 @@
                                 <div class="accordion-body">
                                     <form  autocomplete="off">
                                         <div class="row">
-                                            <div class="col"><label class="form-label">Raza</label><select class="form-select">
-                                                    {% for raza in ficheroRazas.razas %}
-                                                            <option value="{{ raza }}">{{ raza }}</option>
+                                             <div class="col"><label class="form-label">Raza</label><select class="tomselect-basic" id="raza-selector" placeholder="Seleciona uno..">
+                                            <option value="">Seleciona uno..</option>
+                                                    {% for clase,value in ficheroRazas.razas.items %}
+                                                            <option value="{{ clase }}"  data-Fuerza="{{ value.Fuerza }}" data-Destreza="{{ value.Destreza }}" data-Constitución="{{ value.Constitución }}"
+                                                                    data-Inteligencia="{{ value.Inteligencia }}" data-Sabiduría="{{ value.Sabiduría }}" data-Carisma="{{ value.Carisma }}"
+                                                                    data-Atributos="{{ value.Atributos }}">{{ clase }}
+                                                            </option>
                                                         {% endfor %}
-                                                </select></div>
+                                                </select>
+                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col"><label class="form-label">Fuerza&nbsp; &nbsp;</label><span class="badge bg-primary" style="margin: 0px;margin-left: 10px;margin-top: 8px;">+2</span><select class="form-select">
-                                                    <option value="15" selected="">15</option>
-                                                    <option value="14" selected="">14</option>
-                                                    <option value="13" selected="">13</option>
-                                                    <option value="12" selected="">12</option>
-                                                    <option value="10" selected="">10</option>
-                                                    <option value="8" selected="">8</option>
-                                                </select></div>
+                                            <div class="col"><label class="form-label">Fuerza&nbsp; &nbsp;</label><span class="badge bg-primary" id="fuerza-cartel" style="margin: 0px;margin-left: 10px;margin-top: 8px;">+0</span>
+                                               <select class="tomselect-basic select-atributos" id="fuerza-selector"></select></div>
                                         </div>
                                         <div class="row">
-                                            <div class="col"><label class="form-label">Destreza&nbsp; &nbsp;</label><span class="badge bg-primary" style="margin-left: 10px;margin-top: 8px;">+2</span><select class="form-select">
-                                                     <option value="15" selected="">15</option>
-                                                    <option value="14" selected="">14</option>
-                                                    <option value="13" selected="">13</option>
-                                                    <option value="12" selected="">12</option>
-                                                    <option value="10" selected="">10</option>
-                                                    <option value="8" selected="">8</option>
-                                                </select></div>
+                                            <div class="col"><label class="form-label">Destreza&nbsp; &nbsp;</label><span class="badge bg-primary" id="destreza-cartel" style="margin-left: 10px;margin-top: 8px;">+0</span>
+                                                <select class="tomselect-basic select-atributos" id="destreza-selector"></select></div>
                                         </div>
                                     </form>
                                     <form>
                                         <div class="row">
-                                            <div class="col"><label class="form-label">Constitución&nbsp; &nbsp;</label><span class="badge bg-primary" style="margin: 0px;margin-left: 10px;margin-top: 8px;">+2</span><select class="form-select">
-                                                      <option value="15" selected="">15</option>
-                                                    <option value="14" selected="">14</option>
-                                                    <option value="13" selected="">13</option>
-                                                    <option value="12" selected="">12</option>
-                                                    <option value="10" selected="">10</option>
-                                                    <option value="8" selected="">8</option>
-                                                </select></div>
+                                            <div class="col"><label class="form-label">Constitución&nbsp; &nbsp;</label><span class="badge bg-primary" id="constitucion-cartel" style="margin: 0px;margin-left: 10px;margin-top: 8px;">+0</span>
+                                                <select class="tomselect-basic select-atributos" id="constitucion-selector"></select></div>
                                         </div>
                                         <div class="row">
-                                            <div class="col"><label class="form-label">Sabiduría&nbsp; &nbsp;</label><span class="badge bg-primary" style="margin-top: 8px;margin-left: 10px;">+2</span><select class="form-select">
-                                                     <option value="15" selected="">15</option>
-                                                    <option value="14" selected="">14</option>
-                                                    <option value="13" selected="">13</option>
-                                                    <option value="12" selected="">12</option>
-                                                    <option value="10" selected="">10</option>
-                                                    <option value="8" selected="">8</option>
-                                                </select></div>
+                                            <div class="col"><label class="form-label">Sabiduría&nbsp; &nbsp;</label><span class="badge bg-primary" id="sabiduria-cartel" style="margin-top: 8px;margin-left: 10px;">+0</span>
+                                                <select class="tomselect-basic select-atributos" id="sabiduria-selector"></select></div>
                                         </div>
                                     </form>
                                     <form>
                                         <div class="row">
-                                            <div class="col"><label class="form-label">Inteligencia&nbsp; &nbsp;</label><span class="badge bg-primary" style="margin-top: 8px;margin-left: 10px;">+2</span><select class="form-select">
-                                                    <option value="15" selected="">15</option>
-                                                    <option value="14" selected="">14</option>
-                                                    <option value="13" selected="">13</option>
-                                                    <option value="12" selected="">12</option>
-                                                    <option value="10" selected="">10</option>
-                                                    <option value="8" selected="">8</option>
-                                                </select></div>
+                                            <div class="col"><label class="form-label">Inteligencia&nbsp; &nbsp;</label><span class="badge bg-primary" id="inteligencia-cartel" style="margin-top: 8px;margin-left: 10px;">+0</span>
+                                                <select class="tomselect-basic select-atributos" id="inteligencia-selector"></select></div>
                                         </div>
                                         <div class="row">
-                                            <div class="col"><label class="form-label">Carisma&nbsp; &nbsp;</label><span class="badge bg-primary" style="margin-left: 10px;margin-top: 8px;">+2</span><select class="form-select">
-                                                     <option value="15" selected="">15</option>
-                                                    <option value="14" selected="">14</option>
-                                                    <option value="13" selected="">13</option>
-                                                    <option value="12" selected="">12</option>
-                                                    <option value="10" selected="">10</option>
-                                                    <option value="8" selected="">8</option>
-                                                </select></div>
+                                            <div class="col"><label class="form-label">Carisma&nbsp; &nbsp;</label><span class="badge bg-primary" id="carisma-cartel" style="margin-left: 10px;margin-top: 8px;">+0</span>
+                                                <select class="tomselect-basic select-atributos" id="carisma-selector"></select></div>
                                         </div>
                                     </form>
                                 </div>

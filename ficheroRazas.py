@@ -1,6 +1,12 @@
 razas = {
   "Dracónido": {
-    "Aumento de característica": {"Fuerza": 2, "Carisma": 1},
+      "Atributos":["15","14","13","12","10","8"],
+    "Fuerza":2,
+    "Destreza":0,
+    "Constitución":0,
+    "Inteligencia":0,
+    "Sabiduría":0,
+    "Carisma":1,
     "Velocidad": 30,
     "Competencias": [],
     "Lenguajes": ["Común", "Dracónico"],
@@ -25,100 +31,162 @@ razas = {
                  "Resistencia al Daño": "Tienes resistencia a un tipo de daño asociado con tu ascendencia dracónica."
                  }
   },
-  "Elfo": {
         "Alto Elfo": {
-        "Aumento de característica": [],
+"Atributos":[15,14,13,12,10,8],
+        "Fuerza":0,
+    "Destreza":0,
+    "Constitución":0,
+    "Inteligencia":0,
+    "Sabiduría":2,
+    "Carisma":1,
         "Velocidad": 30,
         "Competencias": [],
         "Lenguajes": [],
         "Features": []
     },
     "Elfo de los Bosques": {
-        "Aumento de característica": [],
+        "Fuerza":2,
+    "Destreza":0,
+    "Constitución":0,
+    "Inteligencia":0,
+    "Sabiduría":0,
+    "Carisma":1,
         "Velocidad": 30,
         "Competencias": [],
         "Lenguajes": [],
         "Features": []
     },
     "Elfo Oscuro (Drow)": {
-        "Aumento de característica": [],
+        "Fuerza":2,
+    "Destreza":0,
+    "Constitución":0,
+    "Inteligencia":0,
+    "Sabiduría":0,
+    "Carisma":1,
         "Velocidad": 30,
         "Competencias": [],
         "Lenguajes": [],
         "Features": []
-    }
+
   },
-  "Enano":{
       "Enano de las Colinas": {
-          "Aumento de característica": [],
+          "Fuerza":2,
+    "Destreza":0,
+    "Constitución":0,
+    "Inteligencia":0,
+    "Sabiduría":0,
+    "Carisma":1,
           "Velocidad": 30,
           "Competencias": [],
           "Lenguajes": [],
           "Features": []
       },
       "Enano de las Montañas": {
-          "Aumento de característica": [],
+          "Fuerza":2,
+    "Destreza":0,
+    "Constitución":0,
+    "Inteligencia":0,
+    "Sabiduría":0,
+    "Carisma":1,
           "Velocidad": 30,
           "Competencias": [],
           "Lenguajes": [],
           "Features": []
-      }
+
   },
-  "Gnomo": {
     "Gnomo del Bosque": {
-        "Aumento de característica": [],
+        "Fuerza":2,
+    "Destreza":0,
+    "Constitución":0,
+    "Inteligencia":0,
+    "Sabiduría":0,
+    "Carisma":1,
         "Velocidad": 30,
         "Competencias": [],
         "Lenguajes": [],
         "Features": []
       },
       "Gnomo de la Roca": {
-        "Aumento de característica": [],
+        "Fuerza":2,
+    "Destreza":0,
+    "Constitución":0,
+    "Inteligencia":0,
+    "Sabiduría":0,
+    "Carisma":1,
         "Velocidad": 30,
         "Competencias": [],
         "Lenguajes": [],
         "Features": []
-      }
+
   },
   "Humano": {
-    "Aumento de característica": [],
+    "Fuerza":2,
+    "Destreza":0,
+    "Constitución":0,
+    "Inteligencia":0,
+    "Sabiduría":0,
+    "Carisma":1,
     "Velocidad": 30,
     "Competencias": [],
     "Lenguajes": [],
     "Features": []
   },
-  "Mediano":{
         "Mediano Piesligeros": {
-        "Aumento de característica": [],
+        "Fuerza":2,
+    "Destreza":0,
+    "Constitución":0,
+    "Inteligencia":0,
+    "Sabiduría":0,
+    "Carisma":1,
         "Velocidad": 30,
         "Competencias": [],
         "Lenguajes": [],
         "Features": []
       },
       "Mediano Fornido": {
-        "Aumento de característica": [],
+        "Fuerza":2,
+    "Destreza":0,
+    "Constitución":0,
+    "Inteligencia":0,
+    "Sabiduría":0,
+    "Carisma":1,
         "Velocidad": 30,
         "Competencias": [],
         "Lenguajes": [],
         "Features": []
-      }
+
   },
   "Semielfo": {
-    "Aumento de característica": [],
+    "Fuerza":2,
+    "Destreza":0,
+    "Constitución":0,
+    "Inteligencia":0,
+    "Sabiduría":0,
+    "Carisma":1,
     "Velocidad": 30,
     "Competencias": [],
     "Lenguajes": [],
     "Features": []
   },
   "Semiorco": {
-    "Aumento de característica": [],
+    "Fuerza":2,
+    "Destreza":0,
+    "Constitución":0,
+    "Inteligencia":0,
+    "Sabiduría":0,
+    "Carisma":1,
     "Velocidad": 30,
     "Competencias": [],
     "Lenguajes": [],
     "Features": []
   },
   "Tiefling": {
-    "Aumento de característica": [],
+    "Fuerza":2,
+    "Destreza":0,
+    "Constitución":0,
+    "Inteligencia":0,
+    "Sabiduría":0,
+    "Carisma":1,
     "Velocidad": 30,
     "Competencias": [],
     "Lenguajes": [],
