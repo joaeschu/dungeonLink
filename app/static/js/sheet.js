@@ -2,20 +2,20 @@ $('.stat').bind('input', function()
     {
       var inputName = $(this).attr('name')
       var mod = parseInt($(this).val()) - 10
-      
+
       if (mod % 2 == 0)
         mod = mod / 2
       else
         mod = (mod - 1) / 2
-  
+
       if (isNaN(mod))
         mod = ""
       else if (mod >= 0)
         mod = "+" + mod
-  
+
       var scoreName = inputName.slice(0, inputName.indexOf("score"))
       var modName = scoreName + "mod"
-      
+
       $("[name='" + modName + "']").val(mod)
     })
 
@@ -62,7 +62,7 @@ function totalhd_clicked()
   $("[name='remaininghd']").val($("[name='totalhd']").val())
 }
 const convertPythonDictToJSON = function (data) {
-  if(data === ''){
+  if(data === '' || data === null){
     return null;
   }
     let d = data.replace(new RegExp(`(?<=[a-zA-Z])'(?=[a-zA-Z ])`, "g"), '__')
@@ -87,14 +87,113 @@ const addArrayDropdown  = function (select,array){
 
 }
 
+function getScoreMod(score){
+      let mod = parseInt(score) - 10
+
+      if (mod % 2 === 0)
+        mod = mod / 2
+      else
+        mod = (mod - 1) / 2
+      return mod
+};
+
 document.getElementById('button-guardar').addEventListener("click", function(event) {
-    console.log('test')
+
+    let clase = document.getElementById("clase-selector").querySelector(':checked');
+    document.getElementById('sheet-classlevel').value = document.getElementById('clase-selector').value + " 1";
     document.getElementById('sheet-charname').value = document.getElementById('text-nombre').value;
-    document.getElementById('sheet-classlevel').value = 1;
-    document.getElementById('sheet-background').value = convertPythonDictToJSON(document.getElementById('trasfondo-selector').querySelector(':checked'));
-    document.getElementById('sheet-race').value = convertPythonDictToJSON(document.getElementById('raza-selector').querySelector(':checked'));
-    document.getElementById('sheet-alignment').value = convertPythonDictToJSON(document.getElementById('alineamiento-selector').querySelector(':checked'));
+    document.getElementById('sheet-background').value = document.getElementById('trasfondo-selector').value;
+    document.getElementById('sheet-race').value = document.getElementById('raza-selector').value;
+    document.getElementById('sheet-alignment').value = document.getElementById('alineamiento-selector').value;
     document.getElementById('sheet-experiencepoints').value = "0";
+    document.getElementById('sheet-proficiencybonus').value = "+2";
+
+    let mod_Fuerza = getScoreMod(document.getElementById('fuerza-selector').value);
+    let mod_Destreza = getScoreMod(document.getElementById('destreza-selector').value);
+    let mod_Constitucion = getScoreMod(document.getElementById('constitucion-selector').value);
+    let mod_Sabiduria = getScoreMod(document.getElementById('sabiduria-selector').value);
+    let mod_Inteligencia = getScoreMod(document.getElementById('inteligencia-selector').value);
+    let mod_Carisma = getScoreMod(document.getElementById('carisma-selector').value);
+
+    document.getElementById('sheet-Strengthscore').value = document.getElementById('fuerza-selector').value;
+    document.getElementById('sheet-Strengthmod').value = mod_Fuerza;
+    document.getElementById('sheet-Dexterityscore').value = document.getElementById('destreza-selector').value;
+    document.getElementById('sheet-Dexteritymod').value = mod_Destreza;
+    document.getElementById('sheet-Constitutionscore').value = document.getElementById('constitucion-selector').value;
+    document.getElementById('sheet-Constitutionmod').value = mod_Constitucion;
+    document.getElementById('sheet-Wisdomscore').value = document.getElementById('sabiduria-selector').value;
+    document.getElementById('sheet-Wisdommod').value = mod_Sabiduria;
+    document.getElementById('sheet-Intelligencescore').value = document.getElementById('inteligencia-selector').value;
+    document.getElementById('sheet-Intelligencemod').value = mod_Inteligencia;
+    document.getElementById('sheet-Charismascore').value = document.getElementById('carisma-selector').value;
+    document.getElementById('sheet-Charismamod').value = mod_Carisma;
+
+
+    let salvaciones = convertPythonDictToJSON(clase.getAttribute('data-Salvaciones'));
+
+    if(salvaciones !== null) {
+        if (salvaciones[0] > 0)
+            document.getElementById('sheet-Strengthsave').value = mod_Fuerza + 2
+        else
+            document.getElementById('sheet-Strengthsave').value = mod_Fuerza
+        if (salvaciones[1] > 0)
+            document.getElementById('sheet-Dexteritysave').value = mod_Destreza + 2
+        else
+            document.getElementById('sheet-Dexteritysave').value = mod_Destreza
+        if (salvaciones[2] > 0)
+            document.getElementById('sheet-Constitutionsave').value = mod_Constitucion + 2
+        else
+            document.getElementById('sheet-Constitutionsave').value = mod_Constitucion
+        if (salvaciones[3] > 0)
+            document.getElementById('sheet-Wisdomsave').value = mod_Sabiduria + 2
+        else
+            document.getElementById('sheet-Wisdomsave').value = mod_Sabiduria
+        if (salvaciones[4] > 0)
+            document.getElementById('sheet-Intelligencesave').value = mod_Inteligencia + 2
+        else
+            document.getElementById('sheet-Intelligencesave').value = mod_Inteligencia
+        if (salvaciones[5] > 0)
+            document.getElementById('sheet-Charismasave').value = mod_Carisma + 2
+        else
+            document.getElementById('sheet-Charismasave').value = mod_Carisma
+    }
+
+   document.getElementById('sheet-Atletismo').value = mod_Fuerza;
+   document.getElementById('sheet-Acrobacias').value = mod_Destreza;
+   document.getElementById('sheet-JuegodeManos').value = mod_Destreza;
+   document.getElementById('sheet-Sigilo').value = mod_Destreza;
+   document.getElementById('sheet-Arcano').value = mod_Inteligencia;
+   document.getElementById('sheet-Historia').value = mod_Inteligencia;
+   document.getElementById('sheet-Investigación').value = mod_Inteligencia;
+   document.getElementById('sheet-Religión').value = mod_Inteligencia;
+   document.getElementById('sheet-Naturaleza').value = mod_Inteligencia;
+   document.getElementById('sheet-Tratodeanimales').value = mod_Sabiduria;
+   document.getElementById('sheet-Medicina').value = mod_Sabiduria;
+   document.getElementById('sheet-Percepción').value = mod_Sabiduria;
+   document.getElementById('sheet-Perspicacia').value = mod_Sabiduria;
+   document.getElementById('sheet-Supervivencia').value = mod_Sabiduria;
+   document.getElementById('sheet-Engaño').value = mod_Carisma;
+   document.getElementById('sheet-Intimidación').value = mod_Carisma;
+   document.getElementById('sheet-Interpretación').value = mod_Carisma;
+   document.getElementById('sheet-Persuasión').value = mod_Carisma;
+
+   let competenciaHabilidades = document.getElementById('habilidades-selector').tomselect.getValue();
+
+   competenciaHabilidades.forEach(function (option){
+        document.getElementById('sheet-' + option.replace(/\s+/g, '')).value = parseInt(document.getElementById('sheet-' + option.replace(/\s+/g, '')).value) + 2
+    });
+
+
+
+    convertPythonDictToJSON(clase.getAttribute('data-habilidades')).forEach(function(habilidad){
+        let valor = document.getElementById('sheet-' + habilidad.replace(/\s+/g, '')).value;
+        if(valor > 0)
+            document.getElementById('sheet-' + habilidad.replace(/\s+/g, '')).value = '+' + valor;
+    });
+
+document.getElementById('form-sheet').submit();
+
+
 });
 
 
@@ -149,22 +248,34 @@ document.getElementById('trasfondo-selector').addEventListener("change", functio
     select_herramientas.tomselect.settings.maxItems =selection.getAttribute('data-trasfondo-herramientas-max');
     addArrayDropdown(select_herramientas, convertPythonDictToJSON(selection.getAttribute('data-trasfondo-herramientas')));
 });
-let atributos_selecionados = [];
+
+
 document.getElementById('raza-selector').addEventListener("change", function(event) {
 
     let selection = this.querySelector(':checked');
     document.getElementById("fuerza-cartel").textContent = '+'+selection.getAttribute('data-Fuerza');
-    let atributos = convertPythonDictToJSON(selection.getAttribute('data-Atributos'));
+    atributos = convertPythonDictToJSON(selection.getAttribute('data-Atributos'));
     Array.from(document.getElementsByClassName("select-atributos")).forEach(function(element) {
             if(typeof element.tomselect === 'undefined') {
                 return;
             }
             clearDropown(element);
             addArrayDropdown(element,atributos);
-            element.tomselect.off('dropdown_open');
-            element.tomselect.on('dropdown_open', function (dropdown){
-                console.log(dropdown.parent.tomselect);
-            });
+
+            element.onchange = function(event2) {
+                if(typeof this.tomselect === 'undefined') {
+                    return;
+                }
+                let atributos_selecionados = Array.prototype.map.call(document.getElementsByClassName("select-atributos"), function(element) {
+                    if(typeof element.tomselect === 'undefined') {
+                        return;
+                    }
+                    return element.tomselect.getValue();
+                })
+
+                console.log(this.tomselect.getValue());
+
+            };
     });
 });
 

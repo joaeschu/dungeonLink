@@ -5,6 +5,7 @@ habilidades = ["Atletismo", "Acrobacias", "Juego de Manos", "Sigilo", "Arcano", 
                      "Investigación", "Naturaleza", "Religión", "Trato de animales", "Medicina", "Percepción", "Perspicacia", "Supervivencia",
                      "Engaño", "Intimidación", "Interpretación", "Persuasión"]
 
+
 alineamientos = ["Legal Bueno", "Neutral Bueno", "Caótico Bueno", "Legal Neutral",
                       "Neutral", "Caótico Neutral", "Legal Malvado", "Neutral Malvado", "Caótico Malvado"]
 
