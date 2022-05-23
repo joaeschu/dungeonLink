@@ -1,6 +1,6 @@
 clases = {
     "Bárbaro": {
-        "Dado_de_golpe": 12,
+        "Dado_golpe": 12,
         "Armaduras": ["Armaduras ligeras", "Armaduras medias", "Escudos"],
         "Armas": ["Armas c/c simples", "Armas c/c marciales", "Armas a distancia simples", "Armas a distancia marciales"],
         "Herramientas_a_elegir": 0,
@@ -39,7 +39,7 @@ clases = {
                     }
                 },
         "Bardo":  {
-            "Dado_de_golpe": 8,
+            "Dado_golpe": 8,
             "Armaduras": ["Armaduras ligeras"],
             "Armas": ["Armas c/c simples", "Armas a distancia simples", "ballesta de mano", "espada larga", "estoque",
                       "espada corta"],

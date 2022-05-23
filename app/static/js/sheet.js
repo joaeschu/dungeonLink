@@ -19,6 +19,7 @@ $('.stat').bind('input', function()
       $("[name='" + modName + "']").val(mod)
     })
 
+
 $('.statmod').bind('change', function()
 {
   var name = $(this).attr('name')
@@ -97,16 +98,80 @@ function getScoreMod(score){
       return mod
 };
 
+function clearFicha() {
+    let checkboxes = ["Atletismo", "Acrobacias", "Juego de Manos", "Sigilo", "Arcano", "Historia",
+        "Investigación", "Naturaleza", "Religión", "Trato de animales", "Medicina", "Percepción", "Perspicacia", "Supervivencia",
+        "Enganyo", "Intimidación", "Interpretación", "Persuasión","Strengthsave", "Dexteritysave", "Constitutionsave", "Wisdomsave", "Intelligencesave", "Charismasave",
+        "deathsuccess1", "deathsuccess2", "deathsuccess3", "deathfail1", "deathfail2", "deathfail3"];
+    checkboxes.forEach(function (option) {
+        document.getElementById('sheet-check-' + option.replace(/\s+/g, '')).checked = false;
+    });
+
+    let zeroes =["cp","sp","ep","gp","pp","temphp"]
+    zeroes.forEach(function (option) {
+        document.getElementById('sheet-' + option.replace(/\s+/g, '')).value = 0;
+    });
+
+    let blanks =["ideals", "bonds", "flaws"]
+    blanks.forEach(function (option) {
+        document.getElementById('sheet-' + option.replace(/\s+/g, '')).value = " ";
+    });
+};
+
+function getPuntosGastados(puntuacion){
+    if(puntuacion > 13){
+        if(puntuacion === 14){
+            return 7;
+        }else{
+            return 9;
+        }
+    }else{
+        return (puntuacion - 8)
+    }
+};
+
+function getMaxPuntuacionPosible(puntosRestantes, puntuacionActual){
+    let suma = puntosRestantes + puntuacionActual;
+    if(puntosRestantes > 8 || puntuacionActual === 15 || suma > 16){
+        return 15;
+    }
+    if(puntosRestantes < 1){
+        return 0;
+    }
+    if(suma < 14){
+        return suma;
+    }
+    if(suma === 14){
+        return 13;
+    }
+    if(suma === 15){
+        return 14;
+    }
+    if(suma === 16){
+        if(puntuacionActual === 14){return 15;}
+        return 14;
+    }
+};
+
 document.getElementById('button-guardar').addEventListener("click", function(event) {
 
     let clase = document.getElementById("clase-selector").querySelector(':checked');
+    let raza = document.getElementById("raza-selector").querySelector(':checked');
+    let trasfondo = document.getElementById("trasfondo-selector").querySelector(':checked');
+    let habilidades = ["Atletismo", "Acrobacias", "Juego de Manos", "Sigilo", "Arcano", "Historia",
+        "Investigación", "Naturaleza", "Religión", "Trato de animales", "Medicina", "Percepción", "Perspicacia", "Supervivencia",
+        "Enganyo", "Intimidación", "Interpretación", "Persuasión"];
+    clearFicha();
+
     document.getElementById('sheet-classlevel').value = document.getElementById('clase-selector').value + " 1";
     document.getElementById('sheet-charname').value = document.getElementById('text-nombre').value;
+    document.getElementById('sheet-playername').value = document.getElementById('subclase-selector').value;
     document.getElementById('sheet-background').value = document.getElementById('trasfondo-selector').value;
     document.getElementById('sheet-race').value = document.getElementById('raza-selector').value;
     document.getElementById('sheet-alignment').value = document.getElementById('alineamiento-selector').value;
     document.getElementById('sheet-experiencepoints').value = "0";
     document.getElementById('sheet-proficiencybonus').value = "+2";
+    document.getElementById('sheet-personality').value = document.getElementById('personalidad-selector').value;
 
     let mod_Fuerza = getScoreMod(document.getElementById('fuerza-selector').value);
     let mod_Destreza = getScoreMod(document.getElementById('destreza-selector').value);
@@ -128,72 +193,172 @@ document.getElementById('button-guardar').addEventListener("click", function(eve
     document.getElementById('sheet-Charismascore').value = document.getElementById('carisma-selector').value;
     document.getElementById('sheet-Charismamod').value = mod_Carisma;
 
+    document.getElementById('sheet-ac').value = 10 + mod_Destreza;
+    document.getElementById('sheet-initiative').value = 10 + mod_Destreza;
+    document.getElementById('sheet-speed').value = raza.getAttribute('data-Velocidad');
+    let dadoGolpe = parseInt(clase.getAttribute('data-dado-golpe'));
+    document.getElementById('sheet-maxhp').value = dadoGolpe + mod_Constitucion;
+    document.getElementById('sheet-currenthp').value = dadoGolpe + mod_Constitucion;
+    document.getElementById('sheet-totalhd').value = "1d" + dadoGolpe;
+    document.getElementById('sheet-remaininghd').value = "1d" + dadoGolpe;
 
     let salvaciones = convertPythonDictToJSON(clase.getAttribute('data-Salvaciones'));
-
-    if(salvaciones !== null) {
-        if (salvaciones[0] > 0)
-            document.getElementById('sheet-Strengthsave').value = mod_Fuerza + 2
-        else
+    if (salvaciones !== null) {
+        if (salvaciones[0] > 0) {
+            document.getElementById('sheet-Strengthsave').value = mod_Fuerza + 2;
+            document.getElementById('sheet-check-Strengthsave').checked = true;
+        } else
             document.getElementById('sheet-Strengthsave').value = mod_Fuerza
-        if (salvaciones[1] > 0)
+        if (salvaciones[1] > 0) {
             document.getElementById('sheet-Dexteritysave').value = mod_Destreza + 2
-        else
+            document.getElementById('sheet-check-Dexteritysave').checked = true;
+        } else
             document.getElementById('sheet-Dexteritysave').value = mod_Destreza
-        if (salvaciones[2] > 0)
+        if (salvaciones[2] > 0) {
             document.getElementById('sheet-Constitutionsave').value = mod_Constitucion + 2
-        else
+            document.getElementById('sheet-check-Constitutionsave').checked = true;
+        } else
             document.getElementById('sheet-Constitutionsave').value = mod_Constitucion
-        if (salvaciones[3] > 0)
+        if (salvaciones[3] > 0) {
             document.getElementById('sheet-Wisdomsave').value = mod_Sabiduria + 2
-        else
+            document.getElementById('sheet-check-Wisdomsave').checked = true;
+        } else
             document.getElementById('sheet-Wisdomsave').value = mod_Sabiduria
-        if (salvaciones[4] > 0)
+        if (salvaciones[4] > 0) {
             document.getElementById('sheet-Intelligencesave').value = mod_Inteligencia + 2
-        else
+            document.getElementById('sheet-check-Intelligencesave').checked = true;
+        } else
             document.getElementById('sheet-Intelligencesave').value = mod_Inteligencia
-        if (salvaciones[5] > 0)
+        if (salvaciones[5] > 0) {
             document.getElementById('sheet-Charismasave').value = mod_Carisma + 2
-        else
+            document.getElementById('sheet-check-Charismasave').checked = true;
+        } else
             document.getElementById('sheet-Charismasave').value = mod_Carisma
     }
 
-   document.getElementById('sheet-Atletismo').value = mod_Fuerza;
-   document.getElementById('sheet-Acrobacias').value = mod_Destreza;
-   document.getElementById('sheet-JuegodeManos').value = mod_Destreza;
-   document.getElementById('sheet-Sigilo').value = mod_Destreza;
-   document.getElementById('sheet-Arcano').value = mod_Inteligencia;
-   document.getElementById('sheet-Historia').value = mod_Inteligencia;
-   document.getElementById('sheet-Investigación').value = mod_Inteligencia;
-   document.getElementById('sheet-Religión').value = mod_Inteligencia;
-   document.getElementById('sheet-Naturaleza').value = mod_Inteligencia;
-   document.getElementById('sheet-Tratodeanimales').value = mod_Sabiduria;
-   document.getElementById('sheet-Medicina').value = mod_Sabiduria;
-   document.getElementById('sheet-Percepción').value = mod_Sabiduria;
-   document.getElementById('sheet-Perspicacia').value = mod_Sabiduria;
-   document.getElementById('sheet-Supervivencia').value = mod_Sabiduria;
-   document.getElementById('sheet-Engaño').value = mod_Carisma;
-   document.getElementById('sheet-Intimidación').value = mod_Carisma;
-   document.getElementById('sheet-Interpretación').value = mod_Carisma;
-   document.getElementById('sheet-Persuasión').value = mod_Carisma;
+    document.getElementById('sheet-Atletismo').value = mod_Fuerza;
+    document.getElementById('sheet-Acrobacias').value = mod_Destreza;
+    document.getElementById('sheet-JuegodeManos').value = mod_Destreza;
+    document.getElementById('sheet-Sigilo').value = mod_Destreza;
+    document.getElementById('sheet-Arcano').value = mod_Inteligencia;
+    document.getElementById('sheet-Historia').value = mod_Inteligencia;
+    document.getElementById('sheet-Investigación').value = mod_Inteligencia;
+    document.getElementById('sheet-Religión').value = mod_Inteligencia;
+    document.getElementById('sheet-Naturaleza').value = mod_Inteligencia;
+    document.getElementById('sheet-Tratodeanimales').value = mod_Sabiduria;
+    document.getElementById('sheet-Medicina').value = mod_Sabiduria;
+    document.getElementById('sheet-Percepción').value = mod_Sabiduria;
+    document.getElementById('sheet-Perspicacia').value = mod_Sabiduria;
+    document.getElementById('sheet-Supervivencia').value = mod_Sabiduria;
+    document.getElementById('sheet-Enganyo').value = mod_Carisma;
+    document.getElementById('sheet-Intimidación').value = mod_Carisma;
+    document.getElementById('sheet-Interpretación').value = mod_Carisma;
+    document.getElementById('sheet-Persuasión').value = mod_Carisma;
 
-   let competenciaHabilidades = document.getElementById('habilidades-selector').tomselect.getValue();
 
-   competenciaHabilidades.forEach(function (option){
-        document.getElementById('sheet-' + option.replace(/\s+/g, '')).value = parseInt(document.getElementById('sheet-' + option.replace(/\s+/g, '')).value) + 2
+    let competenciaClase = document.getElementById('habilidades-selector').tomselect.getValue();
+    let competenciaTrasfondo = document.getElementById('trasfondo-habilidades-selector').tomselect.getValue();
+    let competenciaRaza = convertPythonDictToJSON(raza.getAttribute('data-Habilidades'));
+    let competenciaHabilidades = [];
+    if (competenciaClase !== null) {
+        competenciaHabilidades = competenciaClase;
+    }
+    if (competenciaTrasfondo !== null) {
+        competenciaHabilidades = competenciaHabilidades.concat(competenciaTrasfondo.filter((item) => competenciaHabilidades.indexOf(item) < 0));
+    }
+    if (competenciaRaza !== null) {
+        competenciaHabilidades = competenciaHabilidades.concat(competenciaRaza.filter((item) => competenciaHabilidades.indexOf(item) < 0));
+    }
+
+    competenciaHabilidades.forEach(function (option) {
+        let valor = parseInt(document.getElementById('sheet-' + option.replace('ñ', 'ny').replace(/\s+/g, '')).value);
+        document.getElementById('sheet-' + option.replace('ñ', 'ny').replace(/\s+/g, '')).value = valor + 2;
+        document.getElementById('sheet-check-' + option.replace('ñ', 'ny').replace(/\s+/g, '')).checked = true;
     });
 
+    document.getElementById('sheet-passiveperception').value = document.getElementById('sheet-Percepción').value + 10;
 
-
-    convertPythonDictToJSON(clase.getAttribute('data-habilidades')).forEach(function(habilidad){
-        let valor = document.getElementById('sheet-' + habilidad.replace(/\s+/g, '')).value;
-        if(valor > 0)
-            document.getElementById('sheet-' + habilidad.replace(/\s+/g, '')).value = '+' + valor;
+    habilidades.forEach(function (habilidad) {
+        let valor = document.getElementById('sheet-' + habilidad.replace('ñ', 'ny').replace(/\s+/g, '')).value;
+        if (valor > 0)
+            document.getElementById('sheet-' + habilidad.replace('ñ', 'ny').replace(/\s+/g, '')).value = '+' + valor;
     });
+
+    let listaEquipo = [];
+    listaEquipo.push(document.getElementById('equipoA-selector').tomselect.getValue() + "\n");
+    listaEquipo.push(document.getElementById('equipoB-selector').tomselect.getValue() + "\n");
+    listaEquipo.push(document.getElementById('equipoC-selector').tomselect.getValue() + "\n");
+    listaEquipo.push(trasfondo.getAttribute('data-trasfondo-equipo') + "\n");
+    listaEquipo.concat(convertPythonDictToJSON(clase.getAttribute('data-Equipo-obligatorio')));
+
+    let stringEquipo = "";
+    listaEquipo.forEach(function (objeto) {
+        if (objeto != null && objeto !== "")
+            stringEquipo += objeto
+    });
+    document.getElementById('sheet-Lista-de-equipo').value = stringEquipo;
+
+    let listaCompetencias = [];
+    competencia = document.getElementById('herramientas-selector').tomselect.getValue();
+    if (competencia !== null) {
+     competencia.forEach(function (objeto) {
+        if (objeto != null && objeto !== "")
+            listaCompetencias.push(objeto);
+    });
+    }
+    competencia = convertPythonDictToJSON(clase.getAttribute('data-Armas'));
+    if (competencia !== null) {
+    competencia.forEach(function (objeto) {
+        if (objeto != null && objeto !== "")
+            listaCompetencias.push(objeto);
+    });
+    }
+    competencia = convertPythonDictToJSON(clase.getAttribute('data-Armaduras'));
+    if (competencia !== null) {
+    competencia.forEach(function (objeto) {
+        if (objeto != null && objeto !== "")
+            listaCompetencias.push(objeto);
+    });
+    }
+    competencia = document.getElementById('trasfondo-idiomas-selector').tomselect.getValue();
+    if (competencia !== null) {
+    competencia.forEach(function (objeto) {
+        if (objeto != null && objeto !== "")
+            listaCompetencias.push(objeto);
+    });
+    }
+    competencia = document.getElementById('trasfondo-herramientas-selector').tomselect.getValue();
+    if (competencia !== null) {
+    competencia.forEach(function (objeto) {
+        if (objeto != null && objeto !== "")
+            listaCompetencias.push(objeto);
+    });
+    }
+    competencia = convertPythonDictToJSON(raza.getAttribute('data-Competencias'));
+    if (competencia !== null) {
+    competencia.forEach(function (objeto) {
+        if (objeto != null && objeto !== "")
+            listaCompetencias.push(objeto);
+    });
+    }
+    competencia = convertPythonDictToJSON(raza.getAttribute('data-Lenguajes'));
+    if (competencia !== null) {
+    competencia.forEach(function (objeto) {
+        if (objeto != null && objeto !== "")
+            listaCompetencias.push(objeto);
+    });
+    }
+
+    let stringCompetencias = "";
+    listaCompetencias.forEach(function(competencia){
+        if(competencia != null && competencia !== "") {
+            competencia += "\n"
+            stringCompetencias += competencia
+        }
+    });
+    document.getElementById('sheet-otherprofs').value = stringCompetencias;
 
 document.getElementById('form-sheet').submit();
-
-
 });
 
 
@@ -279,32 +444,36 @@ document.getElementById('raza-selector').addEventListener("change", function(eve
     });
 });
 
-//TODO
-/*
-Array.from(document.getElementsByClassName("select-atributos")).forEach(
+Array.from(document.getElementsByClassName("form-range")).forEach(
     function(element) {
         element.addEventListener("change", function(event) {
+            let fuerza = parseInt(document.getElementById('fuerza-selector').value);
+            let destreza = parseInt(document.getElementById('destreza-selector').value);
+            let constitucion = parseInt(document.getElementById('constitucion-selector').value);
+            let sabiduria = parseInt(document.getElementById('sabiduria-selector').value);
+            let inteligencia = parseInt(document.getElementById('inteligencia-selector').value);
+            let carisma = parseInt(document.getElementById('carisma-selector').value);
 
+            let puntosGastados = getPuntosGastados(fuerza) + getPuntosGastados(destreza) + getPuntosGastados(constitucion) + getPuntosGastados(sabiduria) + getPuntosGastados(inteligencia) + getPuntosGastados(carisma);
+
+            let puntosRestantes = 27 - puntosGastados;
+            document.getElementById('fuerza-selector').max = Math.max(fuerza, getMaxPuntuacionPosible(puntosRestantes, fuerza));
+            document.getElementById('destreza-selector').max = Math.max(destreza, getMaxPuntuacionPosible(puntosRestantes, destreza));
+            document.getElementById('constitucion-selector').max = Math.max(constitucion, getMaxPuntuacionPosible(puntosRestantes, constitucion));
+            document.getElementById('sabiduria-selector').max = Math.max(sabiduria, getMaxPuntuacionPosible(puntosRestantes, sabiduria));
+            document.getElementById('inteligencia-selector').max = Math.max(inteligencia, getMaxPuntuacionPosible(puntosRestantes, inteligencia));
+            document.getElementById('carisma-selector').max = Math.max(carisma, getMaxPuntuacionPosible(puntosRestantes, carisma));
+            document.getElementById('fuerza-selector-etiqueta').innerHTML = fuerza;
+            document.getElementById('destreza-selector-etiqueta').innerHTML = destreza;
+            document.getElementById('constitucion-selector-etiqueta').innerHTML = constitucion;
+            document.getElementById('sabiduria-selector-etiqueta').innerHTML = sabiduria;
+            document.getElementById('inteligencia-selector-etiqueta').innerHTML = inteligencia;
+            document.getElementById('carisma-selector-etiqueta').innerHTML = carisma;
+            document.getElementById('etiqueta-restantes').innerHTML = 'Puntos restantes: ' + puntosRestantes + '/27';
         });
     }
-);*/
+);
 
-    // select-atributos
- document.getElementById('fuerza-selector').addEventListener("change", function(event) {
-    let select_destreza = document.getElementById("destreza-selector");
-    let select_constitucion = document.getElementById("constitucion-selector");
-    let select_sabiduria = document.getElementById("sabiduria-selector");
-    let select_inteligencia = document.getElementById("inteligencia-selector");
-    let select_carisma = document.getElementById("carisma-selector");
-
-    let seleccion_fuerza = this.querySelector(':checked');
-    let seleccion_destreza = select_destreza.querySelector(':checked');
-    let seleccion_constitucion = select_constitucion.querySelector(':checked');
-    let seleccion_sabiduria = select_sabiduria.querySelector(':checked');
-    let seleccion_inteligencia = select_inteligencia.querySelector(':checked');
-    let seleccion_carisma = select_carisma.querySelector(':checked');
-
-});
 
 new TomSelect("#habilidades-selector",{
     plugins: ['remove_button'],

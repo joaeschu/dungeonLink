@@ -1,4 +1,4 @@
-conjuros_bardo ={
+bardo ={
     "Nivel 0": ["Burla cruel", "Cuchichear mensaje", "Ilusión menor", "Impacto verdadero", "Luces danzantes", "Luz", "Mano del mago",
                  "Prestidigitación"],
     "Nivel 1":["Encantar Animal", "Caer como una pluma", "Comprensión idiomática", "Curar heridas", "Detectar magia",
