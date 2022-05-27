@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-d8prj+v8gqej2b&3&_(4##5$vmeg6g3*e8)zr9p^h455lznpj=
 DEBUG = True
 
 ALLOWED_HOSTS = ['jresteve.rocks','www.jresteve.rocks','127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://jresteve.rocks','https://www.jresteve.rocks','http://127.0.0.1:8000']
 
 # Application definition
 
