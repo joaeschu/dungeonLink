@@ -9,6 +9,9 @@
     <link href="{% static 'css/sheet.css' %}" rel="stylesheet">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.1/dist/css/tom-select.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+
 </head>
 
 <body>
@@ -367,7 +370,7 @@
       </section>
     </section>
     <section>
-      <section class="flavor">s
+      <section class="flavor">
         <div class="personality">
           <label for="personality">Personalidad</label><textarea name="personality"id="sheet-personality">{% if sheet is not None %}{{ sheet.personality }}{% endif %}</textarea>
         </div>
@@ -383,7 +386,35 @@
       </section>
       <section class="features">
         <div>
-          <label for="features">Rasgos y atributos</label><textarea name="features"id="sheet-features">{% if sheet is not None %}{{ sheet.features }}{% endif %}</textarea>
+          <label for="features">Rasgos y atributos</label>
+            <table>
+            <tbody id="rasgos-table" data-total="0">
+            {% if sheet is not None  and sheet.rasgos_input1 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input1" type="text" value="{{sheet.rasgos_input1}}" />
+                    <textarea class="d-none" id="rasgos-testarea1" name="rasgos_testarea1">{{sheet.rasgos_testarea1}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea1"><i class="bi bi-eye-fill"></i></a></td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.rasgos_input2 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input2" type="text" value="{{sheet.rasgos_input2}}" />
+                    <textarea class="d-none" id="rasgos-testarea2" name="rasgos_testarea2">{{sheet.rasgos_testarea2}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea2"><i class="bi bi-eye-fill"></i></a></td>
+              </tr>
+            {% endif %}
+            </tbody>
+                            <tfoot>
+              <tr>
+                  <td style="vertical-align:top;text-align:right;" colspan="3" ><a class="badge bg-secondary" href="#" id="rasgos-plus"><i class="bi bi-plus"></i></a></td>
+              </tr>
+            </tfoot>
+          </table>
+
         </div>
       </section>
     </section>
@@ -427,11 +458,11 @@
                                             <option value="">Seleciona uno..</option>
                                                     {% for clase,value in ficheroClases.clases.items %}
                                                             <option value="{{ clase }}"  data-habilidades-max="{{ value.Habilidades_a_elegir }}" data-subclases="{{ value.Subclases }}" data-habilidades="{{ value.Habilidades }}"
-                                                                    data-equipoA="{{ value.Equipo_A }}"data-equipoB="{{ value.Equipo_B }}"data-equipoC="{{ value.Equipo_C }}"data-herramientas-max="{{ value.Herramientas_a_elegir }}"
+                                                                    data-equipoA="{{ value.Equipo_A }}"data-equipoB="{{ value.Equipo_B }}"data-equipoC="{{ value.Equipo_C }}"data-equipoD="{{ value.Equipo_D }}"data-herramientas-max="{{ value.Herramientas_a_elegir }}"
                                                                     data-herramientas="{{ value.Herramientas }}" data-Trucos-a-elegir="{{ value.Trucos_a_elegir }}"data-Trucos="{{ value.Trucos }}"data-Conjuros-a-elegir="{{ value.Conjuros_a_elegir }}"
                                                                     data-Conjuros-1="{{ value.Conjuros_1 }}" data-Armaduras="{{ value.Armaduras }}" data-Armas="{{ value.Armas }}"
                                                                     data-Salvaciones="{{ value.Salvaciones }}" data-Equipo-obligatorio="{{ value.Equipo_obligatorio }}" data-Nivel-1="{{ value.Nivel_1 }}"
-                                                                    data-dado-golpe="{{ value.Dado_golpe }}" data-Equipo-obligatorio="{{ value.Equipo_obligatorio }}">{{ clase }}
+                                                                    data-dado-golpe="{{ value.Dado_golpe }}">{{ clase }}
                                                             </option>
                                                         {% endfor %}
                                                 </select></div>
@@ -442,6 +473,7 @@
                                                 <select class="tomselect-basic" id="equipoA-selector"></select>
                                                 <select class="tomselect-basic" id="equipoB-selector"></select>
                                                 <select class="tomselect-basic" id="equipoC-selector"></select>
+                                                <select class="tomselect-basic" id="equipoD-selector"></select>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -460,7 +492,7 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div><
+                                </div>
                             </div>
                         </div>
                         <div class="accordion-item">

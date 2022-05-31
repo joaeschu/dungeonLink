@@ -10,6 +10,9 @@
   display: none !important;
 }
 
+.float-right {
+   float:right;
+}
 textarea {
   font-size: 12px;
   text-align: left;
@@ -17,7 +20,7 @@ textarea {
   border-radius: 10px;
   padding: 10px;
   resize: none;
-  overflow: hidden;
+  overflow-y: scroll;
   height: 15em;
 }
 
@@ -732,6 +735,6 @@ form.charsheet main section.features div label {
 form.charsheet main section.features div textarea {
   border: 0;
   padding: 5px;
-  height: 43em;
+  height: 20em;
 }
 

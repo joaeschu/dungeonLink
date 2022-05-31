@@ -34,7 +34,7 @@ conjuros_brujo = {
 conjuros_clerigo = {
     "Nivel 0": ["Disipar la agonía", "Llama sagrada", "Luz", "Orientación divina", "Remendar", "Resistencia", "Taumaturgia"],
     "Nivel 1": ["Bendecir", "Crear o destruir agua", "Curar heridas", "Detectar el mal y el bien", "Detectar magia", "Detectar veneno y enfermedad",
-                    "Escudo de la fe", "Infligir heridas", "rden imperiosa", "Palabra curativa", "Perdición", "Protección contra el mal y el bien",
+                    "Escudo de la fe", "Infligir heridas", "Orden imperiosa", "Palabra curativa", "Perdición", "Protección contra el mal y el bien",
                     "Purificar comida y bebida", "Rayo guía", "Santuario"]
 }
 

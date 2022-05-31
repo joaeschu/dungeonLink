@@ -369,6 +369,7 @@ document.getElementById('clase-selector').addEventListener("change", function(ev
     let select_equipoA = document.getElementById('equipoA-selector');
     let select_equipoB = document.getElementById('equipoB-selector');
     let select_equipoC = document.getElementById('equipoC-selector');
+    let select_equipoD = document.getElementById('equipoD-selector');
     let select_herramientas = document.getElementById('herramientas-selector');
     let select_trucos = document.getElementById('trucos-selector');
     let select_conjuros= document.getElementById('conjuros-selector');
@@ -378,6 +379,7 @@ document.getElementById('clase-selector').addEventListener("change", function(ev
     clearDropown(select_equipoA);
     clearDropown(select_equipoB);
     clearDropown(select_equipoC);
+    clearDropown(select_equipoD);
     clearDropown(select_herramientas);
     clearDropown(select_trucos);
     clearDropown(select_conjuros);
@@ -389,6 +391,7 @@ document.getElementById('clase-selector').addEventListener("change", function(ev
     addArrayDropdown(select_equipoA, convertPythonDictToJSON(selection.getAttribute('data-equipoA')));
     addArrayDropdown(select_equipoB, convertPythonDictToJSON(selection.getAttribute('data-equipoB')));
     addArrayDropdown(select_equipoC, convertPythonDictToJSON(selection.getAttribute('data-equipoC')));
+    addArrayDropdown(select_equipoD, convertPythonDictToJSON(selection.getAttribute('data-equipoD')));
     select_herramientas.tomselect.settings.maxItems =selection.getAttribute('data-herramientas-max');
     addArrayDropdown(select_herramientas, convertPythonDictToJSON(selection.getAttribute('data-herramientas')));
     select_trucos.tomselect.settings.maxItems =selection.getAttribute('data-Trucos-a-elegir');
@@ -516,3 +519,42 @@ Array.from(document.getElementsByClassName("tomselect-basic")).forEach(
     }
 );
 
+function eyeEvent(){
+    $('.rasgos-eye').unbind('click').click(function (e) {
+        e.preventDefault();
+        let textarea = $('#'+$(this).data('textarea'));
+        if(textarea.hasClass('d-none')){
+            textarea.removeClass('d-none')
+        }else{
+            textarea.addClass('d-none')
+        }
+    });
+}
+eyeEvent()
+function addRasgo(input = '', textarea = ''){
+        let table = $('#rasgos-table');
+        let total = table.data('total') + 1;
+        table.data('total',total);
+        let tr = '<tr>\n' +
+            '<script>' +
+            '$("button").on("click", function(){\n' +
+            '    $(this).parent().parent().remove();\n' +
+            '});' +
+            '</script>' +
+            '                <td  colspan="2">\n' +
+            '                    <input name="rasgos_input'+total+'" type="text" value="'+input+'" />\n' +
+            '                    <textarea class="d-none" id="rasgos-testarea'+total+'" name="rasgos_testarea'+total+'">'+textarea+'</textarea>\n' +
+            '                </td>\n' +
+            '                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea'+total+'"><i class="bi bi-eye-fill"></i></a><button><i class="bi bi-x-circle-fill"></i></button>' +
+            '              </tr>';
+        table.append(tr);
+        eyeEvent();
+        $("button").on("click", function(){
+        $(this).parent().remove();
+});
+}
+$('#rasgos-table').data('total',$('#rasgos-table >tr').length);
+$('#rasgos-plus').click(function (e){
+    e.preventDefault();
+    addRasgo();
+});
