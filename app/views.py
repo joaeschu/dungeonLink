@@ -46,6 +46,25 @@ def sheet(request):
                                           'ficheroGeneral': ficheroGeneral, 'ficheroHechizos': ficheroHechizos, 'ficheroObjetos': ficheroObjetos,
                                           'ficheroRazas': ficheroRazas, 'ficheroTrasfondos': ficheroTrasfondos})
 
+#def sheet(request):
+#    if request.session.get('user_id') is None:
+#      return redirect('index')
+#    file = 'json/sheet' + str(request.session['user_id']) + '.json'
+#    sheet = None
+#    if request.method == 'POST':
+#        sheet = request.POST
+#        if (os.path.isfile(BASE_DIR / file)):
+#            os.remove(BASE_DIR / file)
+#        f = open(BASE_DIR / file, "a")
+#        f.write(json.dumps(sheet))
+#        f.close()
+#        return redirect('spellSheet')
+#    if (os.path.isfile(BASE_DIR / file)):
+#       sheet = json.load(open(BASE_DIR / file, "r"))
+#    return render(request, 'spellSheet.html', {'session': request.session, 'sheet': sheet, 'ficheroClases': ficheroClases,
+#                                                 'ficheroGeneral': ficheroGeneral, 'ficheroHechizos': ficheroHechizos, 'ficheroObjetos': ficheroObjetos,
+#                                                'ficheroRazas': ficheroRazas, 'ficheroTrasfondos': ficheroTrasfondos})
+
 
 def index(request):
     context = {'error': None}

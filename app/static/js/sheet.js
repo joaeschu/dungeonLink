@@ -116,6 +116,15 @@ function clearFicha() {
     blanks.forEach(function (option) {
         document.getElementById('sheet-' + option.replace(/\s+/g, '')).value = " ";
     });
+    document.getElementById('sheet-atkname1').value = "";
+    document.getElementById('sheet-atkbonus1').value = "";
+    document.getElementById('sheet-atkdamage1').value = "";
+    document.getElementById('sheet-atkname2').value = "";
+    document.getElementById('sheet-atkbonus2').value = "";
+    document.getElementById('sheet-atkdamage2').value = "";
+    document.getElementById('sheet-atkname3').value = "";
+    document.getElementById('sheet-atkbonus3').value = "";
+    document.getElementById('sheet-atkdamage3').value = "";
 };
 
 function getPuntosGastados(puntuacion){
@@ -173,24 +182,31 @@ document.getElementById('button-guardar').addEventListener("click", function(eve
     document.getElementById('sheet-proficiencybonus').value = "+2";
     document.getElementById('sheet-personality').value = document.getElementById('personalidad-selector').value;
 
-    let mod_Fuerza = getScoreMod(document.getElementById('fuerza-selector').value);
-    let mod_Destreza = getScoreMod(document.getElementById('destreza-selector').value);
-    let mod_Constitucion = getScoreMod(document.getElementById('constitucion-selector').value);
-    let mod_Sabiduria = getScoreMod(document.getElementById('sabiduria-selector').value);
-    let mod_Inteligencia = getScoreMod(document.getElementById('inteligencia-selector').value);
-    let mod_Carisma = getScoreMod(document.getElementById('carisma-selector').value);
+    let fuerza = parseInt(document.getElementById('fuerza-selector').value) + parseInt(raza.getAttribute('data-Fuerza'));
+    let destreza = parseInt(document.getElementById('destreza-selector').value) + parseInt(raza.getAttribute('data-Destreza'));
+    let constitucion = parseInt(document.getElementById('constitucion-selector').value) + parseInt(raza.getAttribute('data-Constitución'));
+    let sabiduria = parseInt(document.getElementById('sabiduria-selector').value) + parseInt(raza.getAttribute('data-Sabiduría'));
+    let inteligencia = parseInt(document.getElementById('inteligencia-selector').value) + parseInt(raza.getAttribute('data-Inteligencia'));
+    let carisma = parseInt(document.getElementById('carisma-selector').value) + parseInt(raza.getAttribute('data-Carisma'));
 
-    document.getElementById('sheet-Strengthscore').value = document.getElementById('fuerza-selector').value;
+    let mod_Fuerza = getScoreMod(fuerza);
+    let mod_Destreza = getScoreMod(destreza);
+    let mod_Constitucion = getScoreMod(constitucion);
+    let mod_Sabiduria = getScoreMod(sabiduria);
+    let mod_Inteligencia = getScoreMod(inteligencia);
+    let mod_Carisma = getScoreMod(carisma);
+
+    document.getElementById('sheet-Strengthscore').value = fuerza;
     document.getElementById('sheet-Strengthmod').value = mod_Fuerza;
-    document.getElementById('sheet-Dexterityscore').value = document.getElementById('destreza-selector').value;
+    document.getElementById('sheet-Dexterityscore').value = destreza;
     document.getElementById('sheet-Dexteritymod').value = mod_Destreza;
-    document.getElementById('sheet-Constitutionscore').value = document.getElementById('constitucion-selector').value;
+    document.getElementById('sheet-Constitutionscore').value = constitucion;
     document.getElementById('sheet-Constitutionmod').value = mod_Constitucion;
-    document.getElementById('sheet-Wisdomscore').value = document.getElementById('sabiduria-selector').value;
+    document.getElementById('sheet-Wisdomscore').value = sabiduria;
     document.getElementById('sheet-Wisdommod').value = mod_Sabiduria;
-    document.getElementById('sheet-Intelligencescore').value = document.getElementById('inteligencia-selector').value;
+    document.getElementById('sheet-Intelligencescore').value = inteligencia;
     document.getElementById('sheet-Intelligencemod').value = mod_Inteligencia;
-    document.getElementById('sheet-Charismascore').value = document.getElementById('carisma-selector').value;
+    document.getElementById('sheet-Charismascore').value = carisma;
     document.getElementById('sheet-Charismamod').value = mod_Carisma;
 
     document.getElementById('sheet-ac').value = 10 + mod_Destreza;
@@ -276,7 +292,7 @@ document.getElementById('button-guardar').addEventListener("click", function(eve
         document.getElementById('sheet-check-' + option.replace('ñ', 'ny').replace(/\s+/g, '')).checked = true;
     });
 
-    document.getElementById('sheet-passiveperception').value = document.getElementById('sheet-Percepción').value + 10;
+    document.getElementById('sheet-passiveperception').value = parseInt(document.getElementById('sheet-Percepción').value) + 10;
 
     habilidades.forEach(function (habilidad) {
         let valor = document.getElementById('sheet-' + habilidad.replace('ñ', 'ny').replace(/\s+/g, '')).value;
@@ -358,6 +374,36 @@ document.getElementById('button-guardar').addEventListener("click", function(eve
     });
     document.getElementById('sheet-otherprofs').value = stringCompetencias;
 
+    deleteAllRasgos();
+
+    let features_clase = convertPythonDictToJSON(clase.getAttribute('data-nivel-1'));
+    if (features_clase !== null) {
+        for (const feature in features_clase) {
+           addRasgo(feature, features_clase[feature]);
+        };
+    }
+
+    let subclases = convertPythonDictToJSON(clase.getAttribute('data-subclases'));
+    let subclase_seleccionada = document.getElementById('subclase-selector').tomselect.getValue();
+    if (subclase_seleccionada !== null) {
+            for (let subclase in subclases) {
+                if(subclase == subclase_seleccionada){
+                    subclase = subclases[subclase];
+                     for (let feature in subclase) {
+                        addRasgo(feature, subclase[feature]);
+                    };
+                }
+            }
+    }
+
+    let features_raza = convertPythonDictToJSON(raza.getAttribute('data-Features'));
+    if (features_raza !== null) {
+        for (const feature in features_raza) {
+           addRasgo(feature, features_raza[feature]);
+        };
+    }
+
+
 document.getElementById('form-sheet').submit();
 });
 
@@ -386,7 +432,8 @@ document.getElementById('clase-selector').addEventListener("change", function(ev
 
     let selection = this.querySelector(':checked');
     select_habilidades.tomselect.settings.maxItems =selection.getAttribute('data-habilidades-max');
-    addArrayDropdown(select_subclass, convertPythonDictToJSON(selection.getAttribute('data-subclases')));
+    let lista_subclases = convertPythonDictToJSON(selection.getAttribute('data-subclases'))
+    addArrayDropdown(select_subclass, Object.keys(lista_subclases));
     addArrayDropdown(select_habilidades, convertPythonDictToJSON(selection.getAttribute('data-habilidades')));
     addArrayDropdown(select_equipoA, convertPythonDictToJSON(selection.getAttribute('data-equipoA')));
     addArrayDropdown(select_equipoB, convertPythonDictToJSON(selection.getAttribute('data-equipoB')));
@@ -422,6 +469,11 @@ document.getElementById('raza-selector').addEventListener("change", function(eve
 
     let selection = this.querySelector(':checked');
     document.getElementById("fuerza-cartel").textContent = '+'+selection.getAttribute('data-Fuerza');
+    document.getElementById("destreza-cartel").textContent = '+'+selection.getAttribute('data-Destreza');
+    document.getElementById("constitucion-cartel").textContent = '+'+selection.getAttribute('data-Constitución');
+    document.getElementById("sabiduria-cartel").textContent = '+'+selection.getAttribute('data-Sabiduría');
+    document.getElementById("inteligencia-cartel").textContent = '+'+selection.getAttribute('data-Inteligencia');
+    document.getElementById("carisma-cartel").textContent = '+'+selection.getAttribute('data-Carisma');
     atributos = convertPythonDictToJSON(selection.getAttribute('data-Atributos'));
     Array.from(document.getElementsByClassName("select-atributos")).forEach(function(element) {
             if(typeof element.tomselect === 'undefined') {
@@ -530,28 +582,35 @@ function eyeEvent(){
         }
     });
 }
+function deleteEvent(){
+    $('.rasgos-delete').unbind('click').click(function (e) {
+        e.preventDefault();
+               $(this).parent().parent().remove();
+    });
+}
+function deleteAllRasgos(){
+     var node = document.getElementById('rasgos-table');
+     node.innerHTML = "";
+}
 eyeEvent()
+deleteEvent()
 function addRasgo(input = '', textarea = ''){
         let table = $('#rasgos-table');
+    if(table.data('total') < 28) {
         let total = table.data('total') + 1;
-        table.data('total',total);
+        table.data('total', total);
         let tr = '<tr>\n' +
-            '<script>' +
-            '$("button").on("click", function(){\n' +
-            '    $(this).parent().parent().remove();\n' +
-            '});' +
-            '</script>' +
             '                <td  colspan="2">\n' +
-            '                    <input name="rasgos_input'+total+'" type="text" value="'+input+'" />\n' +
-            '                    <textarea class="d-none" id="rasgos-testarea'+total+'" name="rasgos_testarea'+total+'">'+textarea+'</textarea>\n' +
+            '                    <input name="rasgos_input' + total + '" type="text" value="' + input + '" />\n' +
+            '                    <textarea class="d-none" id="rasgos-testarea' + total + '" name="rasgos_testarea' + total + '">' + textarea + '</textarea>\n' +
             '                </td>\n' +
-            '                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea'+total+'"><i class="bi bi-eye-fill"></i></a><button><i class="bi bi-x-circle-fill"></i></button>' +
+            '                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea' + total + '"><i class="bi bi-eye-fill"></i></a>' +
+            '                   <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>' +
             '              </tr>';
         table.append(tr);
         eyeEvent();
-        $("button").on("click", function(){
-        $(this).parent().remove();
-});
+        deleteEvent();
+    }
 }
 $('#rasgos-table').data('total',$('#rasgos-table >tr').length);
 $('#rasgos-plus').click(function (e){
