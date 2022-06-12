@@ -7,5 +7,6 @@ urlpatterns = [
     path('private-area', views.private_area, name='private-area'),
     path('logout', views.logout, name='logout'),
     path('sheet', views.sheet, name='sheet'),
+    path('sheet/spell', views.spell_sheet, name='spell'),
 
 ]

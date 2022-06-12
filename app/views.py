@@ -22,6 +22,31 @@ def private_area(request):
         return redirect('index')
     return render(request, 'private_area.html', {'session': request.session})
 
+def spell_sheet(request):
+    if request.session.get('user_id') is None:
+        return redirect('index')
+    file = 'json/sheet' + str(request.session['user_id']) + '.json'
+    sheet = None
+    file_spell = 'json/sheet_spell' + str(request.session['user_id']) + '.json'
+    spell = None
+    if request.method == 'POST':
+        spell = request.POST
+        if (os.path.isfile(BASE_DIR / file_spell)):
+            os.remove(BASE_DIR / file_spell)
+        f = open(BASE_DIR / file_spell, "a")
+        f.write(json.dumps(spell))
+        f.close()
+        return redirect('spell')
+
+    if (os.path.isfile(BASE_DIR / file)):
+        sheet = json.load(open(BASE_DIR / file, "r"))
+
+    if (os.path.isfile(BASE_DIR / file_spell)):
+        spell = json.load(open(BASE_DIR / file_spell, "r"))
+
+    return render(request, 'spellSheet.html', {'session': request.session, 'spell': spell, 'sheet': sheet, 'ficheroClases': ficheroClases,
+                                          'ficheroGeneral': ficheroGeneral, 'ficheroHechizos': ficheroHechizos, 'ficheroObjetos': ficheroObjetos,
+                                          'ficheroRazas': ficheroRazas, 'ficheroTrasfondos': ficheroTrasfondos})
 
 def sheet(request):
     if request.session.get('user_id') is None:

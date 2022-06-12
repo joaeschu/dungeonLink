@@ -21,30 +21,45 @@
         <div class="btn-toolbar">
         <div class="btn-group" role="group">
             <a class="btn btn-primary" style="margin: 22px;" href="{% url 'sheet' %}">Volver</a>
+            <button class="btn btn-primary" id="button-selector" type="button" style="margin: 22px;" data-bs-toggle="modal" data-bs-target="#modal-selector">Selector de Hechizos</button>
+            <button class="btn btn-primary" type="submit" style="margin: 22px;">Guardar</button>
         </div>
         <div class="btn-group" role="group">
 
         </div>
     </div>
   <header>
+  <input id="nombreClase" name="nombreClase" type="hidden" value="{{ sheet.claseSinNivel}}">
+  <input id="valorSabiduria" name="valorSabiduria" type="hidden" value="{{ sheet.Wisdomscore }}">
+  <input id="valorInteligencia" name="valorInteligencia" type="hidden" value="{{ sheet.Intelligencescore }}">
+  <input id="valorCarisma" name="valorCarisma" type="hidden" value="{{ sheet.Charismascore }}">
+  <input id="listaHechizos" name="listaHechizos" type="hidden" value="{{ ficheroHechizos.hechizos}}">
     <section class="misc">
       <ul>
         <li>
-          <label for="castingAbility">Característica de lanzamiento de conjuros</label><input name="castingAbility" id="spell-sheet-castingAbility"{% if sheet is not None %} value="{{ sheet.castingAbility }}"{% endif %} placeholder="Inteligencia" />
+          <label for="castingAbilityLabel">Característica de lanzamiento de conjuros</label><input name="castingAbility" id="castingAbility"{% if spell is not None %} value="{{ spell.castingAbility }}"{% endif %} placeholder="Inteligencia" />
         </li>
         <li>
-          <label for="saveDC">CD de salvación de conjuro</label><input name="saveDC" id="sheet-saveDC"{% if sheet is not None %} value="{{ sheet.saveDC }}"{% endif %} placeholder="10" />
+          <label for="saveDCLabel">CD de salvación de conjuro</label><input name="saveDC" id="saveDC"{% if spell is not None %} value="{{ spell.saveDC }}"{% endif %} placeholder="17" />
         </li>
         <li>
-          <label for="spellAttack">Bonificador de ataque con hechizos</label><input name="spellAttack" id="sheet-spellAttack"{% if sheet is not None %} value="{{ sheet.spellAttack }}"{% endif %} placeholder="+5">
+          <label for="spellAttackLabel">Bonificador de ataque con hechizos</label><input name="spellAttack" id="spellAttack"{% if spell is not None %} value="{{ spell.spellAttack }}"{% endif %} placeholder="+5">
         </li>
       </ul>
     </section>
   </header>
   <main>
-   <section class="features">
+    <div class="row">
+   <section class="spells">
         <div>
-          <label for="features">Trucos</label>
+          <label for="spells">Trucos</label>
+        <table>
+            <td><input name="level0slot2" id="spell-check-level0slot2"{% if spell is not None and spell.level0slot2 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="level0slot3" id="spell-check-level0slot3"{% if spell is not None and spell.level0slot3 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="level0slot4" id="spell-check-level0slot4"{% if spell is not None and spell.level0slot4 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="level0slot5" id="spell-check-level0slot5"{% if spell is not None and spell.level0slot5 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="level0slot6" id="spell-check-level0slot6"{% if spell is not None and spell.level0slot6 == 'on' %} checked{% endif %} type="checkbox" /></td>
+        </table>
             <table>
             <tbody id="trucos-table" data-total="0">
             {% if sheet is not None  and sheet.trucos_input1 is not None %}
@@ -91,72 +106,6 @@
                   </td>
               </tr>
             {% endif %}
-             {% if sheet is not None  and sheet.rasgos_input5 is not None %}
-                <tr>
-                <td  colspan="2">
-                    <input name="rasgos_input5" type="text" value="{{sheet.rasgos_input5}}" />
-                    <textarea class="d-none" id="rasgos-testarea5" name="rasgos_testarea5">{{sheet.rasgos_testarea5}}</textarea>
-                </td>
-                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea5"><i class="bi bi-eye-fill"></i></a>
-                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
-                  </td>
-              </tr>
-            {% endif %}
-             {% if sheet is not None  and sheet.rasgos_input6 is not None %}
-                <tr>
-                <td  colspan="2">
-                    <input name="rasgos_input6" type="text" value="{{sheet.rasgos_input6}}" />
-                    <textarea class="d-none" id="rasgos-testarea6" name="rasgos_testarea6">{{sheet.rasgos_testarea6}}</textarea>
-                </td>
-                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea6"><i class="bi bi-eye-fill"></i></a>
-                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
-                  </td>
-              </tr>
-            {% endif %}
-             {% if sheet is not None  and sheet.rasgos_input7 is not None %}
-                <tr>
-                <td  colspan="2">
-                    <input name="rasgos_input7" type="text" value="{{sheet.rasgos_input7}}" />
-                    <textarea class="d-none" id="rasgos-testarea7" name="rasgos_testarea7">{{sheet.rasgos_testarea7}}</textarea>
-                </td>
-                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea7"><i class="bi bi-eye-fill"></i></a>
-                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
-                  </td>
-              </tr>
-            {% endif %}
-             {% if sheet is not None  and sheet.rasgos_input8 is not None %}
-                <tr>
-                <td  colspan="2">
-                    <input name="rasgos_input8" type="text" value="{{sheet.rasgos_input8}}" />
-                    <textarea class="d-none" id="rasgos-testarea8" name="rasgos_testarea8">{{sheet.rasgos_testarea8}}</textarea>
-                </td>
-                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea8"><i class="bi bi-eye-fill"></i></a>
-                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
-                  </td>
-              </tr>
-            {% endif %}
-             {% if sheet is not None  and sheet.rasgos_input9 is not None %}
-                <tr>
-                <td  colspan="2">
-                    <input name="rasgos_input9" type="text" value="{{sheet.rasgos_input9}}" />
-                    <textarea class="d-none" id="rasgos-testarea9" name="rasgos_testarea9">{{sheet.rasgos_testarea9}}</textarea>
-                </td>
-                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea9"><i class="bi bi-eye-fill"></i></a>
-                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
-                  </td>
-              </tr>
-            {% endif %}
-             {% if sheet is not None  and sheet.rasgos_input10 is not None %}
-                <tr>
-                <td  colspan="2">
-                    <input name="rasgos_input10" type="text" value="{{sheet.rasgos_input10}}" />
-                    <textarea class="d-none" id="rasgos-testarea10" name="rasgos_testarea10">{{sheet.rasgos_testarea10}}</textarea>
-                </td>
-                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea10"><i class="bi bi-eye-fill"></i></a>
-                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
-                  </td>
-              </tr>
-            {% endif %}
             </tbody>
                             <tfoot>
               <tr>
@@ -169,9 +118,16 @@
       </section>
     </section>
 
-      <section class="features">
+      <section class="spells">
         <div>
-          <label for="features">Nivel 1</label>
+          <label for="spells">Nivel 1</label>
+        <table>
+            <td><input name="1slot2" id="spell-check-level1slot2"{% if spell is not None and spell.level1slot2 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot3" id="spell-check-level1slot3"{% if spell is not None and spell.level1slot3 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot4" id="spell-check-level1slot4"{% if spell is not None and spell.level1slot4 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot5" id="spell-check-level1slot5"{% if spell is not None and spell.level1slot5 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot6" id="spell-check-level1slot6"{% if spell is not None and spell.level1slot6 == 'on' %} checked{% endif %} type="checkbox" /></td>
+        </table>
             <table>
             <tbody id="nivel-1-table" data-total="0">
             {% if sheet is not None  and sheet.hechizos_input1 is not None %}
@@ -218,68 +174,71 @@
                   </td>
               </tr>
             {% endif %}
-             {% if sheet is not None  and sheet.rasgos_input5 is not None %}
-                <tr>
+            </tbody>
+                            <tfoot>
+              <tr>
+                  <td style="vertical-align:top;text-align:right;" colspan="3" ><a class="badge bg-secondary" href="#" id="rasgos-plus"><i class="bi bi-plus"></i></a></td>
+              </tr>
+            </tfoot>
+          </table>
+
+        </div>
+      </section>
+    </section>
+  </section>
+
+      <section class="spells">
+        <div>
+          <label for="spells">Nivel 2</label>
+        <table>
+            <td><input name="1slot2" id="spell-check-level1slot2"{% if spell is not None and spell.level1slot2 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot3" id="spell-check-level1slot3"{% if spell is not None and spell.level1slot3 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot4" id="spell-check-level1slot4"{% if spell is not None and spell.level1slot4 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot5" id="spell-check-level1slot5"{% if spell is not None and spell.level1slot5 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot6" id="spell-check-level1slot6"{% if spell is not None and spell.level1slot6 == 'on' %} checked{% endif %} type="checkbox" /></td>
+        </table>
+            <table>
+            <tbody id="nivel-2-table" data-total="0">
+            {% if sheet is not None  and sheet.hechizos_input1 is not None %}
+             <tr>
                 <td  colspan="2">
-                    <input name="rasgos_input5" type="text" value="{{sheet.rasgos_input5}}" />
-                    <textarea class="d-none" id="rasgos-testarea5" name="rasgos_testarea5">{{sheet.rasgos_testarea5}}</textarea>
+                    <input name="rasgos_input1" type="text" value="{{sheet.rasgos_input1}}" />
+                    <textarea class="d-none" id="rasgos-testarea1" name="rasgos_testarea1">{{sheet.rasgos_testarea1}}</textarea>
                 </td>
-                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea5"><i class="bi bi-eye-fill"></i></a>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea1"><i class="bi bi-eye-fill"></i></a>
                   <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
                   </td>
               </tr>
             {% endif %}
-             {% if sheet is not None  and sheet.rasgos_input6 is not None %}
+            {% if sheet is not None  and sheet.hechizos_input2 is not None %}
                 <tr>
                 <td  colspan="2">
-                    <input name="rasgos_input6" type="text" value="{{sheet.rasgos_input6}}" />
-                    <textarea class="d-none" id="rasgos-testarea6" name="rasgos_testarea6">{{sheet.rasgos_testarea6}}</textarea>
+                    <input name="rasgos_input2" type="text" value="{{sheet.rasgos_input2}}" />
+                    <textarea class="d-none" id="rasgos-testarea2" name="rasgos_testarea2">{{sheet.rasgos_testarea2}}</textarea>
                 </td>
-                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea6"><i class="bi bi-eye-fill"></i></a>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea2"><i class="bi bi-eye-fill"></i></a>
                   <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
                   </td>
               </tr>
             {% endif %}
-             {% if sheet is not None  and sheet.rasgos_input7 is not None %}
+             {% if sheet is not None  and sheet.hechizos_input3 is not None %}
                 <tr>
                 <td  colspan="2">
-                    <input name="rasgos_input7" type="text" value="{{sheet.rasgos_input7}}" />
-                    <textarea class="d-none" id="rasgos-testarea7" name="rasgos_testarea7">{{sheet.rasgos_testarea7}}</textarea>
+                    <input name="rasgos_input3" type="text" value="{{sheet.rasgos_input3}}" />
+                    <textarea class="d-none" id="rasgos-testarea3" name="rasgos_testarea3">{{sheet.rasgos_testarea3}}</textarea>
                 </td>
-                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea7"><i class="bi bi-eye-fill"></i></a>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea3"><i class="bi bi-eye-fill"></i></a>
                   <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
                   </td>
               </tr>
             {% endif %}
-             {% if sheet is not None  and sheet.rasgos_input8 is not None %}
+             {% if sheet is not None  and sheet.rasgos_input4 is not None %}
                 <tr>
                 <td  colspan="2">
-                    <input name="rasgos_input8" type="text" value="{{sheet.rasgos_input8}}" />
-                    <textarea class="d-none" id="rasgos-testarea8" name="rasgos_testarea8">{{sheet.rasgos_testarea8}}</textarea>
+                    <input name="rasgos_input4" type="text" value="{{sheet.rasgos_input4}}" />
+                    <textarea class="d-none" id="rasgos-testarea4" name="rasgos_testarea4">{{sheet.rasgos_testarea4}}</textarea>
                 </td>
-                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea8"><i class="bi bi-eye-fill"></i></a>
-                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
-                  </td>
-              </tr>
-            {% endif %}
-             {% if sheet is not None  and sheet.rasgos_input9 is not None %}
-                <tr>
-                <td  colspan="2">
-                    <input name="rasgos_input9" type="text" value="{{sheet.rasgos_input9}}" />
-                    <textarea class="d-none" id="rasgos-testarea9" name="rasgos_testarea9">{{sheet.rasgos_testarea9}}</textarea>
-                </td>
-                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea9"><i class="bi bi-eye-fill"></i></a>
-                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
-                  </td>
-              </tr>
-            {% endif %}
-             {% if sheet is not None  and sheet.rasgos_input10 is not None %}
-                <tr>
-                <td  colspan="2">
-                    <input name="rasgos_input10" type="text" value="{{sheet.rasgos_input10}}" />
-                    <textarea class="d-none" id="rasgos-testarea10" name="rasgos_testarea10">{{sheet.rasgos_testarea10}}</textarea>
-                </td>
-                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea10"><i class="bi bi-eye-fill"></i></a>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea4"><i class="bi bi-eye-fill"></i></a>
                   <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
                   </td>
               </tr>
@@ -295,12 +254,514 @@
         </div>
       </section>
     </section>
+    </div>
+  <div class="row">
+      <section class="spells">
+        <div>
+          <label for="spells">Nivel 3</label>
+        <table>
+            <td><input name="1slot2" id="spell-check-level1slot2"{% if spell is not None and spell.level1slot2 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot3" id="spell-check-level1slot3"{% if spell is not None and spell.level1slot3 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot4" id="spell-check-level1slot4"{% if spell is not None and spell.level1slot4 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot5" id="spell-check-level1slot5"{% if spell is not None and spell.level1slot5 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot6" id="spell-check-level1slot6"{% if spell is not None and spell.level1slot6 == 'on' %} checked{% endif %} type="checkbox" /></td>
+        </table>
+            <table>
+            <tbody id="trucos-table" data-total="0">
+            {% if sheet is not None  and sheet.trucos_input1 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="trucos_input1" type="text" value="{{sheet.trucos_input1}}" />
+                    <textarea class="d-none" id="trucos-testarea1" name="trucos_testarea1">{{sheet.trucos_testarea1}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="trucos-testarea1"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary trucos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.rasgos_input2 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input2" type="text" value="{{sheet.rasgos_input2}}" />
+                    <textarea class="d-none" id="rasgos-testarea2" name="rasgos_testarea2">{{sheet.rasgos_testarea2}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea2"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+             {% if sheet is not None  and sheet.rasgos_input3 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input3" type="text" value="{{sheet.rasgos_input3}}" />
+                    <textarea class="d-none" id="rasgos-testarea3" name="rasgos_testarea3">{{sheet.rasgos_testarea3}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea3"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+             {% if sheet is not None  and sheet.rasgos_input4 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input4" type="text" value="{{sheet.rasgos_input4}}" />
+                    <textarea class="d-none" id="rasgos-testarea4" name="rasgos_testarea4">{{sheet.rasgos_testarea4}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea4"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            </tbody>
+                            <tfoot>
+              <tr>
+                  <td style="vertical-align:top;text-align:right;" colspan="3" ><a class="badge bg-secondary" href="#" id="rasgos-plus"><i class="bi bi-plus"></i></a></td>
+              </tr>
+            </tfoot>
+          </table>
+
+        </div>
+      </section>
+    </section>
+
+      <section class="spells">
+        <div>
+          <label for="spells">Nivel 4</label>
+        <table>
+            <td><input name="1slot2" id="spell-check-level1slot2"{% if spell is not None and spell.level1slot2 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot3" id="spell-check-level1slot3"{% if spell is not None and spell.level1slot3 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot4" id="spell-check-level1slot4"{% if spell is not None and spell.level1slot4 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot5" id="spell-check-level1slot5"{% if spell is not None and spell.level1slot5 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot6" id="spell-check-level1slot6"{% if spell is not None and spell.level1slot6 == 'on' %} checked{% endif %} type="checkbox" /></td>
+        </table>
+            <table>
+            <tbody id="nivel-1-table" data-total="0">
+            {% if sheet is not None  and sheet.hechizos_input1 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input1" type="text" value="{{sheet.rasgos_input1}}" />
+                    <textarea class="d-none" id="rasgos-testarea1" name="rasgos_testarea1">{{sheet.rasgos_testarea1}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea1"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.hechizos_input2 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input2" type="text" value="{{sheet.rasgos_input2}}" />
+                    <textarea class="d-none" id="rasgos-testarea2" name="rasgos_testarea2">{{sheet.rasgos_testarea2}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea2"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+             {% if sheet is not None  and sheet.hechizos_input3 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input3" type="text" value="{{sheet.rasgos_input3}}" />
+                    <textarea class="d-none" id="rasgos-testarea3" name="rasgos_testarea3">{{sheet.rasgos_testarea3}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea3"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+             {% if sheet is not None  and sheet.rasgos_input4 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input4" type="text" value="{{sheet.rasgos_input4}}" />
+                    <textarea class="d-none" id="rasgos-testarea4" name="rasgos_testarea4">{{sheet.rasgos_testarea4}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea4"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            </tbody>
+                            <tfoot>
+              <tr>
+                  <td style="vertical-align:top;text-align:right;" colspan="3" ><a class="badge bg-secondary" href="#" id="rasgos-plus"><i class="bi bi-plus"></i></a></td>
+              </tr>
+            </tfoot>
+          </table>
+
+        </div>
+      </section>
+    </section>
+  </section>
+
+      <section class="spells">
+        <div>
+          <label for="spells">Nivel 5</label>
+        <table>
+            <td><input name="1slot2" id="spell-check-level1slot2"{% if spell is not None and spell.level1slot2 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot3" id="spell-check-level1slot3"{% if spell is not None and spell.level1slot3 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot4" id="spell-check-level1slot4"{% if spell is not None and spell.level1slot4 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot5" id="spell-check-level1slot5"{% if spell is not None and spell.level1slot5 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot6" id="spell-check-level1slot6"{% if spell is not None and spell.level1slot6 == 'on' %} checked{% endif %} type="checkbox" /></td>
+        </table>
+            <table>
+            <tbody id="nivel-2-table" data-total="0">
+            {% if sheet is not None  and sheet.hechizos_input1 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input1" type="text" value="{{sheet.rasgos_input1}}" />
+                    <textarea class="d-none" id="rasgos-testarea1" name="rasgos_testarea1">{{sheet.rasgos_testarea1}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea1"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.hechizos_input2 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input2" type="text" value="{{sheet.rasgos_input2}}" />
+                    <textarea class="d-none" id="rasgos-testarea2" name="rasgos_testarea2">{{sheet.rasgos_testarea2}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea2"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+             {% if sheet is not None  and sheet.hechizos_input3 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input3" type="text" value="{{sheet.rasgos_input3}}" />
+                    <textarea class="d-none" id="rasgos-testarea3" name="rasgos_testarea3">{{sheet.rasgos_testarea3}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea3"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+             {% if sheet is not None  and sheet.rasgos_input4 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input4" type="text" value="{{sheet.rasgos_input4}}" />
+                    <textarea class="d-none" id="rasgos-testarea4" name="rasgos_testarea4">{{sheet.rasgos_testarea4}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea4"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            </tbody>
+                            <tfoot>
+              <tr>
+                  <td style="vertical-align:top;text-align:right;" colspan="3" ><a class="badge bg-secondary" href="#" id="rasgos-plus"><i class="bi bi-plus"></i></a></td>
+              </tr>
+            </tfoot>
+          </table>
+
+        </div>
+      </section>
+    </section>
+     </div>
+  <div class="row">
+      <section class="spells">
+        <div>
+          <label for="spells">Nivel 6</label>
+        <table>
+            <td><input name="1slot2" id="spell-check-level1slot2"{% if spell is not None and spell.level1slot2 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot3" id="spell-check-level1slot3"{% if spell is not None and spell.level1slot3 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot4" id="spell-check-level1slot4"{% if spell is not None and spell.level1slot4 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot5" id="spell-check-level1slot5"{% if spell is not None and spell.level1slot5 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot6" id="spell-check-level1slot6"{% if spell is not None and spell.level1slot6 == 'on' %} checked{% endif %} type="checkbox" /></td>
+        </table>
+            <table>
+            <tbody id="trucos-table" data-total="0">
+            {% if sheet is not None  and sheet.trucos_input1 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="trucos_input1" type="text" value="{{sheet.trucos_input1}}" />
+                    <textarea class="d-none" id="trucos-testarea1" name="trucos_testarea1">{{sheet.trucos_testarea1}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="trucos-testarea1"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary trucos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.rasgos_input2 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input2" type="text" value="{{sheet.rasgos_input2}}" />
+                    <textarea class="d-none" id="rasgos-testarea2" name="rasgos_testarea2">{{sheet.rasgos_testarea2}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea2"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+             {% if sheet is not None  and sheet.rasgos_input3 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input3" type="text" value="{{sheet.rasgos_input3}}" />
+                    <textarea class="d-none" id="rasgos-testarea3" name="rasgos_testarea3">{{sheet.rasgos_testarea3}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea3"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+             {% if sheet is not None  and sheet.rasgos_input4 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input4" type="text" value="{{sheet.rasgos_input4}}" />
+                    <textarea class="d-none" id="rasgos-testarea4" name="rasgos_testarea4">{{sheet.rasgos_testarea4}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea4"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            </tbody>
+                            <tfoot>
+              <tr>
+                  <td style="vertical-align:top;text-align:right;" colspan="3" ><a class="badge bg-secondary" href="#" id="rasgos-plus"><i class="bi bi-plus"></i></a></td>
+              </tr>
+            </tfoot>
+          </table>
+
+        </div>
+      </section>
+    </section>
+
+      <section class="spells">
+        <div>
+          <label for="spells">Nivel 7</label>
+        <table>
+            <td><input name="1slot2" id="spell-check-level1slot2"{% if spell is not None and spell.level1slot2 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot3" id="spell-check-level1slot3"{% if spell is not None and spell.level1slot3 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot4" id="spell-check-level1slot4"{% if spell is not None and spell.level1slot4 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot5" id="spell-check-level1slot5"{% if spell is not None and spell.level1slot5 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot6" id="spell-check-level1slot6"{% if spell is not None and spell.level1slot6 == 'on' %} checked{% endif %} type="checkbox" /></td>
+        </table>
+            <table>
+            <tbody id="nivel-1-table" data-total="0">
+            {% if sheet is not None  and sheet.hechizos_input1 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input1" type="text" value="{{sheet.rasgos_input1}}" />
+                    <textarea class="d-none" id="rasgos-testarea1" name="rasgos_testarea1">{{sheet.rasgos_testarea1}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea1"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.hechizos_input2 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input2" type="text" value="{{sheet.rasgos_input2}}" />
+                    <textarea class="d-none" id="rasgos-testarea2" name="rasgos_testarea2">{{sheet.rasgos_testarea2}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea2"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+             {% if sheet is not None  and sheet.hechizos_input3 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input3" type="text" value="{{sheet.rasgos_input3}}" />
+                    <textarea class="d-none" id="rasgos-testarea3" name="rasgos_testarea3">{{sheet.rasgos_testarea3}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea3"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+             {% if sheet is not None  and sheet.rasgos_input4 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input4" type="text" value="{{sheet.rasgos_input4}}" />
+                    <textarea class="d-none" id="rasgos-testarea4" name="rasgos_testarea4">{{sheet.rasgos_testarea4}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea4"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            </tbody>
+                            <tfoot>
+              <tr>
+                  <td style="vertical-align:top;text-align:right;" colspan="3" ><a class="badge bg-secondary" href="#" id="rasgos-plus"><i class="bi bi-plus"></i></a></td>
+              </tr>
+            </tfoot>
+          </table>
+
+        </div>
+      </section>
+    </section>
+  </section>
+
+      <section class="spells">
+        <div>
+          <label for="spells">Nivel 8</label>
+        <table>
+            <td><input name="1slot2" id="spell-check-level1slot2"{% if spell is not None and spell.level1slot2 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot3" id="spell-check-level1slot3"{% if spell is not None and spell.level1slot3 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot4" id="spell-check-level1slot4"{% if spell is not None and spell.level1slot4 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot5" id="spell-check-level1slot5"{% if spell is not None and spell.level1slot5 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot6" id="spell-check-level1slot6"{% if spell is not None and spell.level1slot6 == 'on' %} checked{% endif %} type="checkbox" /></td>
+        </table>
+            <table>
+            <tbody id="nivel-2-table" data-total="0">
+            {% if sheet is not None  and sheet.hechizos_input1 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input1" type="text" value="{{sheet.rasgos_input1}}" />
+                    <textarea class="d-none" id="rasgos-testarea1" name="rasgos_testarea1">{{sheet.rasgos_testarea1}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea1"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.hechizos_input2 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input2" type="text" value="{{sheet.rasgos_input2}}" />
+                    <textarea class="d-none" id="rasgos-testarea2" name="rasgos_testarea2">{{sheet.rasgos_testarea2}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea2"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+             {% if sheet is not None  and sheet.hechizos_input3 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input3" type="text" value="{{sheet.rasgos_input3}}" />
+                    <textarea class="d-none" id="rasgos-testarea3" name="rasgos_testarea3">{{sheet.rasgos_testarea3}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea3"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+             {% if sheet is not None  and sheet.rasgos_input4 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input4" type="text" value="{{sheet.rasgos_input4}}" />
+                    <textarea class="d-none" id="rasgos-testarea4" name="rasgos_testarea4">{{sheet.rasgos_testarea4}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea4"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            </tbody>
+                            <tfoot>
+              <tr>
+                  <td style="vertical-align:top;text-align:right;" colspan="3" ><a class="badge bg-secondary" href="#" id="rasgos-plus"><i class="bi bi-plus"></i></a></td>
+              </tr>
+            </tfoot>
+          </table>
+
+        </div>
+      </section>
+    </section>
+      <section class="spells">
+        <div>
+          <label for="spells">Nivel 9</label>
+        <table>
+            <td><input name="1slot2" id="spell-check-level1slot2"{% if spell is not None and spell.level1slot2 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot3" id="spell-check-level1slot3"{% if spell is not None and spell.level1slot3 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot4" id="spell-check-level1slot4"{% if spell is not None and spell.level1slot4 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot5" id="spell-check-level1slot5"{% if spell is not None and spell.level1slot5 == 'on' %} checked{% endif %} type="checkbox" /></td>
+            <td><input name="1slot6" id="spell-check-level1slot6"{% if spell is not None and spell.level1slot6 == 'on' %} checked{% endif %} type="checkbox" /></td>
+        </table>
+            <table>
+            <tbody id="nivel-2-table" data-total="0">
+            {% if sheet is not None  and sheet.hechizos_input1 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input1" type="text" value="{{sheet.rasgos_input1}}" />
+                    <textarea class="d-none" id="rasgos-testarea1" name="rasgos_testarea1">{{sheet.rasgos_testarea1}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea1"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.hechizos_input2 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input2" type="text" value="{{sheet.rasgos_input2}}" />
+                    <textarea class="d-none" id="rasgos-testarea2" name="rasgos_testarea2">{{sheet.rasgos_testarea2}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea2"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+             {% if sheet is not None  and sheet.hechizos_input3 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input3" type="text" value="{{sheet.rasgos_input3}}" />
+                    <textarea class="d-none" id="rasgos-testarea3" name="rasgos_testarea3">{{sheet.rasgos_testarea3}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea3"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+             {% if sheet is not None  and sheet.rasgos_input4 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="rasgos_input4" type="text" value="{{sheet.rasgos_input4}}" />
+                    <textarea class="d-none" id="rasgos-testarea4" name="rasgos_testarea4">{{sheet.rasgos_testarea4}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary rasgos-eye" href="#" data-textarea="rasgos-testarea4"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary rasgos-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            </tbody>
+                            <tfoot>
+              <tr>
+                  <td style="vertical-align:top;text-align:right;" colspan="3" ><a class="badge bg-secondary" href="#" id="rasgos-plus"><i class="bi bi-plus"></i></a></td>
+              </tr>
+            </tfoot>
+          </table>
+
+        </div>
+      </section>
+    </section>
+     </div>
   </main>
 </form>
+    <div class="modal fade" role="dialog" tabindex="-1" id="modal-selector">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Selector de Hechizos</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form  autocomplete="off">
+                        <div class="row">
+                            <div class="col"><label class="form-label">Trucos</label>
+                                <select  id="trucos-selector" name="trucos-select[]" multiple placeholder="Selecciona" autocomplete="off"></select>
+                            </div>
+                            <div class="col" style="display: none;"><label class="form-label">Nivel 1</label>
+                                <select  id="conjuros-selector" name="conjuros-select[]" multiple placeholder="Selecciona" autocomplete="off"></select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Cerrar</button><button class="btn btn-primary" id="button-guarda" type="button" data-bs-dismiss="modal">Guardar</button></div>
+            </div>
+        </div>
+    </div>
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.1/dist/js/tom-select.complete.min.js"></script>
-    <script src="{% static 'js/sheet.js' %}" defer></script>
+    <script src="{% static 'js/spell.js' %}" defer></script>
 </body>
 
 </html>

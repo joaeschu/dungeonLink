@@ -163,7 +163,6 @@ function getMaxPuntuacionPosible(puntosRestantes, puntuacionActual){
 };
 
 document.getElementById('button-guardar').addEventListener("click", function(event) {
-
     let clase = document.getElementById("clase-selector").querySelector(':checked');
     let raza = document.getElementById("raza-selector").querySelector(':checked');
     let trasfondo = document.getElementById("trasfondo-selector").querySelector(':checked');
@@ -172,7 +171,10 @@ document.getElementById('button-guardar').addEventListener("click", function(eve
         "Enganyo", "Intimidación", "Interpretación", "Persuasión"];
     clearFicha();
 
-    document.getElementById('sheet-classlevel').value = document.getElementById('clase-selector').value + " 1";
+    if (clase != null){
+        document.getElementById('claseSinNivel').value = document.getElementById('clase-selector').value;
+        document.getElementById('sheet-classlevel').value = document.getElementById('clase-selector').value + " 1";
+    }
     document.getElementById('sheet-charname').value = document.getElementById('text-nombre').value;
     document.getElementById('sheet-playername').value = document.getElementById('subclase-selector').value;
     document.getElementById('sheet-background').value = document.getElementById('trasfondo-selector').value;
@@ -417,8 +419,7 @@ document.getElementById('clase-selector').addEventListener("change", function(ev
     let select_equipoC = document.getElementById('equipoC-selector');
     let select_equipoD = document.getElementById('equipoD-selector');
     let select_herramientas = document.getElementById('herramientas-selector');
-    let select_trucos = document.getElementById('trucos-selector');
-    let select_conjuros= document.getElementById('conjuros-selector');
+
 
     clearDropown(select_subclass);
     clearDropown(select_habilidades);
@@ -427,8 +428,6 @@ document.getElementById('clase-selector').addEventListener("change", function(ev
     clearDropown(select_equipoC);
     clearDropown(select_equipoD);
     clearDropown(select_herramientas);
-    clearDropown(select_trucos);
-    clearDropown(select_conjuros);
 
     let selection = this.querySelector(':checked');
     select_habilidades.tomselect.settings.maxItems =selection.getAttribute('data-habilidades-max');
@@ -441,10 +440,7 @@ document.getElementById('clase-selector').addEventListener("change", function(ev
     addArrayDropdown(select_equipoD, convertPythonDictToJSON(selection.getAttribute('data-equipoD')));
     select_herramientas.tomselect.settings.maxItems =selection.getAttribute('data-herramientas-max');
     addArrayDropdown(select_herramientas, convertPythonDictToJSON(selection.getAttribute('data-herramientas')));
-    select_trucos.tomselect.settings.maxItems =selection.getAttribute('data-Trucos-a-elegir');
-    addArrayDropdown(select_trucos, convertPythonDictToJSON(selection.getAttribute('data-Trucos')));
-    select_conjuros.tomselect.settings.maxItems =selection.getAttribute('data-Conjuros-a-elegir');
-    addArrayDropdown(select_conjuros, convertPythonDictToJSON(selection.getAttribute('data-Conjuros-1')));
+
 });
 
 document.getElementById('trasfondo-selector').addEventListener("change", function(event) {
@@ -536,16 +532,6 @@ new TomSelect("#habilidades-selector",{
 });
 
 new TomSelect("#herramientas-selector",{
-    plugins: ['remove_button'],
-	maxItems: 4
-});
-
-new TomSelect("#trucos-selector",{
-    plugins: ['remove_button'],
-	maxItems: 4
-});
-
-new TomSelect("#conjuros-selector",{
     plugins: ['remove_button'],
 	maxItems: 4
 });

@@ -161,7 +161,69 @@ clases = {
                         }
                     },
         "Druida": {
-        },
+            "Dado_golpe": 8,
+            "Armaduras": ["Armaduras ligeras", "armaduras medias", "escudos", "(los druidas no son competentes con ninguna armadura o escudo hecho de metal)"],
+            "Armas": ["bastones", "cimitarras", "clavas", "dagas", "dardos", "hoces", "hondas", "lanzas", "mazas"],
+            "Herramientas_a_elegir": 1,
+            "Herramientas": ["kit de herboristería"],
+            "Salvaciones": [0,0,0,1,1,0],
+            "Habilidades_a_elegir": 2,
+            "Habilidades": ["Arcano", "Medicina", "Naturaleza", "Percepción", "Perspicacia", "Religión", "Supervivencia", "Trato de animales"],
+            "Subclases": {
+                "Dominio de conocimiento": {
+                    "Lista de Conjuros Expandida": "orden imperiosa, identificar",
+                    "Bendiciones del Conocimiento": "A partir del nivel 1 aprendes dos idiomas de tu elección. También pasas a ser competente en dos de las siguientes habilidades, a tu elección: Arcano, Historia, Naturaleza o Religión. Tu bonificador de competencia se duplica para cualquier tirada de habilidad que use cualquiera de estas habilidades."
+                },
+                "Dominio de guerra": {
+                    "Lista de Conjuros Expandida": "favor divino, escudo de la fe",
+                    "Competencias Adicionales": "A nivel 1 ganas competencia con armas marciales y armadura pesada.",
+                    "Clérigo de Guerra": "Desde el nivel 1 tu dios te otorga instantes de inspiración cuando estás en medio de la batalla. Cuando usas la acción de Atacar, puedes hacer un ataque con armas como acción adicional. Puedes usar este rasgo un número de veces equivalente a tu modificador de Sabiduría (con un mínimo de 1). Recuperas todos los usos gastados cuando finalizas un descanso prolongado."
+                },
+                "Dominio de luz": {
+                    "Lista de Conjuros Expandida": "manos ardientes, fuego feérico",
+                    "Truco Adicional": "Cuando seleccionas este dominio en el nivel 1, ganas el truco luz si es que aún no lo conocías.",
+                    "Fulgor Protector": "También en el nivel 1 puedes interponer una luz divina entre ti y un enemigo que te ataque. Cuando eres atacado por una criatura que puedas ver en un rango de 30 pies (9 metros), puedes usar tu reacción para imponerle desventaja en su tirada de ataque, haciendo que la luz deslumbre al atacante antes de que lleve a cabo su ataque. Un atacante que no pueda ser cegado es inmune a este efecto. Puedes usar este rasgo un número de veces igual a tu modificador de Sabiduría (mínimo de 1). Recuperas todos los usos gastados cuando finalizas un descanso prolongado."
+                },
+                "Dominio de naturaleza": {
+                    "Lista de Conjuros Expandida": "amistad con los animales, hablar con los animales",
+                    "Competencia Adicionale": "También en el nivel 1 obtienes competencia con armadura pesada.",
+                    "Acólito de la Naturaleza": "En el nivel 1 aprendes un truco de druida de tu elección. También ganas competencia en una de las siguientes habilidades, a tu elección: Trato con Animales, Naturaleza, o Supervivencia."
+                },
+                "Dominio de tempestad": {
+                    "Lista de Conjuros Expandida": "nube brumosa, onda atronadora",
+                    "Competencias Adicionales": "En el nivel 1 ganas competencia con las armas marciales y armaduras pesadas.",
+                    "Ira de la tormenta": "También en el nivel 1 puedes reprender con truenos a tus atacantes. Cuando una criatura en un rango de 5 pies (1,5 metros) de ti que puedas ver te golpee con un ataque, puedes usar tu reacción para que haga una tirada de salvación de Destreza. La criatura recibe 2d8 de daño sónico o eléctrico (a tu elección) con una tirada de salvación fallida, y la mitad con una salvación exitosa. Puedes usar este rasgo un número de veces igual a tu modificador de Sabiduría (un mínimo de 1). Recuperas todos los usos gastados cuando finalizas un descanso prolongado."
+                },
+                "Dominio de superchería": {
+                    "Lista de Conjuros Expandida": "hechizar persona, disfrazarse",
+                    "Bendición del Tramposo": "Comenzando cuando eliges este dominio a nivel 1 puedes usar tu acción para tocar a una criatura voluntaria y darle ventaja en las tiradas de Destreza (Sigilo). Esta bendición dura una hora o hasta que uses este rasgo nuevamente",
+                },
+                "Dominio de vida": {
+                    "Lista de Conjuros Expandida": "bendecir, curar heridas",
+                    "Competencias Adicionales": "Cuando eliges este dominio en el nivel 1 ganas competencia con armaduras pesadas.",
+                    "Discípulo de la Vida": "También a nivel 1 tus conjuros de sanación son más efectivos. Cada vez que uses un conjuro de nivel 1 o superior para restaurar Puntos de Golpe a una criatura, la criatura recupera Puntos de Golpe adicionales iguales a 2 + el nivel del conjuro."
+                }
+            },
+            "Equipo_A": ["un escudo de madera", "cualquier arma simple cuerpo a cuerpo"],
+            "Equipo_B": [" una cimitarra", "cualquier arma simple a distancia"],
+            "Equipo_C": ["una ballesta ligera y 20 virotes", "cualquier arma simple."],
+            "Equipo_D": ["un equipo de sacerdote", "un equipo de explorador"],
+            "Equipo_obligatorio": ["escudo", "símbolo sagrado"],
+            "Trucos_a_elegir": 3,
+            "Trucos": ["Disipar la agonía", "Llama sagrada", "Luz", "Orientación divina", "Remendar", "Resistencia", "Taumaturgia"],
+            "Conjuros_a_elegir": 15,
+            "Espacio_conjuro": 2,
+            "Caracteristica_conjuros": "Sabiduría",
+            "Conjuros_1": ["Bendecir", "Crear o destruir agua", "Curar heridas", "Detectar el mal y el bien", "Detectar magia", "Detectar veneno y enfermedad",
+                    "Escudo de la fe", "Infligir heridas", "Orden imperiosa", "Palabra curativa", "Perdición", "Protección contra el mal y el bien",
+                    "Purificar comida y bebida", "Rayo guía", "Santuario"],
+            "Nivel_1": {
+                "Conjuros de dominio":
+                "Cada dominio tiene una lista de conjuros propia, que obtienes según alcanzas niveles de clérigo. Cuando ganas un conjuro de dominio siempre lo tienes preparado, y no cuenta para el número de conjuros que puedes preparar cada día. Si tienes un conjuro de dominio que no aparece en la lista de conjuros de clérigo, éste cuenta de todas formas como un conjuro de clérigo para ti.",
+                "Lanzamiento de conjuros":
+                    "Como conductor de poder divino, eres capaz de lanzar conjuros de clérigo. Ve el Capítulo 10 para ver las reglas generales acerca de lanzar conjuros y al Capítulo 11 para ver la lista de conjuros del clérigo. La tabla Clérigo muestra cuántos espacios para conjuros tienes para lanzar tus conjuros de nivel 1 o superior. Para lanzar uno de esos conjuros debes gastar un espacio de nivel de ese conjuro o superior. Recuperas todos los espacios para conjuros gastados cuando finalizas un descanso prolongado. Preparas la lista de conjuros que eres capaz de lanzar, eligiéndolos de la lista de conjuros del clérigo. Cuando lo haces, escoge un número de conjuros igual a tu modificador de Sabiduría + tu nivel de clérigo (mínimo un conjuro). Los conjuros deben ser de un nivel para el cual tengas espacios de conjuros. Por ejemplo, si eres un clérigo de nivel 3, tienes cuatro espacios para conjuros de nivel 1 y dos de nivel 2. Con una Sabiduría de 16, tu lista de conjuros preparados puede incluir seis conjuros de nivel 1 o 2, en cualquier combinación. Si preparas el conjuro de nivel 1 curar heridas, puedes lanzarlo usando un espacio de nivel 1 o 2. Lanzar el conjuro no lo elimina de tu lista de conjuros preparados. Puedes cambiar tu lista de conjuros preparados cuando finalices un descanso prolongado. Preparar una nueva lista de conjuros requiere gastar tiempo en oración y meditación: al menos 1 minuto por nivel de conjuro preparado. Puedes lanzar un conjuro de clérigo como un ritual si ese conjuro tiene el descriptor ritual y tienes el conjuro preparado. Puedes usar un símbolo sagrado (ver el Capítulo 5) como un foco de lanzamiento de conjuros para tus conjuros de clérigo.",
+                        }
+                    },
         "Explorador": {"Cazador", "Señor de las Bestias"},
         "Guerrero": {"Caballero Arcano", "Campeón", "Maestro de Batalla"},
         "Hechicero": {"Línea de sangre Dracónica", "Magia Salvaje"},

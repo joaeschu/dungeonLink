@@ -23,12 +23,14 @@
             <a class="btn btn-primary" style="margin: 22px;" href="{% url 'private-area' %}">Volver</a>
             <button class="btn btn-primary" type="submit" style="margin: 22px;">Guardar</button>
             <button class="btn btn-primary" type="button" style="margin: 22px;" data-bs-toggle="modal" data-bs-target="#modal-generador">Generador Personaje</button>
+            <a class="btn btn-primary" style="margin: 22px;" href="{% url 'spell' %}">Hechizos</a>
         </div>
         <div class="btn-group" role="group">
 
         </div>
     </div>
   <header>
+    <input id="claseSinNivel" name="claseSinNivel" type="hidden" {% if sheet is not None %} value="{{ sheet.claseSinNivel }}"{% endif %}>
     <section class="charname">
       <label for="charname">Nombre del personaje</label><input name="charname" id="sheet-charname"{% if sheet is not None %} value="{{ sheet.charname }}"{% endif %} placeholder="Lego Las" />
     </section>
@@ -783,14 +785,6 @@
                                             <div class="col"><label class="form-label">Herramientas</label>
                                                 <select  id="herramientas-selector" name="herramientas-select[]" multiple placeholder="Seleciona" autocomplete="off">
                                                 </select></div>
-                                        </div>
-                                        <div class="row">
-                                             <div class="col"><label class="form-label">Trucos</label>
-                                                <select  id="trucos-selector" name="trucos-select[]" multiple placeholder=" " autocomplete="off"></select>
-                                            </div>
-                                             <div class="col"><label class="form-label">Hechizos</label>
-                                                <select  id="conjuros-selector" name="conjuros-select[]" multiple placeholder=" " autocomplete="off"></select>
-                                            </div>
                                         </div>
                                     </form>
                                 </div>
