@@ -20,10 +20,10 @@
         {% csrf_token %}
         <div class="btn-toolbar">
         <div class="btn-group" role="group">
-            <a class="btn btn-primary" style="margin: 22px;" href="{% url 'private-area' %}">Volver</a>
             <button class="btn btn-primary" type="submit" style="margin: 22px;">Guardar</button>
             <button class="btn btn-primary" type="button" style="margin: 22px;" data-bs-toggle="modal" data-bs-target="#modal-generador">Generador Personaje</button>
             <a class="btn btn-primary" style="margin: 22px;" href="{% url 'spell' %}">Hechizos</a>
+            <a class="btn btn-primary" style="margin: 22px;" href="{% url 'logout' %}">Cerrar Sesión</a>
         </div>
         <div class="btn-group" role="group">
 
