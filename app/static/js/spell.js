@@ -204,51 +204,61 @@ function deleteEvent(){
     $('.trucos-delete').unbind('click').click(function (e) {
         e.preventDefault();
                $(this).parent().parent().remove();
+               $('#trucos-table').data('total',$('#trucos-table >tr').length);
     });
 
     $('.hechizos1-delete').unbind('click').click(function (e) {
         e.preventDefault();
                $(this).parent().parent().remove();
+               $('#hechizos1-table').data('total',$('#hechizos1-table >tr').length);
     });
 
     $('.hechizos2-delete').unbind('click').click(function (e) {
         e.preventDefault();
                $(this).parent().parent().remove();
+               $('#hechizos2-table').data('total',$('#hechizos2-table >tr').length);
     });
 
     $('.hechizos3-delete').unbind('click').click(function (e) {
         e.preventDefault();
                $(this).parent().parent().remove();
+               $('#hechizos3-table').data('total',$('#hechizos3-table >tr').length);
     });
 
     $('.hechizos4-delete').unbind('click').click(function (e) {
         e.preventDefault();
                $(this).parent().parent().remove();
+               $('#hechizos4-table').data('total',$('#hechizos4-table >tr').length);
     });
 
     $('.hechizos5-delete').unbind('click').click(function (e) {
         e.preventDefault();
                $(this).parent().parent().remove();
+               $('#hechizos5-table').data('total',$('#hechizos5-table >tr').length);
     });
 
     $('.hechizos6-delete').unbind('click').click(function (e) {
         e.preventDefault();
                $(this).parent().parent().remove();
+               $('#hechizos6-table').data('total',$('#hechizos6-table >tr').length);
     });
 
     $('.hechizos7-delete').unbind('click').click(function (e) {
         e.preventDefault();
                $(this).parent().parent().remove();
+               $('#hechizos7-table').data('total',$('#hechizos7-table >tr').length);
     });
 
     $('.hechizos8-delete').unbind('click').click(function (e) {
         e.preventDefault();
                $(this).parent().parent().remove();
+               $('#hechizos8-table').data('total',$('#hechizos8-table >tr').length);
     });
 
     $('.hechizos9-delete').unbind('click').click(function (e) {
         e.preventDefault();
                $(this).parent().parent().remove();
+               $('#hechizos9-table').data('total',$('#hechizos9-table >tr').length);
     });
 }
 function deleteAllTrucos(){
