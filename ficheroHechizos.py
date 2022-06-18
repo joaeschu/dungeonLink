@@ -11,7 +11,7 @@ hechizos ={
     },
     "Brujo" : {
         "Nivel_0_max": 2,
-        "Nivel_1_max": 3,
+        "Nivel_1_max": 2,
         "Nivel_0": ["Explosión sobrenatural", "Ilusión menor", "Impacto verdadero", "Mano del mago", "Prestidigitación", "Rociar veneno",
                       "Toque helado"],
         "Nivel_1": ["Comprensión idiomática", "Escritura ilusoria", "Hechizar persona", "Protección contra el mal y el bien",
@@ -20,7 +20,7 @@ hechizos ={
 
     "Clérigo" : {
         "Nivel_0_max": 3,
-        "Nivel_1_max": 2,
+        "Nivel_1_max": 6,
         "Nivel_0": ["Disipar la agonía", "Llama sagrada", "Luz", "Orientación divina", "Remendar", "Resistencia", "Taumaturgia"],
         "Nivel_1": ["Bendecir", "Crear o destruir agua", "Curar heridas", "Detectar el mal y el bien", "Detectar magia", "Detectar veneno y enfermedad",
                         "Escudo de la fe", "Infligir heridas", "Orden imperiosa", "Palabra curativa", "Perdición", "Protección contra el mal y el bien",
@@ -29,7 +29,7 @@ hechizos ={
 
     "Druida" : {
         "Nivel_0_max": 2,
-        "Nivel_1_max": 2,
+        "Nivel_1_max": 6,
         "Nivel_0": ["Conocimiento druídico", "Flamear", "Garrote", "Orientación divina", "Remendar", "Resistencia", "Rociar veneno"],
         "Nivel_1": ["Encantar Animal", "Buenas bayas", "Crear o destruir agua", "Curar heridas", "Detectar magia",
                        "Detectar veneno y enfermedad", "Enmarañar", "Fuego feérico", "Hablar con los animales", "Hechizar persona", "Nube brumosa",
@@ -55,7 +55,7 @@ hechizos ={
 
     "Mago" : {
         "Nivel_0_max": 3,
-        "Nivel_1_max": 2,
+        "Nivel_1_max": 6,
         "Nivel_0": ["Contacto electrizante", "Cuchichear mensaje", "Ilusión menor", "Impacto verdadero", "Luces danzantes", "Luz",
                      "Mano del mago", "Prestidigitación", "Rayo de escarcha", "Rayo de fuego", "Remendar", "Rociar veneno", "Salpicadura de ácido",
                      "Toque helado"],
