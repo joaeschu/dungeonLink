@@ -66,7 +66,7 @@ const convertPythonDictToJSON = function (data) {
   if(data === '' || data === null){
     return null;
   }
-    let d = data.replace(new RegExp(`(?<=[a-zA-Z])'(?=[a-zA-Z ])`, "g"), '__')
+    let d = data.replace(new RegExp(`(?:[a-zA-Z])'(?=[a-zA-Z ])`, "g"), '__')
     d = d.replace(new RegExp("'", 'g'), '"')
     d = d.replace(new RegExp("__", 'g'), "'")
     d = d.replace(new RegExp("None", 'g'), 'null')
