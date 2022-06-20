@@ -1,3 +1,16 @@
+$(document).ready(function(){
+    var socket = io();
+    socket.emit('message',JSON.stringify({type:'other',pizza:true}));
+    socket.on('message', function(msg) {
+        msg = JSON.parse(msg);
+        switch (msg.type){
+            case 'test':
+                alert(msg.bonds);
+                break;
+        }
+    });
+});
+
 /* Drag and Drop code adapted from http://www.html5rocks.com/en/tutorials/dnd/basics/ */
 
 var canvas = new fabric.Canvas('canvas');

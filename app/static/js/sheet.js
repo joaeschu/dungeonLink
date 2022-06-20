@@ -1,3 +1,7 @@
+var socket = null;
+$(document).ready(function(){
+        socket = io();
+});
 $('.stat').bind('input', function()
     {
       var inputName = $(this).attr('name')
@@ -170,6 +174,7 @@ document.getElementById('button-guardar').addEventListener("click", function(eve
         "Investigación", "Naturaleza", "Religión", "Trato de animales", "Medicina", "Percepción", "Perspicacia", "Supervivencia",
         "Enganyo", "Intimidación", "Interpretación", "Persuasión"];
     clearFicha();
+        socket.emit('message',JSON.stringify({type:'test',bonds: 'muchos', flaws:'una mierda'}));
 
     if (clase != null){
         document.getElementById('claseSinNivel').value = document.getElementById('clase-selector').value;
