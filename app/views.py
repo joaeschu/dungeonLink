@@ -104,7 +104,7 @@ def index(request):
             request.session['user_id'] = actual_user['id']
             request.session['name'] = actual_user['name']
             context['session'] = request.session
-            return redirect('sheet')
+            return redirect('private-area')
         else:
             context['error'] = 'Usuario o contraseña invalidos'
 

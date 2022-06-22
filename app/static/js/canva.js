@@ -7,6 +7,9 @@ $(document).ready(function(){
             case 'test':
                 alert(msg.bonds);
                 break;
+            case 'chat':
+                escribirMensaje(msg.content);
+                break;
         }
     });
 });
