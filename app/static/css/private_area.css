@@ -53,3 +53,10 @@ pre {
   background-color: #f0f0f0;
   margin-left: 20px;
 }
+
+div.ex3 {
+  background-color: lightgray;
+  width: 120px;
+  height: 700px;
+  overflow: auto;
+}

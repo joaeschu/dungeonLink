@@ -17,7 +17,7 @@ $(document).ready(function(){
 /* Drag and Drop code adapted from http://www.html5rocks.com/en/tutorials/dnd/basics/ */
 
 var canvas = new fabric.Canvas('canvas');
-var imageUrl = "/static/img/asddedasasasasasasasasasasasas1.png";
+var imageUrl = "/static/img/grid2.png";
 
 canvas.setBackgroundImage(imageUrl, canvas.renderAll.bind(canvas), {
     // Optionally add an opacity lvl to the image
