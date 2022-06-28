@@ -20,9 +20,10 @@
         {% csrf_token %}
         <div class="btn-toolbar">
         <div class="btn-group" role="group">
-            <button class="btn btn-primary" type="submit" style="margin: 22px;">Guardar</button>
+            <button class="btn btn-primary" id="buttonGuardarFicha" type="submit" style="margin: 22px;">Guardar</button>
             <button class="btn btn-primary" type="button" style="margin: 22px;" data-bs-toggle="modal" data-bs-target="#modal-generador">Generador Personaje</button>
             <a class="btn btn-primary" style="margin: 22px;" href="{% url 'spell' %}">Hechizos</a>
+            <button class="btn btn-primary" id="buttonModalIntercambio" type="button" style="margin: 22px;" data-bs-toggle="modal" data-bs-target="#modal-intercambio">Intercambio de objetos</button>
         </div>
         <div class="btn-group" role="group">
 
@@ -30,6 +31,8 @@
     </div>
   <header>
     <input id="claseSinNivel" name="claseSinNivel" type="hidden" {% if sheet is not None %} value="{{ sheet.claseSinNivel }}"{% endif %}>
+    <input id="nombreUsuario" name="nombreUsuario" type="hidden" value="{{session.name}}">
+    <input id="emailUsuario" name="emailUsuario" type="hidden" value="{{session.user_id}}">
     <section class="charname">
       <label for="charname">Nombre del personaje</label><input name="charname" id="sheet-charname"{% if sheet is not None %} value="{{ sheet.charname }}"{% endif %} placeholder="Lego Las" />
     </section>
@@ -219,7 +222,7 @@
         <input name="passiveperception"id="sheet-passiveperception"{% if sheet is not None %} value="{{ sheet.passiveperception }}"{% endif %} placeholder="10" />
       </div>
       <div class="otherprofs box textblock">
-        <label for="otherprofs">Otras competencias y lenguajes</label><textarea name="otherprofs"id="sheet-otherprofs">{% if sheet is not None %}{{ sheet.otherprofs }}{% endif %}</textarea>
+        <label for="otherprofs">Competencias y lenguajes</label><textarea name="otherprofs"id="sheet-otherprofs">{% if sheet is not None %}{{ sheet.otherprofs }}{% endif %}</textarea>
       </div>
     </section>
     <section>
@@ -308,65 +311,262 @@
             <tbody>
               <tr>
                 <td>
-                  <input name="atkname1"id="sheet-atkname1"{% if sheet is not None %} value="{{ sheet.atkname1 }}"{% endif %} type="text" />
+                  <input name="atkname1"id="sheet-atkname1" style="background-color: gray;"{% if sheet is not None %} value="{{ sheet.atkname1 }}"{% endif %} type="text" />
                 </td>
                 <td>
-                  <input name="atkbonus1"id="sheet-atkbonus1"{% if sheet is not None %} value="{{ sheet.atkbonus1 }}"{% endif %} type="text" />
+                  <input name="atkbonus1"id="sheet-atkbonus1"style="background-color: gray;"{% if sheet is not None %} value="{{ sheet.atkbonus1 }}"{% endif %} type="text" />
                 </td>
                 <td>
-                  <input name="atkdamage1"id="sheet-atkdamage1"{% if sheet is not None %} value="{{ sheet.atkdamage1 }}"{% endif %} type="text" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input name="atkname2"id="sheet-atkname2"{% if sheet is not None %} value="{{ sheet.atkname2 }}"{% endif %} type="text" />
-                </td>
-                <td>
-                  <input name="atkbonus2"id="sheet-atkbonus2"{% if sheet is not None %} value="{{ sheet.atkbonus2 }}"{% endif %} type="text" />
-                </td>
-                <td>
-                  <input name="atkdamage2"id="sheet-atkdamage2"{% if sheet is not None %} value="{{ sheet.atkdamage2 }}"{% endif %} type="text" />
+                  <input name="atkdamage1"id="sheet-atkdamage1"style="background-color: gray;"{% if sheet is not None %} value="{{ sheet.atkdamage1 }}"{% endif %} type="text" />
                 </td>
               </tr>
               <tr>
                 <td>
-                  <input name="atkname3"id="sheet-atkname3"{% if sheet is not None %} value="{{ sheet.atkname3 }}"{% endif %} type="text" />
+                  <input name="atkname2"id="sheet-atkname2"style="background-color: gray;"{% if sheet is not None %} value="{{ sheet.atkname2 }}"{% endif %} type="text" />
                 </td>
                 <td>
-                  <input name="atkbonus3"id="sheet-atkbonus3"{% if sheet is not None %} value="{{ sheet.atkbonus3 }}"{% endif %} type="text" />
+                  <input name="atkbonus2"id="sheet-atkbonus2"style="background-color: gray;"{% if sheet is not None %} value="{{ sheet.atkbonus2 }}"{% endif %} type="text" />
                 </td>
                 <td>
-                  <input name="atkdamage3"id="sheet-atkdamage3"{% if sheet is not None %} value="{{ sheet.atkdamage3 }}"{% endif %} type="text" />
+                  <input name="atkdamage2"id="sheet-atkdamage2"style="background-color: gray;"{% if sheet is not None %} value="{{ sheet.atkdamage2 }}"{% endif %} type="text" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input name="atkname3"id="sheet-atkname3"style="background-color: gray;"{% if sheet is not None %} value="{{ sheet.atkname3 }}"{% endif %} type="text" />
+                </td>
+                <td>
+                  <input name="atkbonus3"id="sheet-atkbonus3"style="background-color: gray;"{% if sheet is not None %} value="{{ sheet.atkbonus3 }}"{% endif %} type="text" />
+                </td>
+                <td>
+                  <input name="atkdamage3"id="sheet-atkdamage3"style="background-color: gray;"{% if sheet is not None %} value="{{ sheet.atkdamage3 }}"{% endif %} type="text" />
                 </td>
               </tr>
             </tbody>
           </table>
-          <textarea></textarea>
         </div>
       </section>
       <section class="equipment">
         <div>
           <label>Equipo</label>
-          <div class="money">
-            <ul>
-              <li>
-                <label for="cp">PC</label><input name="cp"id="sheet-cp"{% if sheet is not None %} value="{{ sheet.cp }}"{% endif %} />
-              </li>
-              <li>
-                <label for="sp">PP</label><input name="sp"id="sheet-sp"{% if sheet is not None %} value="{{ sheet.sp }}"{% endif %} />
-              </li>
-              <li>
-                <label for="ep">PE</label><input name="ep"id="sheet-ep"{% if sheet is not None %} value="{{ sheet.ep }}"{% endif %} />
-              </li>
-              <li>
-                <label for="gp">PO</label><input name="gp"id="sheet-gp"{% if sheet is not None %} value="{{ sheet.gp }}"{% endif %} />
-              </li>
-              <li>
-                <label for="pp">PP</label><input name="pp"id="sheet-pp"{% if sheet is not None %} value="{{ sheet.pp }}"{% endif %} />
-              </li>
-            </ul>
-          </div>
-          <textarea name="equipmentList" placeholder="Lista de equipo" id="sheet-Lista-de-equipo">{% if sheet is not None %}{{ sheet.equipmentList }}{% endif %}</textarea>
+        <table>
+            <tbody id="equipo-table" data-total="0">
+            {% if sheet is not None  and sheet.equipo_input1 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="equipo_input1" id="equipo_input1" type="text" value="{{sheet.equipo_input1}}" />
+                    <textarea class="d-none" id="equipo-testarea1" name="equipo_testarea1">{{sheet.equipo_testarea1}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea1"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input2 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="equipo_input2" id="equipo_input2" type="text" value="{{sheet.equipo_input2}}" />
+                    <textarea class="d-none" id="equipo-testarea2" name="equipo_testarea2">{{sheet.equipo_testarea2}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea2"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+             {% if sheet is not None  and sheet.equipo_input3 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="equipo_input3" id="equipo_input3" type="text" value="{{sheet.equipo_input3}}" />
+                    <textarea class="d-none" id="equipo-testarea3" name="equipo_testarea3">{{sheet.equipo_testarea3}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea3"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input4 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="equipo_input4" id="equipo_input4" type="text" value="{{sheet.rasgos_input4}}" />
+                    <textarea class="d-none" id="equipo-testarea4" name="equipo_testarea4">{{sheet.equipo_testarea4}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea4"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input5 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="equipo_input5" id="equipo_input5" type="text" value="{{sheet.equipo_input5}}" />
+                    <textarea class="d-none" id="equipo-testarea5" name="equipo_testarea5">{{sheet.equipo_testarea5}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea5"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input6 is not None %}
+                <tr>
+                <td  colspan="2">
+                    <input name="equipo_input6" id="equipo_input6" type="text" value="{{sheet.equipo_input6}}" />
+                    <textarea class="d-none" id="equipo-testarea6" name="equipo_testarea6">{{sheet.equipo_testarea6}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea6"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input7 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="equipo_input7" id="equipo_input7" type="text" value="{{sheet.equipo_input7}}" />
+                    <textarea class="d-none" id="equipo-testarea7" name="equipo_testarea17">{{sheet.equipo_testarea7}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea7"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input8 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="equipo_input8" id="equipo_input8" type="text" value="{{sheet.equipo_input8}}" />
+                    <textarea class="d-none" id="equipo-testarea8" name="equipo_testarea8">{{sheet.equipo_testarea8}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea8"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input9 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="equipo_input9" id="equipo_input9" type="text" value="{{sheet.equipo_input9}}" />
+                    <textarea class="d-none" id="equipo-testarea9" name="equipo_testarea9">{{sheet.equipo_testarea9}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea9"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input10 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="equipo_input10" id="equipo_input10" type="text" value="{{sheet.equipo_input10}}" />
+                    <textarea class="d-none" id="equipo-testarea10" name="equipo_testarea10">{{sheet.equipo_testarea10}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea10"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input1 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="equipo_input11" id="equipo_input11" type="text" value="{{sheet.equipo_input11}}" />
+                    <textarea class="d-none" id="equipo-testarea11" name="equipo_testarea11">{{sheet.equipo_testarea11}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea11"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input12 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="equipo_input12" id="equipo_input12" type="text" value="{{sheet.equipo_input12}}" />
+                    <textarea class="d-none" id="equipo-testarea12" name="equipo_testarea12">{{sheet.equipo_testarea12}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea12"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input1 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="equipo_input13" id="equipo_input13" type="text" value="{{sheet.equipo_input13}}" />
+                    <textarea class="d-none" id="equipo-testarea13" name="equipo_testarea13">{{sheet.equipo_testarea13}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea13"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input14 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="equipo_input14" id="equipo_input14" type="text" value="{{sheet.equipo_input14}}" />
+                    <textarea class="d-none" id="equipo-testarea14" name="equipo_testarea14">{{sheet.equipo_testarea14}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea14"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input15 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="equipo_input15" id="equipo_input15" type="text" value="{{sheet.equipo_input15}}" />
+                    <textarea class="d-none" id="equipo-testarea15" name="equipo_testarea15">{{sheet.equipo_testarea15}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea15"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input16 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="equipo_input16" id="equipo_input16" type="text" value="{{sheet.equipo_input16}}" />
+                    <textarea class="d-none" id="equipo-testarea16" name="equipo_testarea16">{{sheet.equipo_testarea16}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea16"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input17 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="equipo_input17" id="equipo_input17" type="text" value="{{sheet.equipo_input17}}" />
+                    <textarea class="d-none" id="equipo-testarea17" name="equipo_testarea17">{{sheet.equipo_testarea17}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea17"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input18 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="equipo_input18" id="equipo_input18" type="text" value="{{sheet.equipo_input18}}" />
+                    <textarea class="d-none" id="equipo-testarea18" name="equipo_testarea18">{{sheet.equipo_testarea18}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea18"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            {% if sheet is not None  and sheet.equipo_input19 is not None %}
+             <tr>
+                <td  colspan="2">
+                    <input name="equipo_input19" id="equipo_input19" type="text" value="{{sheet.equipo_input19}}" />
+                    <textarea class="d-none" id="equipo-testarea19" name="equipo_testarea19">{{sheet.equipo_testarea19}}</textarea>
+                </td>
+                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea19"><i class="bi bi-eye-fill"></i></a>
+                  <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>
+                  </td>
+              </tr>
+            {% endif %}
+            </tbody>
+                            <tfoot>
+              <tr>
+                  <td style="vertical-align:top;text-align:right;" colspan="3" ><a class="badge bg-secondary" href="#" id="equipo-plus"><i class="bi bi-plus"></i></a></td>
+              </tr>
+            </tfoot>
+          </table>
         </div>
       </section>
     </section>
@@ -385,6 +585,49 @@
           <label for="flaws">Defectos</label><textarea name="flaws"id="sheet-flaws">{% if sheet is not None %}{{ sheet.flaws }}{% endif %}</textarea>
         </div>
       </section>
+    <section class="resources">
+    <table>
+        <tr><td>
+        <div class="money">
+            <ul>
+              <li>
+                <label for="cp">PC</label><input name="cp"id="sheet-cp"{% if sheet is not None %} value="{{ sheet.cp }}"{% endif %} />
+              </li>
+              <li>
+                <label for="sp">pp</label><input name="sp"id="sheet-sp"{% if sheet is not None %} value="{{ sheet.sp }}"{% endif %} />
+              </li>
+              <li>
+                <label for="ep">PE</label><input name="ep"id="sheet-ep"{% if sheet is not None %} value="{{ sheet.ep }}"{% endif %} />
+              </li>
+              <li>
+                <label for="gp">PO</label><input name="gp"id="sheet-gp"{% if sheet is not None %} value="{{ sheet.gp }}"{% endif %} />
+              </li>
+              <li>
+                <label for="pp">PP</label><input name="pp"id="sheet-pp"{% if sheet is not None %} value="{{ sheet.pp }}"{% endif %} />
+              </li>
+            </ul>
+          </div>
+        </td>
+                <td><div class="column">
+                    <textarea placeholder="Equipment list here" style="border: solid; margin: 5px; height: 50px;"></textarea>
+                    <textarea placeholder="Equipment list here" style="height: 20px; border: solid;"></textarea>
+                </div>
+                </td>
+            </tr>
+            <tr>
+                <td><textarea placeholder="Equipment list here" style="border: solid; margin: 5px;"></textarea></td>
+                <td><textarea placeholder="Equipment list here" style="border: solid; margin: 5px;"></textarea></td>
+                <td><textarea placeholder="Equipment list here" style="border: solid; margin: 5px;"></textarea></td>
+            </tr>
+            <tr>
+                <td><textarea placeholder="Equipment list here" style="border: solid; margin: 5px;"></textarea></td>
+                <td><textarea placeholder="Equipment list here" style="border: solid; margin: 5px;"></textarea></td>
+                <td><textarea placeholder="Equipment list here" style="border: solid; margin: 5px;"></textarea></td>
+
+            </tr>
+        </table>
+        <label for="resources" style="order: 3; text-align: center; flex: 100%;">Recursos</label>
+    </section>
       <section class="features">
         <div>
           <label for="features">Rasgos y atributos</label>
@@ -722,6 +965,36 @@
     </section>
   </main>
 </form>
+    <div class="modal fade" role="dialog" tabindex="-1" id="modal-intercambio">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitulo">Intercambio de objetos y tesoro</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <div class="modal-body">
+                        <div class="col"><select class="tomselect-basic" id="usuario-cercano-selector" placeholder="Selecciona a otro jugador para intercambiar" >
+                        </select></div>
+                        <div class="row">
+                            <select  id="objetosOtrosSelector" name="objetosO-select[]" multiple placeholder="Selecciona los objetos que quieres intercambiar" autocomplete="off"></select>
+                            <select  id="objetosUsuarioSelector" name="objetosU-select[]" multiple placeholder="Selecciona los objetos que quieres intercambiar" autocomplete="off"></select>
+                        </div>
+                        <div class="row">
+                            <label class="col-form-label">Dinero de Usuario</label>
+                            <div class="col"><label class="col-form-label">PO:<input id="poo" class="form-control" type="text"></label></div>
+                            <div class="col"><label class="col-form-label">PP:<input id="ppo" class="form-control" type="text"></label></div>
+                            <div class="col"><label class="col-form-label">PC:<input id="pco" class="form-control" type="text"></label></div>
+                            <label class="col-form-label">Dinero propio</label>
+                            <div class="col"><label class="col-form-label">PO:<input id="pou" class="form-control" type="text"></label></div>
+                            <div class="col"><label class="col-form-label">PP:<input id="ppu" class="form-control" type="text"></label></div>
+                            <div class="col"><label class="col-form-label">PC:<input id="pcu" class="form-control" type="text"></label></div>
+                        </div>
+                    </div>
+                     <div class="modal-footer"><button class="btn btn-primary" id="buttonIntercambiar" type="button" data-bs-dismiss="modal">Proponer intercambio</button>
+                         <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     <div class="modal fade" role="dialog" tabindex="-1" id="modal-generador">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">

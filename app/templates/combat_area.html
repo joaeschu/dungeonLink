@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Tablero</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link href="{% static 'css/private_area.css' %}" rel="stylesheet">
+    <link href="{% static 'css/Navigation-Clean.css' %}" rel="stylesheet">
+        <link href="{% static 'css/canva.css' %}" rel="stylesheet">
+
+</head>
+
+<body style="height: 700px;">
+    <div class="btn-toolbar" style="margin: 0px;padding: 0px;">
+        <div class="btn-group" role="group" style="margin: -1px;">
+            <a class="btn btn-primary" style="margin: 22px;" href="{% url 'private-area' %}">Volver</a>
+            <a class="btn btn-primary" style="margin: 22px;" href="{% url 'sheet' %}" target="_blank">Ficha de personaje</a>
+            <a class="btn btn-primary" style="margin: 22px;" href="{% url 'logout' %}">Cerrar Sesión</a>
+        </div>
+        <div class="btn-group" role="group"></div>
+    </div>
+    <table>
+        <tr>
+             <td>
+        <div class="ex3" id="images" style="margin: 10px;">
+            <img draggable="true" src="/static/img/warrior.png" width="100" height="100"></img>
+            <img draggable="true" src="/static/img/dwarf.png" width="100" height="100"></img>
+            <img draggable="true" src="/static/img/elf.png" width="100" height="100"></img>
+            <img draggable="true" src="/static/img/elfWarrior.png" width="100" height="100"></img>
+            <img draggable="true" src="/static/img/gror.png" width="100" height="100"></img>
+            <img draggable="true" src="/static/img/monk.png" width="100" height="100"></img>
+            <img draggable="true" src="/static/img/sorceress.png" width="100" height="100"></img>
+            <img draggable="true" src="/static/img/tiefling.png" width="100" height="100"></img>
+            <img draggable="true" src="/static/img/bandit.png" width="100" height="100"></img>
+            <img draggable="true" src="/static/img/dragon.png" width="100" height="100"></img>
+            <img draggable="true" src="/static/img/imp.png" width="100" height="100"></img>
+            <img draggable="true" src="/static/img/redDragon.png" width="100" height="100"></img>
+            <img draggable="true" src="/static/img/rhino.png" width="100" height="100"></img>
+            <img draggable="true" src="/static/img/whiteWolf.png" width="100" height="100"></img>
+            <img draggable="true" src="/static/img/ranger.png" width="100" height="100"></img>
+            <img draggable="true" src="/static/img/wraith.png" width="100" height="100"></img>
+        </div>
+             </td>
+                 <td>
+                     <button class="btn btn-light" id='deleteSelectedImage'>Borrar mini seleccionada</button>
+                     <button class="btn btn-light" id='drawingModeSelect'>Activar dibujo</button>
+                     <input type="color" style="display: none;" value="#005E7A" id="drawing-color">
+                     <button class="btn btn-light" id='clearDrawing'>Limpiar</button>
+        <div id="canvas-container" style="width: 1300px; height: 700px; margin: 10px;">
+            <canvas id="canvas" width="1300" height="700"></canvas>
+        </div>
+                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="{% static 'js/canva.js' %}"></script>
+                 <input id="nombreUsuario" name="nombreUsuario" type="hidden" value="{{session.name}}">
+                     <input id="emailUsuario" name="emailUsuario" type="hidden" value="{{session.user_id}}">
+
+            </td>
+
+            <td>
+                <div id='bodybox'style="margin: 10px;">
+                    <div id='chatborder'>
+                        <p id="chatlog15" class="chatlog">&nbsp;</p>
+                        <p id="chatlog14" class="chatlog">&nbsp;</p>
+                        <p id="chatlog13" class="chatlog">&nbsp;</p>
+                        <p id="chatlog12" class="chatlog">&nbsp;</p>
+                        <p id="chatlog11" class="chatlog">&nbsp;</p>
+                        <p id="chatlog10" class="chatlog">&nbsp;</p>
+                        <p id="chatlog9" class="chatlog">&nbsp;</p>
+                        <p id="chatlog8" class="chatlog">&nbsp;</p>
+                        <p id="chatlog7" class="chatlog">&nbsp;</p>
+                        <p id="chatlog6" class="chatlog">&nbsp;</p>
+                        <p id="chatlog5" class="chatlog">&nbsp;</p>
+                        <p id="chatlog4" class="chatlog">&nbsp;</p>
+                        <p id="chatlog3" class="chatlog">&nbsp;</p>
+                        <p id="chatlog2" class="chatlog">&nbsp;</p>
+                        <p id="chatlog1" class="chatlog">&nbsp;</p>
+                        <input type="text" name="chat"  id="chatbox" placeholder="Chat de texto" onfocus="elimChatbox()">
+                    </div>
+                    <div id='chatborder'>
+                        <table>
+                            <tr>
+                            <td><label class="form-label" id="tirar" style="margin: 2px;">/roll  </label></td>
+                            <td><input type="text" name="numDados"  id="numDados" placeholder="3" onfocus="elimNumDados()" style="width: 50px;"></td>
+                            <td><label class="form-label" id="dado" style="margin: 2px;">d</label></td>
+                            <td><input type="text" name="tipoDados"  id="tipoDados" placeholder="20"onfocus="elimTipoDados()" style="width: 50px;"></td>
+                            <td><label class="form-label" id="suma" style="margin: 2px;"> + </label></td>
+                            <td><input type="text" name="sumaDados"  id="sumaDados" placeholder="5"onfocus="elimSumaDados()" style="width: 50px;"></td>
+                            <td><button class="btn btn-light" type="button" id="button-tirar-dados" style="margin: 10px;">Tirar</button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+<script src="https://unpkg.com/mathjs@9.3.2/lib/browser/math.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/random-js@2.1.0/dist/random-js.umd.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@dice-roller/rpg-dice-roller@5/lib/umd/bundle.min.js"></script>
+    <script src="{% static 'js/private_area.js' %}" ></script>
+</html>

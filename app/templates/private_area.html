@@ -27,39 +27,23 @@
     <table>
         <tr>
              <td>
-        <div class="ex3" id="images" style="margin: 10px;">
-            <img draggable="true" src="/static/img/warrior.png" width="100" height="100"></img>
-            <img draggable="true" src="/static/img/dwarf.png" width="100" height="100"></img>
-            <img draggable="true" src="/static/img/elf.png" width="100" height="100"></img>
-            <img draggable="true" src="/static/img/elfWarrior.png" width="100" height="100"></img>
-            <img draggable="true" src="/static/img/gror.png" width="100" height="100"></img>
-            <img draggable="true" src="/static/img/monk.png" width="100" height="100"></img>
-            <img draggable="true" src="/static/img/sorceress.png" width="100" height="100"></img>
-            <img draggable="true" src="/static/img/tiefling.png" width="100" height="100"></img>
-            <img draggable="true" src="/static/img/bandit.png" width="100" height="100"></img>
-            <img draggable="true" src="/static/img/dragon.png" width="100" height="100"></img>
-            <img draggable="true" src="/static/img/imp.png" width="100" height="100"></img>
-            <img draggable="true" src="/static/img/redDragon.png" width="100" height="100"></img>
-            <img draggable="true" src="/static/img/rhino.png" width="100" height="100"></img>
-            <img draggable="true" src="/static/img/whiteWolf.png" width="100" height="100"></img>
-            <img draggable="true" src="/static/img/ranger.png" width="100" height="100"></img>
-            <img draggable="true" src="/static/img/wraith.png" width="100" height="100"></img>
-        </div>
-             </td>
-                 <td>
-        <div id="canvas-container" style="width: 1300px; height: 700px; margin: 10px;">
-            <canvas id="canvas" width="1300" height="700"></canvas>
+        <div id="canvas-mapa" style="width: 1300px; height: 700px; margin: 10px;">
+            <canvas id="canvas" width="1400" height="700"></canvas>
         </div>
                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.js"></script>
         <script src="/socket.io/socket.io.js"></script>
-        <script src="{% static 'js/canva.js' %}"></script>
+        <script src="{% static 'js/canvaMap.js' %}"></script>
                  <input id="nombreUsuario" name="nombreUsuario" type="hidden" value="{{session.name}}">
+                 <input id="emailUsuario" name="emailUsuario" type="hidden" value="{{session.user_id}}">
+                 <input id="listEventos" name="listEventos" type="hidden" value="{{events}}">
+
             </td>
 
             <td>
+
                 <div id='bodybox'style="margin: 10px;">
                     <div id='chatborder'>
                         <p id="chatlog15" class="chatlog">&nbsp;</p>
@@ -95,8 +79,73 @@
                 </div>
             </td>
         </tr>
+        <tr>
+            <td>
+                    <label class="form-label" style="font-size: 150%;">Arrastrar para crear un evento nuevo:  </label>
+                    <img draggable="true" src="/static/img/dungeon.png" width="100" height="100"></img>
+            </td>
+        </tr>
     </table>
+ <div class="modal fade" role="dialog" tabindex="-1" id="modal-informacio">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitulo">Información del evento</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <div class="modal-body">
+                            <div class="row">
+                                <div class="col"><label class="form-label" id="InfoDescripcion" style="font-size: 125%;">Descripción</label></div>
+                            </div>
+                            <div class="row">
+                                <div class="col"><label class="form-label" id="InfoFecha">Fecha</label></div>
+                            </div>
+                        <div class="col"><label class="form-label" id="infoPosx" style="display: none">Fecha</label></div>
+                        <div class="col"><label class="form-label" id="infoPosy" style="display: none">Fecha</label></div>
+                    </div>
+
+                     <div class="modal-footer">
+                         <a class="btn btn-primary" style="margin: 5px;" href="{% url 'combat-area' %}">Entrar al evento</a>
+                         <button class="btn btn-primary" id="buttonViajar" type="button" data-bs-dismiss="modal">Viajar Hasta aquí</button>
+                         <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+ <div class="modal fade" role="dialog" tabindex="-1" id="modal-creacion">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Información del evento</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <div class="modal-body">
+                        <div class="row" style="margin-bottom: 10px;">
+                            <div class="col"><label class="form-label">Fecha y hora de inicio:  </label>
+                            <input type="0" id="dateFechaEvento"></div>
+                        </div>
+                        <form method="post" id="formEvento">
+                            {% csrf_token %}
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col"><label class="col-form-label">Nombre<input type="text" name="nombre" id="textNombreEvento" class="form-control"></label></div>
+                            </div>
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col"><label class="form-label">Descripción del evento</label><input type="text" name="descripcion" class="form-control" id="textDescripcionEvento"></div>
+                            </div>
+                             <div style="display: none">
+                                <input type="text" name="fecha" id="textFechaEvento" class="form-control">
+                                <input type="text" name="posx" id="textposX" class="form-control">
+                                <input type="text" name="posy" id="textposY" class="form-control">
+                                <input type="text" name="textid" id="textid" class="form-control">
+                                 </div>
+
+                        <button class="btn btn-primary" id="buttonCrearEvento" type="submit" data-bs-dismiss="modal">Crear</button>
+                        <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://unpkg.com/mathjs@9.3.2/lib/browser/math.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/random-js@2.1.0/dist/random-js.umd.min.js"></script>
 

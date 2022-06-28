@@ -1,6 +1,26 @@
 var socket = null;
+var sheets = null;
+var players = [];
 $(document).ready(function(){
         socket = io();
+    $.ajax({
+            type: "GET",
+            url:'/app/sheet/ajax',
+            dataType: 'json'
+        }).done(function(data) {
+            sheets = data;
+            console.log(data);
+        });
+    let idUsuario = document.getElementById("emailUsuario").value;
+    let posx = parseInt(window.localStorage.getItem('posx'));
+    let posy = parseInt(window.localStorage.getItem('posy'));
+    socket.emit('message',JSON.stringify({type:'exchange',idUser: idUsuario, posx: posx, posy: posy}));
+    socket.on('message', function(msg) {
+        msg = JSON.parse(msg);
+        if(msg.type === 'exchangeReply' && msg.idDest === idUsuario){
+            players.push(msg.player);
+        }
+    });
 });
 $('.stat').bind('input', function()
     {
@@ -81,6 +101,10 @@ const convertPythonDictToJSON = function (data) {
 const clearDropown  = function (select){
     select.tomselect.clear()
     select.tomselect.clearOptions()
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 const addArrayDropdown  = function (select,array){
@@ -165,6 +189,7 @@ function getMaxPuntuacionPosible(puntosRestantes, puntuacionActual){
         return 14;
     }
 };
+
 
 document.getElementById('button-guardar').addEventListener("click", function(event) {
     let clase = document.getElementById("clase-selector").querySelector(':checked');
@@ -310,14 +335,16 @@ document.getElementById('button-guardar').addEventListener("click", function(eve
     listaEquipo.push(document.getElementById('equipoB-selector').tomselect.getValue() + "\n");
     listaEquipo.push(document.getElementById('equipoC-selector').tomselect.getValue() + "\n");
     listaEquipo.push(trasfondo.getAttribute('data-trasfondo-equipo') + "\n");
-    listaEquipo.concat(convertPythonDictToJSON(clase.getAttribute('data-Equipo-obligatorio')));
+    listaEquipo.push(convertPythonDictToJSON(clase.getAttribute('data-Equipo-obligatorio')));
 
-    let stringEquipo = "";
+    deleteAllEquipo();
+    let i = 0;
     listaEquipo.forEach(function (objeto) {
         if (objeto != null && objeto !== "")
-            stringEquipo += objeto
+            addEquipo(objeto, " ");
+        window.localStorage.setItem('objeto' + i, objeto);
+        window.localStorage.setItem('textobjeto' + i, objeto);
     });
-    document.getElementById('sheet-Lista-de-equipo').value = stringEquipo;
 
     let listaCompetencias = [];
     competencia = document.getElementById('herramientas-selector').tomselect.getValue();
@@ -498,6 +525,64 @@ document.getElementById('raza-selector').addEventListener("change", function(eve
     });
 });
 
+
+document.getElementById("buttonModalIntercambio").addEventListener("click", async function(event) {
+    let idUsuario = document.getElementById("emailUsuario").value;
+    let posx = parseInt(window.localStorage.getItem('posx'));
+    let posy = parseInt(window.localStorage.getItem('posy'));
+
+    await sleep(1000);
+    let listaUsuariosConEquip = [];
+    if(listaUsuariosConEquip.length > 0){
+        let lista = "{";
+        listaUsuariosConEquip.forEach(function(element){
+            lista += JSON.stringify(element);
+        });
+        lista += "}";
+        let selectUsuaro = document.getElementById("usuario-cercano-selector");
+        clearDropown(selectUsuaro);
+        addArrayDropdown(selectUsuaro, lista);
+    }
+});
+
+document.getElementById('usuario-cercano-selector').addEventListener("change", function(event) {
+    let selection = this.querySelector(':checked');
+    let objetosOtros = document.getElementById("objetosOtrosSelector");
+    let objetosUsuario = document.getElementById("objetosUsuarioSelector");
+
+});
+
+document.getElementById("buttonIntercambiar").addEventListener("click", async function(event) {
+
+});
+
+/*document.getElementById("buttonGuardarFicha").addEventListener("click", function(event) {
+    for(let i = 1; i<19; i++){
+            let input = document.getElementById("equipo_input" + i).value;
+            let testarea = document.getElementById("equipo-testarea" + i).value;
+            window.localStorage.setItem('textobjeto' + i);
+        }
+}); */
+
+ function getEquipmentList(){
+        let listaEquipamiento = "";
+        for(let i = 1; i<19; i++){
+            window.localStorage.getItem('posx');
+            let input = document.getElementById("equipo_input" + i).value;
+            let testarea = document.getElementById("equipo-testarea" + i).value;
+            if(input !== "" && input !== undefined){
+                let equipo = "," + input + ":" + testarea +",";
+                listaEquipamiento += equipo
+            }
+        }
+        console.log(listaEquipamiento);
+        return listaEquipamiento;
+    };
+
+    function getPO(){return document.getElementById("sheet-gp")};
+    function getPP(){return document.getElementById("sheet-sp")};
+    function getCP(){return document.getElementById("sheet-cp")};
+
 Array.from(document.getElementsByClassName("form-range")).forEach(
     function(element) {
         element.addEventListener("change", function(event) {
@@ -554,6 +639,14 @@ new TomSelect("#trasfondo-idiomas-selector",{
 	maxItems: 1
 });
 
+new TomSelect("#objetosOtrosSelector",{
+    plugins: ['remove_button'],
+	maxItems: 100
+});
+new TomSelect("#objetosUsuarioSelector",{
+    plugins: ['remove_button'],
+	maxItems: 100
+});
 Array.from(document.getElementsByClassName("tomselect-basic")).forEach(
     function(element) {
         new TomSelect(element,{});
@@ -570,17 +663,39 @@ function eyeEvent(){
             textarea.addClass('d-none')
         }
     });
+
+    $('.equipo-eye').unbind('click').click(function (e) {
+        e.preventDefault();
+        let textarea = $('#'+$(this).data('textarea'));
+        if(textarea.hasClass('d-none')){
+            textarea.removeClass('d-none')
+        }else{
+            textarea.addClass('d-none')
+        }
+    });
 }
 function deleteEvent(){
     $('.rasgos-delete').unbind('click').click(function (e) {
         e.preventDefault();
                $(this).parent().parent().remove();
     });
+
+     $('.equipo-delete').unbind('click').click(function (e) {
+        e.preventDefault();
+               $(this).parent().parent().remove();
+               $('#equipo-table').data('total',$('#equipo-table >tr').length);
+    });
 }
 function deleteAllRasgos(){
      var node = document.getElementById('rasgos-table');
      node.innerHTML = "";
 }
+
+function deleteAllEquipo(){
+     var node = document.getElementById('equipo-table');
+     node.innerHTML = "";
+}
+
 eyeEvent()
 deleteEvent()
 function addRasgo(input = '', textarea = ''){
@@ -605,4 +720,28 @@ $('#rasgos-table').data('total',$('#rasgos-table >tr').length);
 $('#rasgos-plus').click(function (e){
     e.preventDefault();
     addRasgo();
+});
+
+function addEquipo(input = '', textarea = '', ){
+        let table = $('#equipo-table');
+    if(table.data('total') < 19) {
+        let total = table.data('total') + 1;
+        table.data('total', total);
+        let tr = '<tr>\n' +
+            '                <td  colspan="2">\n' +
+            '                    <input name="equipo_input' + total + '" type="text" value="' + input + '" />\n' +
+            '                    <textarea class="d-none" id="equipo-testarea' + total + '" name="equipo_testarea' + total + '">' + textarea + '</textarea>\n' +
+            '                </td>\n' +
+            '                  <td style="vertical-align:top;"><a class="badge bg-secondary equipo-eye" href="#" data-textarea="equipo-testarea' + total + '"><i class="bi bi-eye-fill"></i></a>' +
+            '                   <a class="badge bg-secondary equipo-delete" href="#"><i class="bi bi-x-circle-fill"></i></a>' +
+            '              </tr>';
+        table.append(tr);
+        eyeEvent();
+        deleteEvent();
+    }
+}
+$('#equipo-table').data('total',$('#equipo-table >tr').length);
+$('#equipo-plus').click(function (e){
+    e.preventDefault();
+    addEquipo();
 });

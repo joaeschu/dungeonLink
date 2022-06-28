@@ -610,7 +610,7 @@ form.charsheet main section.attacksandspellcasting > div > table {
 
 form.charsheet main section.attacksandspellcasting > div > table th {
   font-size: 10px;
-  color: #ddd;
+  color: gray;
 }
 
 form.charsheet main section.attacksandspellcasting > div > table input {
@@ -638,19 +638,32 @@ form.charsheet main section.equipment > div {
   flex-wrap: wrap;
 }
 
-form.charsheet main section.equipment > div > div.money ul {
+form.charsheet main section.resources {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+form.charsheet main section.resources > div {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+ div.money ul {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
 }
 
-form.charsheet main section.equipment > div > div.money ul > li {
+ div.money ul > li {
   display: flex;
   align-items: center;
 }
 
-form.charsheet main section.equipment > div > div.money ul > li label {
+ div.money ul > li label {
   border: 1px solid black;
   border-radius: 10px 0 0 10px;
   border-right: 0;
@@ -660,7 +673,7 @@ form.charsheet main section.equipment > div > div.money ul > li label {
   padding: 3px 0;
 }
 
-form.charsheet main section.equipment > div > div.money ul > li input {
+ div.money ul > li input {
   border: 1px solid black;
   border-radius: 10px;
   width: 40px;
@@ -676,6 +689,17 @@ form.charsheet main section.equipment > div > label {
 }
 
 form.charsheet main section.equipment > div > textarea {
+  flex: 1;
+  border: 0;
+}
+
+form.charsheet main section.resources > div > label {
+  order: 3;
+  text-align: center;
+  flex: 100%;
+}
+
+form.charsheet main section.resources > div > textarea {
   flex: 1;
   border: 0;
 }
